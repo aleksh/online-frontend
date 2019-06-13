@@ -58,6 +58,7 @@ export const api = {
             return axios.get(`${ROOT_URL}/products/${product_id}`);
         },
         productsInCategory(data: any) {
+            console.log(data);
             return axios.get(`${ROOT_URL}/products/inCategory/${data.category_id}/?page=${data.page}&limit=${data.limit}`);
         },
         productsInDepartment(data: any) {

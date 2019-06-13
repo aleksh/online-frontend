@@ -15,18 +15,16 @@ export function* products({ payload }: any) {
         console.log(state);
 
         let response;
-        
-        if(state.selectedDepartment && state.selectedCategory) {
-            console.log("get PRODUCTS BY DEPARTMENT AND CATEGORY");            
-        }
+               
 
-        if(state.selectedDepartment){
+        if(state.selectedDepartment && !state.selectedCategory){
             console.log("get PRODUCTS BY DEPARTMENT");
             response = yield call(api.products.productsInDepartment, {...payload, department_id:state.selectedDepartment.department_id});
         }
 
         if(state.selectedCategory){
             console.log("get PRODUCTS BY CATEGORIES");
+            response = yield call(api.products.productsInCategory, {...payload, category_id:state.selectedCategory.category_id});
         }
 
         if(!state.selectedDepartment && !state.selectedCategory){

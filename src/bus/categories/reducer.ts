@@ -15,6 +15,10 @@ export const categoriesReducer = (state = initialState, action: any) => {
         case types.SET_SELECTED_CATEGORY:
             return state.set("selectedCategory", action.payload);
 
+        case types.CLEAR_SELECTED_CATEGORY:
+            return state.set("selectedCategory", null);
+
+            
         default:
             return state;
     }

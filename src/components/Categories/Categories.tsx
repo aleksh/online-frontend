@@ -3,9 +3,14 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { categoriesActions } from "../../bus/categories/actions";
+import { productsActions } from "../../bus/products/actions";
+import { history } from "../../init/middleware/core";
+import { ITEMS_PER_PAGE } from "../../utils/Constants";
 import VOCategory from "../../VO/VOCategory";
+import VODepartment from "../../VO/VODepartment";
 
 interface ICategoriesProps {
+	selectedDepartment: VODepartment;
 	selectedCategory: VOCategory;
 	categories: VOCategory[];
 	actions: any;
@@ -23,10 +28,25 @@ class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 	};
 
 	_handleClick = (event: any) => {
-		const { actions } = this.props;
+		const { actions, categories, selectedDepartment } = this.props;
 
-		const id: string = event.target.getAttribute("itemid");
-		actions.setSelectedCategoryId(id);
+		const id: number = Number(event.target.getAttribute("itemid"));
+
+		const selectedItem: VOCategory =
+			categories.filter(item => id === item.category_id)[0] || null;
+
+		if (selectedItem) {
+			actions.setSelectedCategory(selectedItem);
+
+			let url: string = `/${selectedItem.name}`;
+
+			if (selectedDepartment) {
+				url = `/${selectedDepartment.name}/${selectedItem.name}`;
+			}
+
+			history.push(url);
+			actions.productsAsync({ page: 1, limit: ITEMS_PER_PAGE });
+		}
 	};
 
 	public render() {
@@ -44,7 +64,7 @@ class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 				dataSource={categories}
 				renderItem={item => (
 					<List.Item
-						itemID={item.category_id}
+						itemID={`${item.category_id}`}
 						onClick={this._handleClick}
 					>
 						{item.name}
@@ -58,13 +78,14 @@ class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 const mapStateToProps = (state: any) => {
 	return {
 		selectedCategory: state.categories.get("selectedCategory"),
+		selectedDepartment: state.departments.get("selectedDepartment"),
 		categories: state.categories.get("categories")
 	};
 };
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		actions: bindActionCreators({ ...categoriesActions }, dispatch)
+		actions: bindActionCreators({ ...categoriesActions, ...productsActions }, dispatch)
 	};
 };
 

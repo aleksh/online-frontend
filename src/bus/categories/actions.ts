@@ -25,6 +25,12 @@ export const categoriesActions = {
         };
     },
 
+    clearSelectedCategory: () => {
+        return {
+            type: types.CLEAR_SELECTED_CATEGORY            
+        };
+    },
+
 
     // Async
     categoriesAsync: () => {

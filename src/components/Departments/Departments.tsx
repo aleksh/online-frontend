@@ -3,13 +3,14 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { departmentsActions } from "../../bus/departments/actions";
+import { categoriesActions } from "../../bus/categories/actions";
 import { productsActions } from "../../bus/products/actions";
 import { history } from "../../init/middleware/core";
 import { ITEMS_PER_PAGE } from "../../utils/Constants";
 import VODepartment from "../../VO/VODepartment";
 
 interface IDepartmentsProps {
-	selectedDepartmentId: VODepartment;
+	selectedDepartment: VODepartment;
 	departments: VODepartment[];
 	actions: any;
 }
@@ -38,6 +39,7 @@ class Departments extends React.Component<
 
 		if (selectedItem) {
             actions.setSelectedDepartment(selectedItem);
+            actions.clearSelectedCategory();
             history.push(`/${selectedItem.name}`);            
 			actions.productsAsync({ page: 1, limit: ITEMS_PER_PAGE });			
 		}
@@ -66,7 +68,7 @@ class Departments extends React.Component<
 
 const mapStateToProps = (state: any) => {
 	return {
-		selectedDepartmentId: state.departments.get("selectedDepartmentId"),
+		selectedDepartment: state.departments.get("selectedDepartment"),
 		departments: state.departments.get("departments")
 	};
 };
@@ -74,7 +76,7 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => {
 	return {
 		actions: bindActionCreators(
-			{ ...departmentsActions, ...productsActions },
+			{ ...departmentsActions, ...productsActions, ...categoriesActions },
 			dispatch
 		)
 	};
