@@ -9,9 +9,7 @@ export function* categories() {
     try {                        
 
         const { data: categories, message, status } =  yield call(api.categories.fetch);         
-
-        console.log("in Saga");
-        console.log(categories);
+        
         if (status !== 200) {
             throw new Error(message);
         }

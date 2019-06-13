@@ -1,2 +1,3 @@
 export { api } from "./api";
-export { ROOT_URL } from "./config";
+export { PRODUCT_IMAGE_URL, ROOT_URL } from "./config";
+
