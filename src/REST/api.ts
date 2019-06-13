@@ -57,11 +57,12 @@ export const api = {
         fetchById(product_id: number) {
             return axios.get(`${ROOT_URL}/products/${product_id}`);
         },
-        productInCategory(category_id: number) {
-            return axios.get(`${ROOT_URL}/products/inCategory/${category_id}`);
+        productsInCategory(data: any) {
+            return axios.get(`${ROOT_URL}/products/inCategory/${data.category_id}/?page=${data.page}&limit=${data.limit}`);
         },
-        productInDepartment(department_id: number) {
-            return axios.get(`${ROOT_URL}/products/inDepartment/${department_id}`);
+        productsInDepartment(data: any) {
+            console.log(data);
+            return axios.get(`${ROOT_URL}/products/inDepartment/${data.department_id}/?page=${data.page}&limit=${data.limit}`);
         },
         productDetails(product_id: number) {
             return axios.get(`${ROOT_URL}/products/${product_id}/details`);

@@ -27,22 +27,31 @@ class ProductsList extends React.Component<
 		const { actions, products, page } = this.props;
 
 		if (products.length === 0) {
-			actions.productsAsync({page, limit:ITEMS_PER_PAGE});
+			actions.productsAsync({ page, limit: ITEMS_PER_PAGE });
 		}
+
+		console.log("ProductsList conponentDidMount");
+	};
+
+	componentDidUpdate = () => {
+		console.log("componentDidUpdate");
+	};
+
+	componentWillMount = () => {
+		console.log("ProductsList componentWillMount");
 	};
 
 	_handleClick = (event: any) => {
 		const id: string = event.currentTarget.getAttribute("data-item-id");
 		history.push(`${Path.product}/${id}`);
-    };
-    
-    _handlePagination = (curPage:any) => {
-        console.log(curPage);
-        const { actions } = this.props;
+	};
 
-        actions.updatePageCount(curPage);
-        actions.productsAsync({page:curPage, limit:ITEMS_PER_PAGE});
-    }
+	_handlePagination = (curPage: any) => {
+		console.log(curPage);
+		const { actions } = this.props;
+
+		actions.productsAsync({ page: curPage, limit: ITEMS_PER_PAGE });
+	};
 
 	public render() {
 		const { products, count, page } = this.props;
@@ -52,8 +61,8 @@ class ProductsList extends React.Component<
 				<Pagination
 					current={page}
 					total={count}
-                    pageSize={ITEMS_PER_PAGE}
-                    onChange={this._handlePagination}
+					pageSize={ITEMS_PER_PAGE}
+					onChange={this._handlePagination}
 				/>
 				<div className={Styles.ProductList}>
 					{products &&

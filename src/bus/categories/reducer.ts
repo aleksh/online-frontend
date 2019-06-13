@@ -4,7 +4,7 @@ import { types } from "./types";
 
 const initialState = Map({
     categories: [],
-    selectedCategoryId: null,
+    selectedCategory: null,
 });
 
 export const categoriesReducer = (state = initialState, action: any) => {
@@ -12,8 +12,8 @@ export const categoriesReducer = (state = initialState, action: any) => {
         case types.SET_CATEGORIES:
             return state.set("categories", action.payload);
 
-        case types.SET_SELECTED_CATEGORY_ID:
-            return state.set("selectedCategoryId", action.payload);
+        case types.SET_SELECTED_CATEGORY:
+            return state.set("selectedCategory", action.payload);
 
         default:
             return state;

@@ -11,10 +11,10 @@ export const departmentsActions = {
         };
     },
 
-    setSelectedDepartmentId: (id: any) => {
+    setSelectedDepartment: (item: any) => {
         return {
-            type: types.SET_SELECTED_DEPARTMENT_ID,
-            payload: id
+            type: types.SET_SELECTED_DEPARTMENT,
+            payload: item
         };
     },
 

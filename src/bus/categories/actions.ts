@@ -18,10 +18,10 @@ export const categoriesActions = {
         };
     },
 
-    setSelectedCategoryId: (id: any) => {
+    setSelectedCategory: (item: any) => {
         return {
-            type: types.SET_SELECTED_CATEGORY_ID,
-            payload: id
+            type: types.SET_SELECTED_CATEGORY,
+            payload: item
         };
     },
 

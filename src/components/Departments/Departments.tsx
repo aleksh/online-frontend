@@ -3,6 +3,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { departmentsActions } from "../../bus/departments/actions";
+import { productsActions } from "../../bus/products/actions";
+import { history } from "../../init/middleware/core";
+import { ITEMS_PER_PAGE } from "../../utils/Constants";
 import VODepartment from "../../VO/VODepartment";
 
 interface IDepartmentsProps {
@@ -26,10 +29,18 @@ class Departments extends React.Component<
 	};
 
 	_handleClick = (event: any) => {
-		const { actions } = this.props;
+		const { actions, departments } = this.props;
 
-		const id: string = event.key;
-		actions.setSelectedDepartmentId(id);
+		const selectedItem: VODepartment =
+			departments.filter(
+				item => Number(event.key) === item.department_id
+			)[0] || null;
+
+		if (selectedItem) {
+            actions.setSelectedDepartment(selectedItem);
+            history.push(`/${selectedItem.name}`);            
+			actions.productsAsync({ page: 1, limit: ITEMS_PER_PAGE });			
+		}
 	};
 
 	public render() {
@@ -62,7 +73,10 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		actions: bindActionCreators({ ...departmentsActions }, dispatch)
+		actions: bindActionCreators(
+			{ ...departmentsActions, ...productsActions },
+			dispatch
+		)
 	};
 };
 

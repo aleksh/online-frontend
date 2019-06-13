@@ -4,7 +4,7 @@ import { types } from "./types";
 
 const initialState = Map({
     departments: [],
-    selectedDepartmentId: null,
+    selectedDepartment: null,
 });
 
 export const departmentsReducer = (state = initialState, action: any) => {
@@ -12,8 +12,8 @@ export const departmentsReducer = (state = initialState, action: any) => {
         case types.SET_DEPARTMENTS:
             return state.set("departments", action.payload);
 
-        case types.SET_SELECTED_DEPARTMENT_ID:
-            return state.set("selectedDepartmentId", action.payload);
+        case types.SET_SELECTED_DEPARTMENT:
+            return state.set("selectedDepartment", action.payload);
 
         default:
             return state;
