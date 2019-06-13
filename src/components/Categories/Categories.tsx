@@ -32,7 +32,7 @@ class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 		console.log(categories);
 		return (
 			<List
-				loading={categories.length === 0}
+                loading={categories.length === 0}            
 				header={
 					<div>
 						<strong>Categories</strong>

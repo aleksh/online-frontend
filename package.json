@@ -2,7 +2,7 @@
   "name": "turing-frontend",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {    
+  "dependencies": {
     "@types/history": "^4.7.2",
     "@types/immutable": "^3.8.7",
     "@types/jest": "24.0.13",
