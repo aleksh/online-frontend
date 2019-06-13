@@ -6,6 +6,7 @@ const initialState = Map({
     products: [],
     product: null,
     count: 0,
+    page: 1,
 });
 
 export const productsReducer = (state = initialState, action: any) => {
@@ -18,6 +19,12 @@ export const productsReducer = (state = initialState, action: any) => {
 
         case types.SET_PRODUCT:
             return state.set("product", action.payload);
+
+        case types.UPDATE_PAGE_COUNT:
+            return state.set("page", action.payload);
+
+        case types.CLEAN_PRODUCT:
+            return state.set("product", null);
 
         default:
             return state;

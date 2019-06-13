@@ -9,9 +9,7 @@ export function* product({ payload: id }: any) {
     try {
 
         const { data: product, message, status } = yield call(api.products.fetchById, id);
-
-        console.log("in Saga product");
-        console.log(product);
+        
         if (status !== 200) {
             throw new Error(message);
         }

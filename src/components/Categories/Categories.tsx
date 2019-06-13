@@ -15,9 +15,11 @@ export interface ICategoriesState {}
 
 class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 	componentDidMount = () => {
-		const { actions } = this.props;
+		const { actions, categories } = this.props;
 
-		actions.categoriesAsync();
+		if (categories.length === 0) {
+			actions.categoriesAsync();
+		}
 	};
 
 	_handleClick = (event: any) => {
@@ -32,7 +34,7 @@ class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 		console.log(categories);
 		return (
 			<List
-                loading={categories.length === 0}            
+				loading={categories.length === 0}
 				header={
 					<div>
 						<strong>Categories</strong>

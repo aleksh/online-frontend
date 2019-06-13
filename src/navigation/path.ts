@@ -1,5 +1,7 @@
 export const Path = Object.freeze({
-    login: '/login',
+    /*login: '/login',
     game: '/game',
-    profile: '/profile',
+    profile: '/profile',*/
+    home: '/',
+    product: '/product',
 })

@@ -1,55 +1,89 @@
-import { Card } from "antd";
+import { Card, Pagination } from "antd";
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { productsActions } from "../../bus/products/actions";
-import VOProduct from "../../VO/VOProduct";
+import { history } from "../../init/middleware/core";
+import { Path } from "../../navigation/path";
 import { PRODUCT_IMAGE_URL } from "../../REST";
+import { ITEMS_PER_PAGE } from "../../utils/Constants";
+import VOProduct from "../../VO/VOProduct";
 import Styles from "./Styles.module.scss";
 
-interface IProductsProps {
+interface IProductsListProps {
 	products: VOProduct[];
-	product: VOProduct;
+	count: number;
+	page: number;
 	actions: any;
 }
 
-export interface IProductsState {}
+export interface IProductsListState {}
 
-class ProductsList extends React.Component<IProductsProps, IProductsState> {
+class ProductsList extends React.Component<
+	IProductsListProps,
+	IProductsListState
+> {
 	componentDidMount = () => {
-		const { actions } = this.props;
+		const { actions, products, page } = this.props;
 
-		actions.productsAsync();
+		if (products.length === 0) {
+			actions.productsAsync({page, limit:ITEMS_PER_PAGE});
+		}
 	};
 
 	_handleClick = (event: any) => {
-		const { actions } = this.props;
+		const id: string = event.currentTarget.getAttribute("data-item-id");
+		history.push(`${Path.product}/${id}`);
+    };
+    
+    _handlePagination = (curPage:any) => {
+        console.log(curPage);
+        const { actions } = this.props;
 
-	/*	const id: string = event.target.getAttribute("itemid");
-		actions.setSelectedCategoryId(id);*/
-	};
+        actions.updatePageCount(curPage);
+        actions.productsAsync({page:curPage, limit:ITEMS_PER_PAGE});
+    }
 
 	public render() {
-		const { products } = this.props;
+		const { products, count, page } = this.props;
 		const { Meta } = Card;
-		console.log(products);
 		return (
-            <div className={Styles.ProductList}>
-                {
-                    products && 
-                    products.map((item) => {
-                        return <Card key={item.product_id}
-                        hoverable
-                        style={{ width: 240, margin:10 }}
-                        cover={<img alt={item.name} src={PRODUCT_IMAGE_URL+item.thumbnail} />}
-                      >
-                        <Meta title={item.name} description={item.description} />
-                      </Card>
-                    })
-                }
-
-            </div>                        
-			
+			<>
+				<Pagination
+					current={page}
+					total={count}
+                    pageSize={ITEMS_PER_PAGE}
+                    onChange={this._handlePagination}
+				/>
+				<div className={Styles.ProductList}>
+					{products &&
+						products.map(item => {
+							return (
+								<Card
+									data-item-id={item.product_id}
+									onClick={this._handleClick}
+									key={item.product_id}
+									hoverable
+									style={{ width: 240, margin: 10 }}
+									cover={
+										<img
+											alt={item.name}
+											src={
+												PRODUCT_IMAGE_URL +
+												item.thumbnail
+											}
+										/>
+									}
+								>
+									<Meta
+										title={item.name}
+										description={item.description}
+									/>
+								</Card>
+							);
+						})}
+				</div>
+			</>
 		);
 	}
 }
@@ -57,7 +91,8 @@ class ProductsList extends React.Component<IProductsProps, IProductsState> {
 const mapStateToProps = (state: any) => {
 	return {
 		products: state.products.get("products"),
-		product: state.products.get("product")
+		count: state.products.get("count"),
+		page: state.products.get("page")
 	};
 };
 

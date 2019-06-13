@@ -14,8 +14,8 @@ export default class Public extends React.Component<
 	public render() {
 		return (
 			<Switch>
-				<Route render={MainPage} path={Path.game} />
-				<Redirect to={Path.game} />
+				<Route render={MainPage} path={Path.home} />
+				<Redirect to={Path.home} />
 			</Switch>
 		);
 	}

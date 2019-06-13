@@ -47,8 +47,9 @@ export const api = {
 
 
     products: {
-        fetch() {
-            return axios.get(`${ROOT_URL}/products`);
+        
+        fetch(data:any) {
+            return axios.get(`${ROOT_URL}/products?page=${data.page}&limit=${data.limit}`);
         },
         search() {
             return axios.get(`${ROOT_URL}/products/search`);

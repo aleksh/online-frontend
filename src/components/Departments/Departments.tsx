@@ -18,9 +18,11 @@ class Departments extends React.Component<
 	IDepartmentsState
 > {
 	componentDidMount = () => {
-		const { actions } = this.props;
+		const { actions, departments } = this.props;
 
-		actions.departmentsAsync();
+		if (departments.length === 0) {
+			actions.departmentsAsync();
+		}
 	};
 
 	_handleClick = (event: any) => {

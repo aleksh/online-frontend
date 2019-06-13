@@ -5,11 +5,14 @@ import { modalActions } from "../../../modal/actions";
 import { productsActions } from "../../actions";
 
 
-export function* products() {
+export function* products({ payload }: any) {
+
+    console.log(payload);
+
     console.log("in Saga products");
     try {
 
-        const { data: products, message, status } = yield call(api.products.fetch);
+        const { data: products, message, status } = yield call(api.products.fetch, payload);
 
         console.log("in Saga products");
         console.log(products);
