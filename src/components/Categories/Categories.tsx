@@ -28,24 +28,31 @@ class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 	};
 
 	_handleClick = (event: any) => {
-		const { actions, categories, selectedDepartment } = this.props;
+		const {
+			actions,
+			categories,
+			selectedDepartment,
+			selectedCategory
+		} = this.props;
 
 		const id: number = Number(event.target.getAttribute("itemid"));
 
-		const selectedItem: VOCategory =
-			categories.filter(item => id === item.category_id)[0] || null;
+		if (!selectedCategory || selectedCategory.category_id !== id) {
+			const selectedItem: VOCategory =
+				categories.filter(item => id === item.category_id)[0] || null;
 
-		if (selectedItem) {
-			actions.setSelectedCategory(selectedItem);
+			if (selectedItem) {
+				actions.setSelectedCategory(selectedItem);
 
-			let url: string = `/${selectedItem.name}`;
+				let url: string = `/${selectedItem.name}`;
 
-			if (selectedDepartment) {
-				url = `/${selectedDepartment.name}/${selectedItem.name}`;
+				if (selectedDepartment) {
+					url = `/${selectedDepartment.name}/${selectedItem.name}`;
+				}
+
+				history.push(url);
+				actions.productsAsync({ page: 1, limit: ITEMS_PER_PAGE });
 			}
-
-			history.push(url);
-			actions.productsAsync({ page: 1, limit: ITEMS_PER_PAGE });
 		}
 	};
 
@@ -85,7 +92,10 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		actions: bindActionCreators({ ...categoriesActions, ...productsActions }, dispatch)
+		actions: bindActionCreators(
+			{ ...categoriesActions, ...productsActions },
+			dispatch
+		)
 	};
 };
 

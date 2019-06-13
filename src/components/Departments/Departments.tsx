@@ -2,8 +2,8 @@ import { Menu } from "antd";
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { departmentsActions } from "../../bus/departments/actions";
 import { categoriesActions } from "../../bus/categories/actions";
+import { departmentsActions } from "../../bus/departments/actions";
 import { productsActions } from "../../bus/products/actions";
 import { history } from "../../init/middleware/core";
 import { ITEMS_PER_PAGE } from "../../utils/Constants";
@@ -30,18 +30,20 @@ class Departments extends React.Component<
 	};
 
 	_handleClick = (event: any) => {
-		const { actions, departments } = this.props;
+		const { actions, departments, selectedDepartment } = this.props;
+		const id: number = Number(event.key);
 
-		const selectedItem: VODepartment =
-			departments.filter(
-				item => Number(event.key) === item.department_id
-			)[0] || null;
+		if (!selectedDepartment || selectedDepartment.department_id !== id) {
+			const selectedItem: VODepartment =
+				departments.filter(item => id === item.department_id)[0] ||
+				null;
 
-		if (selectedItem) {
-            actions.setSelectedDepartment(selectedItem);
-            actions.clearSelectedCategory();
-            history.push(`/${selectedItem.name}`);            
-			actions.productsAsync({ page: 1, limit: ITEMS_PER_PAGE });			
+			if (selectedItem) {
+				actions.setSelectedDepartment(selectedItem);
+                actions.categoriesAsync();        
+				history.push(`/${selectedItem.name}`);
+				actions.productsAsync({ page: 1, limit: ITEMS_PER_PAGE });
+			}
 		}
 	};
 

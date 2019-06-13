@@ -1,22 +1,39 @@
 
-import { call, put, apply } from "redux-saga/effects";
-import { modalActions } from "../../../modal/actions";
+import { call, put, select } from "redux-saga/effects";
 import { api } from "../../../../REST";
+import { modalActions } from "../../../modal/actions";
 import { categoriesActions } from "../../actions";
 
 
 export function* categories() {
-    try {                        
+    try {
+        yield put(categoriesActions.clearSelectedCategory());
+        const state = yield select(getDepartment);
 
-        const { data: categories, message, status } =  yield call(api.categories.fetch);         
-        
+        let response;
+
+        if (state.selectedDepartment) {
+            response = yield call(api.categories.categoriesInDepartment, state.selectedDepartment.department_id);
+        } else {
+            response = yield call(api.categories.fetch);
+        }
+
+        const { data: categories, message, status } = response;
+
         if (status !== 200) {
             throw new Error(message);
         }
 
-        yield put(categoriesActions.setCategories(categories.rows));
+        yield put(categoriesActions.setCategories(categories.rows || categories));
 
     } catch (error) {
         yield put(modalActions.showError(error.message));
     }
 }
+
+
+const getDepartment = (state: any) => (
+    {
+        selectedDepartment: state.departments.get("selectedDepartment"),
+    }
+);

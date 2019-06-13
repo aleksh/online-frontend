@@ -22,10 +22,10 @@ export const api = {
         fetchById(category_id: number) {
             return axios.get(`${ROOT_URL}/categories/${category_id}`);
         },
-        fetchInProduct(product_id: number) {
+        fcategoriesInProduct(product_id: number) {
             return axios.get(`${ROOT_URL}/categories/inProduct/${product_id}`);
         },
-        fetchInDepartment(department_id: number) {
+        categoriesInDepartment(department_id: number) {
             return axios.get(`${ROOT_URL}/categories/inDepartment/${department_id}`);
         },
     },
