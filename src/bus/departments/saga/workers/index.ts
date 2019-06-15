@@ -1,3 +1,3 @@
 export { departments } from "./departments";
-export { department } from "./department";
+export { changeDepartment } from "./changeDepartment";
 

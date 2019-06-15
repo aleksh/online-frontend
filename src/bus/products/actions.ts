@@ -18,6 +18,13 @@ export const productsActions = {
         };
     },
 
+    setSearch: (search: string = "") => {
+        return {
+            type: types.SET_SEARCH,
+            payload: search
+        };
+    },
+
     updatePageCount: (item: any) => {
         return {
             type: types.UPDATE_PAGE_COUNT,
@@ -43,6 +50,13 @@ export const productsActions = {
         return {
             type: types.FETCH_PRODUCT_ASYNC,
             payload: id,
+        };
+    },
+
+    searchAsync: (search: string) => {
+        return {
+            type: types.SEARCH_ASYNC,
+            payload: search,
         };
     },
 

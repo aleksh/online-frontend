@@ -51,8 +51,8 @@ export const api = {
         fetch(data:any) {
             return axios.get(`${ROOT_URL}/products?page=${data.page}&limit=${data.limit}`);
         },
-        search() {
-            return axios.get(`${ROOT_URL}/products/search`);
+        search(data:any) {
+            return axios.get(`${ROOT_URL}/products/search?query_string=${data.search}&page=${data.page}&limit=${data.limit}`);
         },
         fetchById(product_id: number) {
             return axios.get(`${ROOT_URL}/products/${product_id}`);

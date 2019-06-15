@@ -13,7 +13,8 @@ import Styles from "./Styles.module.scss";
 interface IProductsListProps {
 	products: VOProduct[];
 	count: number;
-	page: number;
+    page: number;
+    search: string;
 	actions: any;
 }
 
@@ -34,7 +35,7 @@ class ProductsList extends React.Component<
 	};
 
 	componentDidUpdate = () => {
-		console.log("componentDidUpdate");
+		console.log("ProductsList ---------------------------componentDidUpdate");
 	};
 
 	componentWillMount = () => {
@@ -54,10 +55,13 @@ class ProductsList extends React.Component<
 	};
 
 	public render() {
-		const { products, count, page } = this.props;
+		const { products, count, page, search } = this.props;
 		const { Meta } = Card;
 		return (
 			<>
+                {search.length > 0 && <p>Search For: <strong>{search}</strong></p>
+
+                }
 				<Pagination
 					current={page}
 					total={count}
@@ -101,7 +105,8 @@ const mapStateToProps = (state: any) => {
 	return {
 		products: state.products.get("products"),
 		count: state.products.get("count"),
-		page: state.products.get("page")
+        page: state.products.get("page"),
+        search: state.products.get("search")        
 	};
 };
 

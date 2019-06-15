@@ -1,3 +1,3 @@
 export { categories } from "./categories";
-export { category } from "./category";
+export { changeCategory } from "./changeCategory";
 

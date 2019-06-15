@@ -20,8 +20,7 @@ export default class Private extends React.Component<
 					path={`${Path.product}/:id`}
 					render={ProductPage}
 				/>
-                <Route exact path={'/:id'} render={MainPage} />
-                <Route exact path={'/:did/:catid'} render={MainPage} />
+                <Route exact path={'/:id'} render={MainPage} />                
                 <Route exact path={'/'} render={MainPage} />
 				<Redirect to={'/'} />
 			</Switch>

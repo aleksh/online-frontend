@@ -5,6 +5,7 @@ import Categories from "../components/Categories/Categories";
 import Departments from "../components/Departments/Departments";
 import Modals from "../components/Modals/Modals";
 import ProductsList from "../components/ProductsList/ProductsList";
+import Search from "../components/Search/Search";
 
 interface IMainPageProps {}
 
@@ -17,7 +18,14 @@ const MainPage: React.FunctionComponent<IMainPageProps> = (
 		<Catcher>
 			<Layout>
 				<Header>
-					<Departments />
+                    <div style={{display:'flex'}}>
+                        <div style={{ width: "50%", float: 'left' }}>
+                            <Departments />
+                        </div>
+                        <div style={{ width: "50%" }}>
+                            <Search />
+                        </div>
+                    </div>
 				</Header>
 				<Layout>
 					<Sider style={{ background: "#fff" }}>

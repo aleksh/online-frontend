@@ -6,7 +6,6 @@ import { categoriesActions } from "../../bus/categories/actions";
 import { departmentsActions } from "../../bus/departments/actions";
 import { productsActions } from "../../bus/products/actions";
 import { history } from "../../init/middleware/core";
-import { ITEMS_PER_PAGE } from "../../utils/Constants";
 import VODepartment from "../../VO/VODepartment";
 
 interface IDepartmentsProps {
@@ -39,10 +38,8 @@ class Departments extends React.Component<
 				null;
 
 			if (selectedItem) {
-				actions.setSelectedDepartment(selectedItem);
-                actions.categoriesAsync();        
 				history.push(`/${selectedItem.name}`);
-				actions.productsAsync({ page: 1, limit: ITEMS_PER_PAGE });
+				actions.changeDepartment(selectedItem);
 			}
 		}
 	};
@@ -53,7 +50,7 @@ class Departments extends React.Component<
 			<Menu
 				mode="horizontal"
 				onClick={this._handleClick}
-				style={{ lineHeight: "64px" }}
+				style={{ lineHeight: "64px", width: '300px' }}
 			>
 				{departments &&
 					departments.map(item => {

@@ -7,42 +7,42 @@ import { productsActions } from "../../actions";
 
 export function* products({ payload }: any) {
 
-    console.log(payload);
-
     try {
         yield put(productsActions.updatePageCount(payload.page))
         const state = yield select(getItems);
-        console.log(state);
 
         let response;
-               
 
-        if(state.selectedDepartment && !state.selectedCategory){
-            console.log("get PRODUCTS BY DEPARTMENT");
-            response = yield call(api.products.productsInDepartment, {...payload, department_id:state.selectedDepartment.department_id});
+
+        if (state.search.length > 0) {
+            response = yield call(api.products.search, { ...payload, search: state.search });
+            console.log("search");
+        } else {
+
+            if (state.selectedDepartment && !state.selectedCategory) {
+                response = yield call(api.products.productsInDepartment, { ...payload, department_id: state.selectedDepartment.department_id });
+            }
+
+            if (state.selectedCategory) {
+                response = yield call(api.products.productsInCategory, { ...payload, category_id: state.selectedCategory.category_id });
+            }
+
+            if (!state.selectedDepartment && !state.selectedCategory) {
+                response = yield call(api.products.fetch, payload);
+            }
         }
 
-        if(state.selectedCategory){
-            console.log("get PRODUCTS BY CATEGORIES");
-            response = yield call(api.products.productsInCategory, {...payload, category_id:state.selectedCategory.category_id});
-        }
-
-        if(!state.selectedDepartment && !state.selectedCategory){
-            console.log("just get ALL PRODUCTS")
-            response = yield call(api.products.fetch, payload);
-        }
-        console.log(response)
         const { data: products, message, status } = response;
 
-        console.log("in Saga products");
-        console.log(products);
-        console.log(status);
-        console.log(message);
         if (status !== 200 && status !== 201) {
             throw new Error(message);
         }
 
         yield put(productsActions.setProducts(products));
+
+        if (state.search.length > 0) {
+            // clean selected department and selected category
+        }
 
     } catch (error) {
         yield put(modalActions.showError(error.message));
@@ -54,5 +54,6 @@ const getItems = (state: any) => (
     {
         selectedDepartment: state.departments.get("selectedDepartment"),
         selectedCategory: state.categories.get("selectedCategory"),
+        search: state.products.get("search"),
     }
 );

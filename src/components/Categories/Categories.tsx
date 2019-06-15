@@ -5,12 +5,9 @@ import { bindActionCreators } from "redux";
 import { categoriesActions } from "../../bus/categories/actions";
 import { productsActions } from "../../bus/products/actions";
 import { history } from "../../init/middleware/core";
-import { ITEMS_PER_PAGE } from "../../utils/Constants";
 import VOCategory from "../../VO/VOCategory";
-import VODepartment from "../../VO/VODepartment";
 
 interface ICategoriesProps {
-	selectedDepartment: VODepartment;
 	selectedCategory: VOCategory;
 	categories: VOCategory[];
 	actions: any;
@@ -28,12 +25,7 @@ class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 	};
 
 	_handleClick = (event: any) => {
-		const {
-			actions,
-			categories,
-			selectedDepartment,
-			selectedCategory
-		} = this.props;
+		const { actions, categories, selectedCategory } = this.props;
 
 		const id: number = Number(event.target.getAttribute("itemid"));
 
@@ -42,16 +34,8 @@ class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 				categories.filter(item => id === item.category_id)[0] || null;
 
 			if (selectedItem) {
-				actions.setSelectedCategory(selectedItem);
-
-				let url: string = `/${selectedItem.name}`;
-
-				if (selectedDepartment) {
-					url = `/${selectedDepartment.name}/${selectedItem.name}`;
-				}
-
-				history.push(url);
-				actions.productsAsync({ page: 1, limit: ITEMS_PER_PAGE });
+				history.push(`/${selectedItem.name}`);
+				actions.changeCategory(selectedItem);
 			}
 		}
 	};
@@ -85,7 +69,6 @@ class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 const mapStateToProps = (state: any) => {
 	return {
 		selectedCategory: state.categories.get("selectedCategory"),
-		selectedDepartment: state.departments.get("selectedDepartment"),
 		categories: state.categories.get("categories")
 	};
 };

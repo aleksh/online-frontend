@@ -5,6 +5,7 @@ import Categories from "../components/Categories/Categories";
 import Departments from "../components/Departments/Departments";
 import Modals from "../components/Modals/Modals";
 import Product from "../components/Product/Product";
+import Search from "../components/Search/Search";
 
 interface IProductPageProps {}
 
@@ -17,7 +18,8 @@ const ProductPage: React.FunctionComponent<IProductPageProps> = (
 		<Catcher>
 			<Layout>
 				<Header>
-					<Departments />
+					<Departments />                    
+                    <Search />
 				</Header>
 				<Layout>
 					<Sider style={{ background: "#fff" }}>

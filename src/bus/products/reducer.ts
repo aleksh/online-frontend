@@ -7,6 +7,7 @@ const initialState = Map({
     product: null,
     count: 0,
     page: 1,
+    search: "",
 });
 
 export const productsReducer = (state = initialState, action: any) => {
@@ -19,6 +20,9 @@ export const productsReducer = (state = initialState, action: any) => {
 
         case types.SET_PRODUCT:
             return state.set("product", action.payload);
+
+        case types.SET_SEARCH:
+            return state.set("search", action.payload);
 
         case types.UPDATE_PAGE_COUNT:
             return state.set("page", action.payload);

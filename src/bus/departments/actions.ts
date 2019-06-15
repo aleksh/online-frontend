@@ -1,4 +1,5 @@
 // Types
+import VODepartment from "../../VO/VODepartment";
 import { types } from "./types";
 
 export const departmentsActions = {
@@ -18,18 +19,17 @@ export const departmentsActions = {
         };
     },
 
+    changeDepartment: (item: VODepartment) => {
+        return {
+            type: types.CHANGE_DEPARTMENT,
+            payload: item,
+        };
+    },
 
     // Async
     departmentsAsync: () => {
         return {
             type: types.FETCH_DEPARTMENTS_ASYNC,
-        };
-    },
-
-    departmentAsync: (category_id: number) => {
-        return {
-            type: types.FETCH_DEPARTMENT_ASYNC,
-            payload: category_id,
         };
     },
 

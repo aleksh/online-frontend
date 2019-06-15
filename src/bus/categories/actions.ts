@@ -1,4 +1,5 @@
 // Types
+import VOCategory from "../../VO/VOCategory";
 import { types } from "./types";
 
 export const categoriesActions = {
@@ -11,14 +12,7 @@ export const categoriesActions = {
         };
     },
 
-    setCategory: (category: any) => {
-        return {
-            type: types.SET_CATEGORY,
-            payload: category
-        };
-    },
-
-    setSelectedCategory: (item: any) => {
+    setSelectedCategory: (item: VOCategory) => {
         return {
             type: types.SET_SELECTED_CATEGORY,
             payload: item
@@ -27,7 +21,14 @@ export const categoriesActions = {
 
     clearSelectedCategory: () => {
         return {
-            type: types.CLEAR_SELECTED_CATEGORY            
+            type: types.CLEAR_SELECTED_CATEGORY
+        };
+    },
+
+    changeCategory: (item: VOCategory) => {
+        return {
+            type: types.CHANGE_CATEGORY,
+            payload: item,
         };
     },
 
@@ -36,13 +37,6 @@ export const categoriesActions = {
     categoriesAsync: () => {
         return {
             type: types.FETCH_CATEGORIES_ASYNC,
-        };
-    },
-
-    categoryAsync: (category_id: number) => {
-        return {
-            type: types.FETCH_CATEGORIES_ASYNC,
-            payload: category_id,
         };
     },
 
