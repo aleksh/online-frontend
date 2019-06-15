@@ -4,12 +4,6 @@ import { types } from "./types";
 export const userActions = {
 
     // Sync
-    initialized: () => {
-        return {
-            type: types.INITIALIZED,
-        };
-    },
-
     setUser: (user: any) => {
         return {
             type: types.SET_USER,
@@ -23,39 +17,14 @@ export const userActions = {
         }
     },
 
-    profileUpdating: () => {
-        return {
-            type: types.PROFILE_UPDATING,
-        }
-    },
-
-    profileUpdated: (data: any) => {
-        return {
-            type: types.PROFILE_UPDATED,
-            payload: data,
-        }
-    },
-
-    profileUpdateReset: () => {
-        return {
-            type: types.PROFILE_UPDATE_RESET,
-        }
-    },
-
-    profileUpdateError: () => {
-        return {
-            type: types.PROFILE_UPDATE_ERROR,
-        }
-    },
 
     // Async
-    loginAsync: (provider: any) => {
+    loginAsync: (data: any) => {
         return {
             type: types.LOGIN_ASYNC,
-            payload: provider,
+            payload: data,
         };
     },
-
 
     logoutAsync: () => {
         return {
@@ -63,9 +32,9 @@ export const userActions = {
         };
     },
 
-    updateProfile: (data: any) => {
+    registerAsync: (data: any) => {
         return {
-            type: types.UPDATE_PROFILE_ASYNC,
+            type: types.REGISTER_ASYNC,
             payload: data,
         };
     },

@@ -32,10 +32,10 @@ export function* products({ payload }: any) {
             }
         }
 
-        const { data: products, message, status } = response;
+        const { data: products, status } = response;
 
         if (status !== 200 && status !== 201) {
-            throw new Error(message);
+            throw new Error(products.error.message);
         }
 
         yield put(productsActions.setProducts(products));

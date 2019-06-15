@@ -21,7 +21,7 @@ export function* categories() {
         const { data: categories, message, status } = response;
 
         if (status !== 200) {
-            throw new Error(message);
+            throw new Error(categories.error.message);
         }
 
         yield put(categoriesActions.setCategories(categories.rows || categories));

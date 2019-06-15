@@ -11,7 +11,7 @@ export function* product({ payload: id }: any) {
         const { data: product, message, status } = yield call(api.products.fetchById, id);
         
         if (status !== 200) {
-            throw new Error(message);
+            throw new Error(product.error.message);
         }
 
         yield put(productsActions.setProduct(product));

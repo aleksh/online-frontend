@@ -1,5 +1,7 @@
 import axios from "axios";
-import { ROOT_URL } from './config';
+import VOLoginRequest from "../components/Modals/ModalLogin/VOLoginRequest";
+import VORegisterRequest from "../components/Modals/ModalRegister/VORegisterRequest";
+
 
 export const api = {
     set token(token: string) {
@@ -10,42 +12,52 @@ export const api = {
         return localStorage.getItem('token') || '';
     },
 
+    user: {
+        login(data: VOLoginRequest) {
+            return axios.post(`/customers/login`, data);
+        },
+
+        register(data: VORegisterRequest) {
+            return axios.post(`/customers`, data);
+        },
+    },
+
     departments: {
         fetch() {
-            return axios.get(`${ROOT_URL}/departments`);
+            return axios.get(`/departments`);
         },
         fetchById(department_id: number) {
-            return axios.get(`${ROOT_URL}/departments/${department_id}`);
+            return axios.get(`/departments/${department_id}`);
         },
     },
 
     categories: {
         fetch() {
-            return axios.get(`${ROOT_URL}/categories`);
+            return axios.get(`/categories`);
         },
         fetchById(category_id: number) {
-            return axios.get(`${ROOT_URL}/categories/${category_id}`);
+            return axios.get(`/categories/${category_id}`);
         },
         fcategoriesInProduct(product_id: number) {
-            return axios.get(`${ROOT_URL}/categories/inProduct/${product_id}`);
+            return axios.get(`/categories/inProduct/${product_id}`);
         },
         categoriesInDepartment(department_id: number) {
-            return axios.get(`${ROOT_URL}/categories/inDepartment/${department_id}`);
+            return axios.get(`/categories/inDepartment/${department_id}`);
         },
     },
 
     attributes: {
         fetch() {
-            return axios.get(`${ROOT_URL}/attributes`);
+            return axios.get(`/attributes`);
         },
         fetchById(attribute_id: number) {
-            return axios.get(`${ROOT_URL}/attributes/${attribute_id}`);
+            return axios.get(`/attributes/${attribute_id}`);
         },
         fetchValues(attribute_id: number) {
-            return axios.get(`${ROOT_URL}/attributes/values/${attribute_id}`);
+            return axios.get(`/attributes/values/${attribute_id}`);
         },
         fetchInProduct(product_id: number) {
-            return axios.get(`${ROOT_URL}/attributes/inProduct/${product_id}`);
+            return axios.get(`/attributes/inProduct/${product_id}`);
         },
     },
 
@@ -53,30 +65,30 @@ export const api = {
     products: {
 
         fetch(data: any) {
-            return axios.get(`${ROOT_URL}/products?page=${data.page}&limit=${data.limit}`);
+            return axios.get(`/products?page=${data.page}&limit=${data.limit}`);
         },
         search(data: any) {
-            return axios.get(`${ROOT_URL}/products/search?query_string=${data.search}&page=${data.page}&limit=${data.limit}`);
+            return axios.get(`/products/search?query_string=${data.search}&page=${data.page}&limit=${data.limit}`);
         },
         fetchById(product_id: number) {
-            return axios.get(`${ROOT_URL}/products/${product_id}`);
+            return axios.get(`/products/${product_id}`);
         },
         productsInCategory(data: any) {
             console.log(data);
-            return axios.get(`${ROOT_URL}/products/inCategory/${data.category_id}/?page=${data.page}&limit=${data.limit}`);
+            return axios.get(`/products/inCategory/${data.category_id}/?page=${data.page}&limit=${data.limit}`);
         },
         productsInDepartment(data: any) {
             console.log(data);
-            return axios.get(`${ROOT_URL}/products/inDepartment/${data.department_id}/?page=${data.page}&limit=${data.limit}`);
+            return axios.get(`/products/inDepartment/${data.department_id}/?page=${data.page}&limit=${data.limit}`);
         },
         productDetails(product_id: number) {
-            return axios.get(`${ROOT_URL}/products/${product_id}/details`);
+            return axios.get(`/products/${product_id}/details`);
         },
         productLocations(product_id: number) {
-            return axios.get(`${ROOT_URL}/products/${product_id}/locations`);
+            return axios.get(`/products/${product_id}/locations`);
         },
         productReviews(product_id: number) {
-            return axios.get(`${ROOT_URL}/products/${product_id}/reviews`);
+            return axios.get(`/products/${product_id}/reviews`);
         },
         //need post review api add
     },

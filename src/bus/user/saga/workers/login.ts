@@ -1,11 +1,22 @@
 
-import { apply, put } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
+import { api } from "../../../../REST/api";
 import { modalActions } from "../../../modal/actions";
 
 
 export function* login({ payload }: any) {
+
     try {
-        //yield apply({});
+        const { data, status } = yield call(api.user.login, payload);
+        console.log("RRRRRRRRRRRRRRRRRR");
+        console.log(data);
+
+        if (status !== 200) {
+            throw new Error(data.error.message);
+        }
+
+        //yield put(productsActions.setProduct(product));
+
     } catch (error) {
         yield put(modalActions.showError(error.message));
     }

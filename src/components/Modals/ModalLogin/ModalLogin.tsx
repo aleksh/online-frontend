@@ -3,7 +3,10 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { modalActions } from "../../../bus/modal/actions";
+import { userActions } from "../../../bus/user/actions";
+import { api } from "../../../REST";
 import VOLoginError from "./VOLoginError";
+import VOLoginRequest from "./VOLoginRequest";
 
 interface IModalLoginProps {
 	modalProps: any;
@@ -86,8 +89,7 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 
 		if (formValid) {
 			const { actions } = this.props;
-			console.log({ email, password });
-			//actions.loginAsync({ email, password });
+			this.props.actions.loginAsync(new VOLoginRequest(email, password));			
 		}
 	};
 
@@ -141,7 +143,10 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		actions: bindActionCreators({ ...modalActions }, dispatch)
+		actions: bindActionCreators(
+			{ ...modalActions, ...userActions },
+			dispatch
+		)
 	};
 };
 

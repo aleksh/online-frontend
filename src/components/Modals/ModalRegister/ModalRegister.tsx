@@ -3,7 +3,9 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { modalActions } from "../../../bus/modal/actions";
+import { userActions } from "../../../bus/user/actions";
 import VORegisterError from "./VOErrorRegister";
+import VORegisterRequest from "./VORegisterRequest";
 
 interface IModalRegisterProps {
 	modalProps: any;
@@ -11,14 +13,16 @@ interface IModalRegisterProps {
 }
 
 interface IModalRegisterState {
+	name: string;
 	email: string;
 	password: string;
 	confirmPassword: string;
 	formErrors: VORegisterError;
+	nameValid: boolean;
 	emailValid: boolean;
 	passwordValid: boolean;
-	formValid: boolean;
 	confirmPasswordValid: boolean;
+	formValid: boolean;
 	[key: string]: any;
 }
 
@@ -30,11 +34,13 @@ class ModalRegister extends React.Component<
 		super(props);
 
 		this.state = {
+			name: "",
 			email: "",
 			password: "",
 			confirmPassword: "",
 			formErrors: new VORegisterError(),
 			emailValid: true,
+			nameValid: true,
 			passwordValid: true,
 			confirmPasswordValid: true,
 			formValid: false
@@ -62,11 +68,16 @@ class ModalRegister extends React.Component<
 			formErrors,
 			emailValid,
 			passwordValid,
+			nameValid,
 			confirmPasswordValid,
 			password
 		} = this.state;
 
 		switch (fieldName) {
+			case "name":
+				nameValid = value.trim().length >= 3;
+				formErrors.name = nameValid ? "" : "too short";
+				break;
 			case "email":
 				emailValid =
 					value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) ||
@@ -88,36 +99,53 @@ class ModalRegister extends React.Component<
 		}
 
 		this.setState(
-			{ formErrors, emailValid, passwordValid, confirmPasswordValid },
+			{
+				formErrors,
+				emailValid,
+				passwordValid,
+				nameValid,
+				confirmPasswordValid
+			},
 			this._validateForm
 		);
 	};
 
 	_validateForm = () => {
-		const { emailValid, passwordValid, confirmPasswordValid } = this.state;
+		const {
+			emailValid,
+			passwordValid,
+			nameValid,
+			confirmPasswordValid
+		} = this.state;
 		this.setState({
-			formValid: emailValid && passwordValid && confirmPasswordValid
+			formValid:
+				emailValid && passwordValid && confirmPasswordValid && nameValid
 		});
 	};
 
-	_handlerSubmit = (event:any) => {
+	_handlerSubmit = (event: any) => {
 		event.preventDefault();
 
-		const { formValid, email, password } = this.state;
+		const { formValid, email, name, password } = this.state;
 
-		if (formValid) {            
-            console.log({ email, password });			
+		if (formValid) {
+			this.props.actions.registerAsync(
+				new VORegisterRequest(name.trim(), email, password)
+			);
+			console.log({ name: name.trim(), email, password });
 		}
 	};
 
 	public render() {
 		const {
+			name,
 			email,
-            password,
-            confirmPassword,
+			password,
+			confirmPassword,
+			nameValid,
 			emailValid,
-            passwordValid,
-            confirmPasswordValid,
+			passwordValid,
+			confirmPasswordValid,
 			formErrors
 		} = this.state;
 		return (
@@ -129,12 +157,22 @@ class ModalRegister extends React.Component<
 			>
 				<form onSubmit={this._handlerSubmit}>
 					<div>
+						<label htmlFor="name">Name</label>
+						<input
+							id="name"
+							name="name"
+							autoFocus
+							value={name}
+							onChange={this._handleUserInput}
+						/>
+
+						<p>{formErrors.name}</p>
+					</div>
+					<div>
 						<label htmlFor="email">Email Address</label>
 						<input
 							id="email"
 							name="email"
-							autoComplete="email"
-							autoFocus
 							value={email}
 							onChange={this._handleUserInput}
 						/>
@@ -153,7 +191,7 @@ class ModalRegister extends React.Component<
 
 						<p>{formErrors.password}</p>
 					</div>
-                    <div>
+					<div>
 						<label>Password</label>
 						<input
 							name="confirmPassword"
@@ -174,7 +212,10 @@ class ModalRegister extends React.Component<
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		actions: bindActionCreators({ ...modalActions }, dispatch)
+		actions: bindActionCreators(
+			{ ...modalActions, ...userActions },
+			dispatch
+		)
 	};
 };
 

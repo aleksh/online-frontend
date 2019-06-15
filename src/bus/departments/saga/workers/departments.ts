@@ -11,7 +11,7 @@ export function* departments() {
         const { data: departments, message, status } = yield call(api.departments.fetch);
 
         if (status !== 200) {
-            throw new Error(message);
+            throw new Error(departments.error.message);
         }
 
         yield put(departmentsActions.setDepartments(departments));
