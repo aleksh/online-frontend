@@ -6,6 +6,7 @@ import Departments from "../components/Departments/Departments";
 import Modals from "../components/Modals/Modals";
 import ProductsList from "../components/ProductsList/ProductsList";
 import Search from "../components/Search/Search";
+import User from "../components/User/User";
 
 interface IMainPageProps {}
 
@@ -19,10 +20,13 @@ const MainPage: React.FunctionComponent<IMainPageProps> = (
 			<Layout>
 				<Header>
                     <div style={{display:'flex'}}>
-                        <div style={{ width: "50%", float: 'left' }}>
+                        <div style={{ width: "20%", float: 'left' }}>
+                            <User />
+                        </div>
+                        <div style={{ width: "40%", float: 'left' }}>
                             <Departments />
                         </div>
-                        <div style={{ width: "50%" }}>
+                        <div style={{ width: "20%" }}>
                             <Search />
                         </div>
                     </div>

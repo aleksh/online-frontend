@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import ModalConfirm from "./ModalConfirm/ModalConfirm";
 //actions
 import ModalInfo from "./ModalInfo/ModalInfo";
-import ModalWaitOpponent from "./ModalWaitOpponent/ModalWaitOpponent";
+import ModalLogin from "./ModalLogin/ModalLogin";
+import ModalRegister from "./ModalRegister/ModalRegister";
 
 interface IModalsProps {
 	modalType: string;
@@ -13,7 +14,8 @@ interface IModalsState {}
 
 export const MODAL_TYPES = {
 	INFO: "INFO",
-	WAITING_FOR_OPPONENT: "WAITING_FOR_OPPONENT",
+	LOGIN: "LOGIN",
+	REGISTER: "REGISTER",
 	CONFIRM_INVITE: "CONFIRM_INVITE"
 };
 
@@ -30,8 +32,11 @@ class Modals extends React.Component<IModalsProps, IModalsState> {
 					  (modalType === MODAL_TYPES.CONFIRM_INVITE && (
 							<ModalConfirm modalProps={modalProps} />
 					  )) ||
-					  (modalType === MODAL_TYPES.WAITING_FOR_OPPONENT && (
-							<ModalWaitOpponent modalProps={modalProps} />
+					  (modalType === MODAL_TYPES.LOGIN && (
+							<ModalLogin modalProps={modalProps} />
+					  )) ||
+					  (modalType === MODAL_TYPES.REGISTER && (
+							<ModalRegister modalProps={modalProps} />
 					  ))
 					: null}
 			</>

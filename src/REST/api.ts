@@ -2,9 +2,13 @@ import axios from "axios";
 import { ROOT_URL } from './config';
 
 export const api = {
-    /*get token () {
-        return localStorage.getItem('token');
-    },*/
+    set token(token: string) {
+        localStorage.setItem('token', token);
+    },
+
+    get token(): string {
+        return localStorage.getItem('token') || '';
+    },
 
     departments: {
         fetch() {
@@ -47,11 +51,11 @@ export const api = {
 
 
     products: {
-        
-        fetch(data:any) {
+
+        fetch(data: any) {
             return axios.get(`${ROOT_URL}/products?page=${data.page}&limit=${data.limit}`);
         },
-        search(data:any) {
+        search(data: any) {
             return axios.get(`${ROOT_URL}/products/search?query_string=${data.search}&page=${data.page}&limit=${data.limit}`);
         },
         fetchById(product_id: number) {
