@@ -4,12 +4,16 @@ import VORegisterRequest from "../components/Modals/ModalRegister/VORegisterRequ
 
 
 export const api = {
-    set token(token: string) {
-        localStorage.setItem('token', token);
+    setToken(token: string) {
+        localStorage.setItem('turFrontentToken', token);
     },
 
-    get token(): string {
-        return localStorage.getItem('token') || '';
+    geToken(): string {
+        return localStorage.getItem('turFrontentToken') || '';
+    },
+
+    removeToken() {
+        localStorage.removeItem('turFrontentToken');
     },
 
     user: {

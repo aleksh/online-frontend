@@ -129,10 +129,11 @@ class ModalRegister extends React.Component<
 		const { formValid, email, name, password } = this.state;
 
 		if (formValid) {
-			this.props.actions.registerAsync(
+            const { actions } = this.props;
+			actions.registerAsync(
 				new VORegisterRequest(name.trim(), email, password)
 			);
-			console.log({ name: name.trim(), email, password });
+			actions.hideModal();
 		}
 	};
 

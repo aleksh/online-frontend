@@ -87,9 +87,10 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 		event.preventDefault();
 		const { formValid, email, password } = this.state;
 
-		if (formValid) {
-			const { actions } = this.props;
-			this.props.actions.loginAsync(new VOLoginRequest(email, password));			
+		if (formValid) {		
+            const { actions } = this.props;	
+            actions.loginAsync(new VOLoginRequest(email, password));	
+            actions.hideModal();		
 		}
 	};
 
