@@ -15,6 +15,10 @@ interface IAppProps {
 interface IAppState {}
 
 class App extends React.Component<IAppProps, IAppState> {
+	componentDidMount = () => {
+		this.props.actions.authAsync();
+	};
+
 	public render() {
 		const { isInitialized, isLoggedIn } = this.props;
 

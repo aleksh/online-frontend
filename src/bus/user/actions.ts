@@ -32,6 +32,12 @@ export const userActions = {
         };
     },
 
+    authAsync: () => {
+        return {
+            type: types.AUTHENTICATE_ASYNC,
+        };
+    },
+
     registerAsync: (data: any) => {
         return {
             type: types.REGISTER_ASYNC,

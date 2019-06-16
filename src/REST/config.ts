@@ -15,7 +15,7 @@ axios.interceptors.response.use(function (response) {
     if (response && response.status === 401) {
         // Do logout;
         // Redirect to login;
-        return Promise.reject(error.response);
+        return Promise.resolve(error.response);
     }
     else if (error.response) {
         // Do something.

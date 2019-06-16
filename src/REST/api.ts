@@ -24,6 +24,12 @@ export const api = {
         register(data: VORegisterRequest) {
             return axios.post(`/customers`, data);
         },
+
+        authenticate(token: string) {
+            return axios.get('/customer', {
+                headers: { 'user-key': token }
+            });
+        },
     },
 
     departments: {
