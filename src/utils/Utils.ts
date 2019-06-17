@@ -1,12 +1,24 @@
+import VOAttribute from "../VO/VOAttribute";
+
 export default class Utils {
+
+    static GroupAttributesByName = (arr: VOAttribute[]) => {
+        const result = arr.reduce((r, a) => {
+            r[a.attribute_name] = r[a.attribute_name] || [];
+            r[a.attribute_name].push(a);
+            return r;
+        }, Object.create(null));
+
+        return result;
+    }
 
     static GetRandomInt = (max: number): number => {
         return Math.floor(Math.random() * Math.floor(max));
     }
 
     static CutString = (pStr: string, maxLetters: number = 18, end: string = "..."): string => {
-        if(!pStr) return "";
-        
+        if (!pStr) return "";
+
         let newStr: string = "";
         let strArr: string[] = pStr.split(" ");
 

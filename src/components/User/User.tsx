@@ -30,8 +30,8 @@ class User extends React.Component<IUserProps, IUserState> {
 	};
 
 	_handlerLogout = () => {
-        console.log("logout")
-        const { actions } = this.props;
+		console.log("logout");
+		const { actions } = this.props;
 		actions.logoutAsync();
 	};
 
@@ -41,14 +41,18 @@ class User extends React.Component<IUserProps, IUserState> {
 			<div style={{ background: "white" }}>
 				{isLoggedIn ? (
 					<>
-						<p>Hello {user.name}
-						<Button onClick={this._handlerLogout}>Logout</Button> </p>
+						<p>
+							Hello {user.name}
+							<Button onClick={this._handlerLogout}>
+								Logout
+							</Button>
+						</p>
 					</>
 				) : (
-					<>
+					<p>
 						<Button onClick={this._handlerLogin}>Login</Button>
 						<Button onClick={this._hendleRegister}>Register</Button>
-					</>
+					</p>
 				)}
 			</div>
 		);

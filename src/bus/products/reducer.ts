@@ -5,6 +5,7 @@ import { types } from "./types";
 const initialState = Map({
     products: [],
     product: null,
+    productAttributes: null,
     count: 0,
     page: 1,
     search: "",
@@ -21,6 +22,9 @@ export const productsReducer = (state = initialState, action: any) => {
         case types.SET_PRODUCT:
             return state.set("product", action.payload);
 
+        case types.SET_PRODUCT_ATTRIBUTES:
+            return state.set("productAttributes", action.payload);
+
         case types.SET_SEARCH:
             return state.set("search", action.payload);
 
@@ -28,7 +32,10 @@ export const productsReducer = (state = initialState, action: any) => {
             return state.set("page", action.payload);
 
         case types.CLEAN_PRODUCT:
-            return state.set("product", null);
+            return state.merge({
+                product: null,
+                productAttributes: null,
+            });
 
         default:
             return state;

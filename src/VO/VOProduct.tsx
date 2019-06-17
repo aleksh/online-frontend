@@ -4,7 +4,9 @@ export default class VOProduct {
 	description: string;
 	price: string;
 	discounted_price: string;
-	thumbnail: string;
+    thumbnail: string;
+    image: string;
+    image2: string;  
 
 	constructor(
 		product_id: string,
@@ -12,13 +14,17 @@ export default class VOProduct {
 		description: string,
 		price: string,
 		discounted_price: string,
-		thumbnail: string
+        thumbnail: string,
+        image:string ="",
+        image2:string ="",
 	) {
 		this.product_id = product_id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.discounted_price = discounted_price;
-		this.thumbnail = thumbnail;
+        this.thumbnail = thumbnail;
+        this.image = image;
+        this.image2 = image2;
 	}
 }

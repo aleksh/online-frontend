@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { bindActionCreators } from "redux";
 import { productsActions } from "../../bus/products/actions";
+import { shoppingCartActions } from "../../bus/shoppingCart/actions";
 import { PRODUCT_IMAGE_URL } from "../../REST";
 import VOProduct from "../../VO/VOProduct";
 import Styles from "./Styles.module.scss";
@@ -37,6 +38,11 @@ class Product extends React.Component<IProductProps, IProductState> {
 		history.goBack();
 	};
 
+	_handleAddToCart = () => {
+        const { actions, product } = this.props;
+        actions.addProductAsync({product_id:product.product_id, attributes:"Color red"});
+    };
+
 	public render() {
 		const { product } = this.props;
 		const { Meta } = Card;
@@ -61,6 +67,8 @@ class Product extends React.Component<IProductProps, IProductState> {
 						/>
 					</Card>
 				)}
+
+				<Button onClick={this._handleAddToCart}>Add To Cart</Button>
 			</div>
 		);
 	}
@@ -74,7 +82,10 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		actions: bindActionCreators({ ...productsActions }, dispatch)
+		actions: bindActionCreators(
+			{ ...productsActions, ...shoppingCartActions },
+			dispatch
+		)
 	};
 };
 

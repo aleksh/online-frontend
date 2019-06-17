@@ -21,6 +21,10 @@ export const api = {
             return axios.post(`/customers/login`, data);
         },
 
+        facebook(access_token: string) {
+            return axios.post(`/customers/facebook`, { access_token });
+        },
+
         register(data: VORegisterRequest) {
             return axios.post(`/customers`, data);
         },
@@ -103,137 +107,44 @@ export const api = {
         //need post review api add
     },
 
+    shoppingCart: {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    auth: {
-        /*signup (userInfo) {
-            return fetch(`${MAIN_URL}/user/`, {
-                method:  'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(userInfo),
-            });
+        generateUniqueId() {
+            return axios.get(`/shoppingcart/generateUniqueId`);
         },
-        login (credentials) {
-            return fetch(`${MAIN_URL}/user/login`, {
-                method:  'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(credentials),
-            });
+       
+        add(data:any) {
+            return axios.post(`/shoppingcart/add`, data);
         },
-        authenticate () {
-            return fetch(`${MAIN_URL}/user/login`, {
-                method:  'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ token: this.token }),
-            });
+
+        get(cart_id:any) {
+            return axios.get(`/shoppingcart/${cart_id}`);
         },
-        logout () {
-            return fetch(`${MAIN_URL}/user/logout`, {
-                method:  'GET',
-                headers: {
-                    'Authorization': this.token,
-                },
-            });
-        },*/
+
+        update(data:any) {
+            return axios.put(`/shoppingcart/update/${data.item_id}`, {quantity: data.quantity});
+        },
+
+        empty(cart_id:any) {
+            return axios.delete(`/shoppingcart/empty/${cart_id}`);
+        },
+
+        totalAmount(cart_id:any) {
+            return axios.get(`/shoppingcart/totalAmount/${cart_id}`);
+        },
+
+        removeProduct(item_id:any) {
+            return axios.get(`/shoppingcart/removeProduct/${item_id}`);
+        },
+       
     },
-    /*
-        posts: {
-            fetch () {
-                return fetch(`${MAIN_URL}/feed`, {
-                    method:  'GET',
-                    headers: {
-                        'Authorization': this.token,
-                    },
-                });
-            },
-            create (comment) {
-                return fetch(`${MAIN_URL}/feed`, {
-                    method:  'POST',
-                    headers: {
-                        'Authorization': this.token,
-                        'Content-Type':  'application/json',
-                    },
-                    body: JSON.stringify({ comment }),
-                });
-            },
-            remove (postId) {
-                return fetch(`${MAIN_URL}/feed/${postId}`, {
-                    method:  'DELETE',
-                    headers: {
-                        'Authorization': this.token,
-                    },
-                });
-            },
-            like (postId) {
-                return fetch(`${MAIN_URL}/feed/like/${postId}`, {
-                    method:  'PUT',
-                    headers: {
-                        'Authorization': this.token,
-                    },
-                });
-            },
-        },*/
-    /* profile: {
-         updateProfile (profileInfo) {
-             return fetch(`${MAIN_URL}/user`, {
-                 method:  'PUT',
-                 headers: {
-                     'Authorization': this.token,
-                     'Content-Type':  'application/json',
-                 },
-                 body: JSON.stringify(profileInfo),
-             });
-         },
-         updateAvatar (avatarFormData) {
-             return fetch(`${MAIN_URL}/image`, {
-                 method:  'POST',
-                 headers: {
-                     'Authorization': this.token,
-                 },
-                 body: avatarFormData,
-             });
-         },
-     },*/
-    /* users: {
-         fetch () {
-             return fetch(`${MAIN_URL}/user/all`, {
-                 method:  'GET',
-                 headers: {
-                     'Authorization': this.token,
-                 },
-             });
-         },
-     },*/
+
+
+
+
+
+
+
+
+
 };

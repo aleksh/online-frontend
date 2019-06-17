@@ -18,6 +18,13 @@ export const productsActions = {
         };
     },
 
+    setProductAttributes: (item: any) => {
+        return {
+            type: types.SET_PRODUCT_ATTRIBUTES,
+            payload: item
+        };
+    },
+
     setSearch: (search: string = "") => {
         return {
             type: types.SET_SEARCH,
