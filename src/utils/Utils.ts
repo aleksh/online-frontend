@@ -1,4 +1,5 @@
 import VOAttribute from "../VO/VOAttribute";
+import VOCartItem from "../VO/VOCartItem";
 
 export default class Utils {
 
@@ -8,6 +9,15 @@ export default class Utils {
             r[a.attribute_name].push(a);
             return r;
         }, Object.create(null));
+
+        return result;
+    }
+
+    static GetProductsCount = (arr: VOCartItem[]) => {
+        const result = arr.reduce((r, a) => {
+            r = r + a.quantity;
+            return r;
+        }, 0);
 
         return result;
     }

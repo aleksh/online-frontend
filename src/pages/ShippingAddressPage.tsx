@@ -5,14 +5,14 @@ import Categories from "../components/Categories/Categories";
 import Departments from "../components/Departments/Departments";
 import HeaderBag from "../components/HeaderBag/HeaderBag";
 import Modals from "../components/Modals/Modals";
-import Product from "../components/Product/Product";
 import Search from "../components/Search/Search";
+import ShippingAddress from "../components/ShippingAddress/ShippingAddress";
 import User from "../components/User/User";
 
-interface IProductPageProps {}
+interface IShippingAddressProps {}
 
-const ProductPage: React.FunctionComponent<IProductPageProps> = (
-	props: IProductPageProps
+const ShippingAddressPage: React.FunctionComponent<IShippingAddressProps> = (
+	props: IShippingAddressProps
 ) => {
 	const { Header, Footer, Sider, Content } = Layout;
 
@@ -30,7 +30,7 @@ const ProductPage: React.FunctionComponent<IProductPageProps> = (
 						<div style={{ width: "20%", float: "left" }}>
 							<Search />
 						</div>
-						<div style={{ width: "20%"}}>
+						<div style={{ width: "20%" }}>
 							<HeaderBag />
 						</div>
 					</div>
@@ -45,7 +45,7 @@ const ProductPage: React.FunctionComponent<IProductPageProps> = (
 							minHeight: "calc(100vh - 119px)"
 						}}
 					>
-						<Product />
+						<ShippingAddress />
 					</Content>
 				</Layout>
 				<Footer style={{ height: "55px" }}>Footer</Footer>
@@ -56,4 +56,4 @@ const ProductPage: React.FunctionComponent<IProductPageProps> = (
 	);
 };
 
-export default ProductPage;
+export default ShippingAddressPage;

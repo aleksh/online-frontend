@@ -7,6 +7,7 @@ import Modals from "../components/Modals/Modals";
 import ProductsList from "../components/ProductsList/ProductsList";
 import Search from "../components/Search/Search";
 import User from "../components/User/User";
+import HeaderBag from "../components/HeaderBag/HeaderBag";
 
 interface IMainPageProps {}
 
@@ -28,6 +29,9 @@ const MainPage: React.FunctionComponent<IMainPageProps> = (
                         </div>
                         <div style={{ width: "20%" }}>
                             <Search />
+                        </div>
+                        <div style={{ width: "20%" }}>
+                            <HeaderBag />
                         </div>
                     </div>
 				</Header>

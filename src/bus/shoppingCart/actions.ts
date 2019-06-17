@@ -25,6 +25,26 @@ export const shoppingCartActions = {
         };
     },
 
+    removeItem: (id: any) => {
+        return {
+            type: types.REMOVE_ITEM,
+            payload: id
+        };
+    },
+
+    updateItem: (item: any) => {
+        return {
+            type: types.UPDATE_ITEM,
+            payload: item
+        };
+    },
+
+    emptyCart: () => {
+        return {
+            type: types.EMPTY_CART,
+        };
+    },
+
 
     // Async
     addProductAsync: (data: any) => {
@@ -40,5 +60,26 @@ export const shoppingCartActions = {
             payload: data
         };
     },
+
+    removeItemAsync: (item_id: any) => {
+        return {
+            type: types.REMOVE_iTEM_ASYNC,
+            payload: item_id
+        };
+    },
+
+    updateItemAsync: (data: any) => {
+        return {
+            type: types.UPDATE_iTEM_ASYNC,
+            payload: data
+        };
+    },
+
+    emptyCartAsync: () => {
+        return {
+            type: types.EMPTY_CART_ASYNC,
+        }
+    }
+
 
 }

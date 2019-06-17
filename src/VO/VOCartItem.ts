@@ -1,4 +1,4 @@
-export default class VODepartment {
+export default class VOCartItem {
 
     attributes: string;
     image: string;

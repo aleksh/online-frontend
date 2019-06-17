@@ -134,8 +134,9 @@ export const api = {
         },
 
         removeProduct(item_id:any) {
-            return axios.get(`/shoppingcart/removeProduct/${item_id}`);
+            return axios.delete(`/shoppingcart/removeProduct/${item_id}`);
         },
+
        
     },
 

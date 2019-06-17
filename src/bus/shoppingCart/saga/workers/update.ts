@@ -4,35 +4,22 @@ import { api } from "../../../../REST";
 import Utils from "../../../../utils/Utils";
 import { modalActions } from "../../../modal/actions";
 import { shoppingCartActions } from "../../../shoppingCart/actions";
-import { generateUniqId } from "./index";
 
 
 
-export function* add({ payload }: any) {
+export function* update({ payload }: any) {
     try {
-        console.log(payload);
-        let cart_id = yield select(getCartId);
 
-        //remote it for test        
-        cart_id = "1xh7q2z4qajwzr8gde";
-        yield put(shoppingCartActions.setCartId(cart_id));
-        /////////////////////////
-
-        if (!cart_id) {
-            cart_id = yield call(generateUniqId);
-        }
-
-        const { data, status } = yield call(api.shoppingCart.add, { ...payload, cart_id });
-        console.log(data);
-
+        const { data, status } = yield call(api.shoppingCart.update, payload);
+        
         if (status !== 200) {
             throw new Error(data.error.message);
         }
 
-
         const count = yield call(Utils.GetProductsCount, data);
-
         yield put(shoppingCartActions.setItems({ items: data, count }));
+
+        let cart_id = yield select(getCartId);
         yield put(shoppingCartActions.getTotalAsync(cart_id));
 
     } catch (error) {
