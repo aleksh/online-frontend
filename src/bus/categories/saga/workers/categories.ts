@@ -1,6 +1,7 @@
 
 import { call, put, select } from "redux-saga/effects";
 import { api } from "../../../../REST";
+import { CANCEL_REQUEST } from "../../../../REST/config";
 import { modalActions } from "../../../modal/actions";
 import { categoriesActions } from "../../actions";
 
@@ -27,7 +28,9 @@ export function* categories() {
         yield put(categoriesActions.setCategories(categories.rows || categories));
 
     } catch (error) {
-        yield put(modalActions.showError(error.message));
+        if (error.message !== CANCEL_REQUEST) {
+            yield put(modalActions.showError(error.message));
+        }
     }
 }
 

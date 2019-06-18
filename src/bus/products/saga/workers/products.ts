@@ -1,6 +1,7 @@
 
 import { call, put, select } from "redux-saga/effects";
 import { api } from "../../../../REST";
+import { CANCEL_REQUEST } from "../../../../REST/config";
 import { modalActions } from "../../../modal/actions";
 import { productsActions } from "../../actions";
 
@@ -16,7 +17,6 @@ export function* products({ payload }: any) {
 
         if (state.search.length > 0) {
             response = yield call(api.products.search, { ...payload, search: state.search });
-            console.log("search");
         } else {
 
             if (state.selectedDepartment && !state.selectedCategory) {
@@ -45,7 +45,9 @@ export function* products({ payload }: any) {
         }
 
     } catch (error) {
-        yield put(modalActions.showError(error.message));
+        if (error.message !== CANCEL_REQUEST) {
+            yield put(modalActions.showError(error.message));
+        }
     }
 }
 

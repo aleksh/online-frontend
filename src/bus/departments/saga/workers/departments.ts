@@ -8,7 +8,7 @@ import { departmentsActions } from "../../actions";
 export function* departments() {
     try {
 
-        const { data: departments, message, status } = yield call(api.departments.fetch);
+        const { data: departments, status } = yield call(api.departments.fetch);
 
         if (status !== 200) {
             throw new Error(departments.error.message);
