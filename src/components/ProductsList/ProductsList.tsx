@@ -1,20 +1,20 @@
-import { Card, Pagination } from "antd";
+import { Pagination } from "antd";
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { productsActions } from "../../bus/products/actions";
 import { history } from "../../init/middleware/core";
 import { Path } from "../../navigation/path";
-import { PRODUCT_IMAGE_URL } from "../../REST";
 import { ITEMS_PER_PAGE } from "../../utils/Constants";
 import VOProduct from "../../VO/VOProduct";
+import ProductCard from "./ProductCard";
 import Styles from "./Styles.module.scss";
 
 interface IProductsListProps {
 	products: VOProduct[];
 	count: number;
-    page: number;
-    search: string;
+	page: number;
+	search: string;
 	actions: any;
 }
 
@@ -35,33 +35,50 @@ class ProductsList extends React.Component<
 	};
 
 	componentDidUpdate = () => {
-		console.log("ProductsList ---------------------------componentDidUpdate");
+		console.log(
+			"ProductsList ---------------------------componentDidUpdate"
+		);
 	};
 
 	componentWillMount = () => {
 		console.log("ProductsList componentWillMount");
 	};
 
-	_handleClick = (event: any) => {
-		const id: string = event.currentTarget.getAttribute("data-item-id");
-		history.push(`${Path.product}/${id}`);
+	_handleClick = (item: VOProduct) => {
+		history.push(`${Path.product}/${item.product_id}`);
 	};
 
 	_handlePagination = (curPage: any) => {
-		console.log(curPage);
 		const { actions } = this.props;
 
 		actions.productsAsync({ page: curPage, limit: ITEMS_PER_PAGE });
 	};
 
+	_getProductList = (): any => {
+		const { products } = this.props;
+
+		if (!products) return null;
+
+		return products.map(item => {
+			return (
+				<ProductCard
+					key={item.product_id}
+					item={item}
+					click={this._handleClick}
+				/>
+			);
+		});
+	};
+
 	public render() {
 		const { products, count, page, search } = this.props;
-		const { Meta } = Card;
 		return (
 			<>
-                {search.length > 0 && <p>Search For: <strong>{search}</strong></p>
-
-                }
+				{search.length > 0 && (
+					<p>
+						Search For: <strong>{search}</strong>
+					</p>
+				)}
 				<Pagination
 					current={page}
 					total={count}
@@ -69,44 +86,20 @@ class ProductsList extends React.Component<
 					onChange={this._handlePagination}
 				/>
 				<div className={Styles.ProductList}>
-					{products &&
-						products.map(item => {
-							return (
-								<Card
-									data-item-id={item.product_id}
-									onClick={this._handleClick}
-									key={item.product_id}
-									hoverable
-									style={{ width: 240, margin: 10 }}
-									cover={
-										<img
-											alt={item.name}
-											src={
-												PRODUCT_IMAGE_URL +
-												item.thumbnail
-											}
-										/>
-									}
-								>
-									<Meta
-										title={item.name}
-										description={item.description}
-									/>
-								</Card>
-							);
-						})}
+                {this._getProductList()}
 				</div>
 			</>
 		);
 	}
 }
 
+
 const mapStateToProps = (state: any) => {
 	return {
 		products: state.products.get("products"),
 		count: state.products.get("count"),
-        page: state.products.get("page"),
-        search: state.products.get("search")        
+		page: state.products.get("page"),
+		search: state.products.get("search")
 	};
 };
 

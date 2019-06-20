@@ -1,0 +1,18 @@
+.departmentsNav {
+	font-weight: bold;
+	font-size: 1.5rem;
+
+	li {
+		a {
+			color: #fff;
+		}
+
+		a:hover {
+			color: #f62f5e;
+		}
+
+		a[class*="active"] {
+			color: #f62f5e;
+		}
+	}
+}

@@ -1,11 +1,12 @@
-import { List } from "antd";
 import * as React from "react";
 import { connect } from "react-redux";
+import { ListGroup } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { categoriesActions } from "../../bus/categories/actions";
 import { productsActions } from "../../bus/products/actions";
 import { history } from "../../init/middleware/core";
 import VOCategory from "../../VO/VOCategory";
+import CategoryItem from "./CategoryItem";
 
 interface ICategoriesProps {
 	selectedCategory: VOCategory;
@@ -24,45 +25,33 @@ class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 		}
 	};
 
-	_handleClick = (event: any) => {
-		const { actions, categories, selectedCategory } = this.props;
+	_handleClick = (item: VOCategory) => {
+		const { actions } = this.props;
 
-		const id: number = Number(event.target.getAttribute("itemid"));
+		history.push(`/${item.name}`);
+		actions.changeCategory(item);
+	};
 
-		if (!selectedCategory || selectedCategory.category_id !== id) {
-			const selectedItem: VOCategory =
-				categories.filter(item => id === item.category_id)[0] || null;
+	_getCategoriesList = (): any => {
+		const { categories, selectedCategory } = this.props;
 
-			if (selectedItem) {
-				history.push(`/${selectedItem.name}`);
-				actions.changeCategory(selectedItem);
-			}
-		}
+		return categories.map(item => {
+			const active = selectedCategory
+				? selectedCategory.category_id === item.category_id
+				: false;
+			return (
+				<CategoryItem
+					key={item.category_id}
+					item={item}
+					click={this._handleClick}
+					active={active}
+				/>
+			);
+		});
 	};
 
 	public render() {
-		const { categories } = this.props;
-		console.log(categories);
-		return (
-			<List
-				loading={categories.length === 0}
-				header={
-					<div>
-						<strong>Categories</strong>
-					</div>
-				}
-				bordered
-				dataSource={categories}
-				renderItem={item => (
-					<List.Item
-						itemID={`${item.category_id}`}
-						onClick={this._handleClick}
-					>
-						{item.name}
-					</List.Item>
-				)}
-			/>
-		);
+		return <ListGroup>{this._getCategoriesList()}</ListGroup>;
 	}
 }
 

@@ -1,7 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Badge, Button } from "reactstrap";
+import { ReactComponent as Bag } from "../../assets/images/shopping-bag.svg";
+import { history } from "../../init/middleware/core";
 import { Path } from "../../navigation/path";
+import Styles from "./Styles.module.scss";
 
 interface IHeaderBagProps {
 	count: number;
@@ -10,13 +13,20 @@ interface IHeaderBagProps {
 export interface IHeaderBagState {}
 
 class HeaderBag extends React.Component<IHeaderBagProps, IHeaderBagState> {
+	_handleClick = () => {
+		history.push(Path.shoppingCart);
+	};
+
 	public render() {
 		const { count } = this.props;
+
 		return (
-			<div style={{ backgroundColor: "white" }}>
-				<Link to={Path.shoppingCart}>
-					MyBag <strong>{count}</strong>
-				</Link>
+			<div className={Styles.myBag}>
+				<Badge pill>{count}</Badge>
+				<Bag className={Styles.icon} />
+				<Button color="link" onClick={this._handleClick}>
+					Your Bag
+				</Button>
 			</div>
 		);
 	}

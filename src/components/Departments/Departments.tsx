@@ -1,12 +1,14 @@
-import { Menu } from "antd";
 import * as React from "react";
 import { connect } from "react-redux";
+import { Nav } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { categoriesActions } from "../../bus/categories/actions";
 import { departmentsActions } from "../../bus/departments/actions";
 import { productsActions } from "../../bus/products/actions";
 import { history } from "../../init/middleware/core";
 import VODepartment from "../../VO/VODepartment";
+import DepartmentItem from "./DepartmentItem";
+import Styles from "./Styles.module.scss";
 
 interface IDepartmentsProps {
 	selectedDepartment: VODepartment;
@@ -28,39 +30,35 @@ class Departments extends React.Component<
 		}
 	};
 
-	_handleClick = (event: any) => {
-		const { actions, departments, selectedDepartment } = this.props;
-		const id: number = Number(event.key);
+	_handleClick = (item: VODepartment) => {
+		const { actions } = this.props;
+		history.push(`/${item.name}`);
+		actions.changeDepartment(item);
+	};
 
-		if (!selectedDepartment || selectedDepartment.department_id !== id) {
-			const selectedItem: VODepartment =
-				departments.filter(item => id === item.department_id)[0] ||
-				null;
+	_getDepartmentsList = () => {
+		const { departments, selectedDepartment } = this.props;
 
-			if (selectedItem) {
-				history.push(`/${selectedItem.name}`);
-				actions.changeDepartment(selectedItem);
-			}
-		}
+		return departments.map(item => {
+			const active = selectedDepartment
+				? selectedDepartment.department_id === item.department_id
+				: false;
+			return (
+				<DepartmentItem
+					key={item.department_id}
+					active={active}
+					item={item}
+					click={this._handleClick}
+				/>
+			);
+		});
 	};
 
 	public render() {
-		const { departments } = this.props;
 		return (
-			<Menu
-				mode="horizontal"
-				onClick={this._handleClick}
-				style={{ lineHeight: "64px", width: '300px' }}
-			>
-				{departments &&
-					departments.map(item => {
-						return (
-							<Menu.Item key={item.department_id}>
-								{item.name}
-							</Menu.Item>
-						);
-					})}
-			</Menu>
+			<Nav className={Styles.departmentsNav}>
+				{this._getDepartmentsList()}
+			</Nav>
 		);
 	}
 }

@@ -1,0 +1,22 @@
+.user {
+	display: flex;
+	align-items: center;
+
+	p {
+		color: #2e2e2e;
+		font-weight: bold;
+        font-size: 1.6rem;
+        line-height: 1.8rem;
+        padding: 0;
+        margin:0;	
+
+		a {
+			color: #f62f5e;
+			text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+	}
+}

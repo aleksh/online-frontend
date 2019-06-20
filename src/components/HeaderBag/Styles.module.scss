@@ -1,0 +1,31 @@
+.myBag {
+	position: relative;
+
+	button,
+    button:hover,
+    button:focus {
+		font-size: 1.5rem;
+		font-weight: bold;
+		color: #2e2e2e;
+		background: none;
+		border: 0;
+		text-decoration: none;
+		outline: 0;
+	}
+
+	span {
+		position: absolute;
+		top: 0;
+		left: 10px;
+		background-color: #f62f5e;
+	}
+
+	button:hover {
+		text-decoration: underline;
+	}
+}
+
+.icon {
+	width: 20px;
+	height: 20px;
+}

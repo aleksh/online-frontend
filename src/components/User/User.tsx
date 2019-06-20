@@ -1,4 +1,3 @@
-import { Button } from "antd/lib/radio";
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -6,6 +5,7 @@ import { modalActions } from "../../bus/modal/actions";
 import { userActions } from "../../bus/user/actions";
 import VOUser from "../../VO/VOUser";
 import { MODAL_TYPES } from "../Modals/Modals";
+import Styles from "./Styles.module.scss";
 
 interface IUserProps {
 	isLoggedIn: boolean;
@@ -16,20 +16,23 @@ interface IUserProps {
 export interface IUserState {}
 
 class User extends React.Component<IUserProps, IUserState> {
-	_handlerLogin = () => {
+	_handlerLogin = (event: any) => {
+		event.preventDefault();
 		console.log("login");
 
 		const { actions } = this.props;
 		actions.showModal({ modalType: MODAL_TYPES.LOGIN });
 	};
 
-	_hendleRegister = () => {
+	_hendleRegister = (event: any) => {
+		event.preventDefault();
 		console.log("register");
 		const { actions } = this.props;
 		actions.showModal({ modalType: MODAL_TYPES.REGISTER });
 	};
 
-	_handlerLogout = () => {
+	_handlerLogout = (event: any) => {
+		event.preventDefault();
 		console.log("logout");
 		const { actions } = this.props;
 		actions.logoutAsync();
@@ -38,20 +41,24 @@ class User extends React.Component<IUserProps, IUserState> {
 	public render() {
 		const { user, isLoggedIn } = this.props;
 		return (
-			<div style={{ background: "white" }}>
+			<div className={Styles.user}>
 				{isLoggedIn ? (
-					<>
-						<p>
-							Hello {user.name}
-							<Button onClick={this._handlerLogout}>
-								Logout
-							</Button>
-						</p>
-					</>
+					<p>
+						Hello {user.name}
+						<a href="#" onClick={this._handlerLogout}>
+							Logout
+						</a>
+					</p>
 				) : (
 					<p>
-						<Button onClick={this._handlerLogin}>Login</Button>
-						<Button onClick={this._hendleRegister}>Register</Button>
+						Hi!&nbsp;
+						<a href="#" onClick={this._handlerLogin}>
+							Sign in
+						</a>
+						&nbsp;or&nbsp;
+						<a href="#" onClick={this._hendleRegister}>
+							Register
+						</a>
 					</p>
 				)}
 			</div>

@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { productsActions } from "../../bus/products/actions";
+import Styles from "./Styles.module.scss";
 
 interface ISearchProps {
 	actions: any;
@@ -29,9 +30,9 @@ class Search extends React.Component<ISearchProps, ISearchState> {
 
 	public render() {
 		return (
-			<div>
+			<div className={Styles.search}>
 				<form onSubmit={this._handleSubmit}>
-					<input type="text" name="search" ref={this.inputRef} />
+					<input type="search" name="search" ref={this.inputRef} />
 					<input type="submit" value="Submit" />
 				</form>
 			</div>
