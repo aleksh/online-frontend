@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { productsActions } from "../../bus/products/actions";
+import { ReactComponent as IconSearch } from '../../assets/images/icon-search.svg';
 import Styles from "./Styles.module.scss";
 
 interface ISearchProps {
@@ -22,9 +23,10 @@ class Search extends React.Component<ISearchProps, ISearchState> {
 		event.preventDefault();
 		const search: string = this.inputRef.current!.value;
 
-		if (search && search.length > 0) {
+		if (search && search.length > 0) {            
 			this.props.actions.searchAsync(search);
-			this.inputRef.current!.value = "";
+            this.inputRef.current!.value = "";
+            this.inputRef.current!.blur();
 		}
 	};
 
@@ -33,7 +35,7 @@ class Search extends React.Component<ISearchProps, ISearchState> {
 			<div className={Styles.search}>
 				<form onSubmit={this._handleSubmit}>
 					<input type="search" name="search" ref={this.inputRef} />
-					<input type="submit" value="Submit" />
+					<button type="submit" value=""><IconSearch width={20} height={20}/></button>
 				</form>
 			</div>
 		);
