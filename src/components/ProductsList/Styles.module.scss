@@ -1,21 +1,72 @@
 .ProductList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    
-    > div {
-        margin: 20px;
-        width: 200px;
-    }
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	> div {
+		margin: 20px;
+		width: 200px;
+	}
 }
 
 .ProductThumbnail {
-    width:100%;
-    display: flex;
-    justify-content: center;
-    padding-top:35px;      
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	min-height: 131px;
+	img {
+		width: 120px;
+		animation: fade 1.2s;
+	}
+}
 
-    img {
-        width:120px;
-    }
+.ProductCard {
+	cursor: pointer;
+	transition: all 0.5s;
+	animation: fade 0.3s;
+	h3 {
+		text-align: center;
+	}
+
+	.Price {
+		display: flex;
+		padding: 10px 0 10px 0;
+		font-size: 2rem;
+		justify-content: space-between;
+	}
+}
+
+.ProductCard:hover {
+	-webkit-box-shadow: -2px 6px 15px 1px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: -2px 6px 15px 1px rgba(0, 0, 0, 0.75);
+	box-shadow: -2px 6px 15px 1px rgba(0, 0, 0, 0.75);
+}
+
+.Crossout {
+	text-decoration: line-through;
+}
+
+.Hide {
+	visibility: hidden;
+}
+
+.Search {
+	text-align: center;
+	padding: 10px 0 0 0;
+    min-height:24px;
+	span {
+        font-weight: bold;
+		color: #f62f5e;
+	}
+}
+
+@keyframes fade {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }

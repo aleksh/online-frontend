@@ -1,4 +1,5 @@
-import { Pagination } from "antd";
+import cx from "classnames";
+import Pagination from "rc-pagination";
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -6,6 +7,7 @@ import { productsActions } from "../../bus/products/actions";
 import { history } from "../../init/middleware/core";
 import { Path } from "../../navigation/path";
 import { ITEMS_PER_PAGE } from "../../utils/Constants";
+import locale from "../../utils/en_US";
 import VOProduct from "../../VO/VOProduct";
 import ProductCard from "./ProductCard";
 import Styles from "./Styles.module.scss";
@@ -71,28 +73,36 @@ class ProductsList extends React.Component<
 	};
 
 	public render() {
-		const { products, count, page, search } = this.props;
+		const { count, page, search } = this.props;
+
+		console.log(count);
+		const pgClass = cx({ [Styles.Hide]: count <= ITEMS_PER_PAGE });
+
 		return (
 			<>
-				{search.length > 0 && (
-					<p>
-						Search For: <strong>{search}</strong>
-					</p>
-				)}
+				<div className={Styles.Search}>
+					{search.length > 0 && (
+						<h2>
+							Search For: <span>{search}</span>
+						</h2>
+					)}
+				</div>
 				<Pagination
+					className={pgClass}
 					current={page}
 					total={count}
+					locale={locale}
 					pageSize={ITEMS_PER_PAGE}
 					onChange={this._handlePagination}
 				/>
+
 				<div className={Styles.ProductList}>
-                {this._getProductList()}
+					{this._getProductList()}
 				</div>
 			</>
 		);
 	}
 }
-
 
 const mapStateToProps = (state: any) => {
 	return {

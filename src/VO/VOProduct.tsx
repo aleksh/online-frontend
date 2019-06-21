@@ -2,8 +2,8 @@ export default class VOProduct {
 	product_id: string;
 	name: string;
 	description: string;
-	price: string;
-	discounted_price: string;
+	price: number;
+	discounted_price: number;
     thumbnail: string;
     image: string;
     image2: string;  
@@ -12,8 +12,8 @@ export default class VOProduct {
 		product_id: string,
 		name: string,
 		description: string,
-		price: string,
-		discounted_price: string,
+		price: number,
+		discounted_price: number,
         thumbnail: string,
         image:string ="",
         image2:string ="",

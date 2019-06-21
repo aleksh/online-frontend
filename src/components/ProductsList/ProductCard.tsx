@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Card, CardBody, CardText, CardTitle } from "reactstrap";
+import { Badge, Card, CardBody, CardText } from "reactstrap";
 import { PRODUCT_IMAGE_URL } from "../../REST";
 import VOProduct from "../../VO/VOProduct";
 import Styles from "./Styles.module.scss";
@@ -23,21 +23,37 @@ class ProductCard extends React.Component<
 		}
 	};
 
+	_getPrice = () => {
+		const { item } = this.props;
+
+		return (
+			<>
+                {item.discounted_price > 0 ? (
+                    <>
+				        <Badge className={Styles.Crossout} color="danger" pill>{item.price}</Badge>
+				        <Badge color="success" pill>{item.discounted_price}</Badge>
+                    </>
+                ) : <Badge color="success" pill>{item.price}</Badge>
+                }
+			</>
+		);
+	};
+
 	public render() {
 		const { item } = this.props;
 		return (
-			<Card onClick={this._handleClick}>
-				<div className={Styles.ProductThumbnail}>
-					<img
-						src={PRODUCT_IMAGE_URL + item.thumbnail}
-						alt={item.name}
-					/>
-				</div>
+			<Card className={Styles.ProductCard} onClick={this._handleClick}>
 				<CardBody>
-					<CardTitle>{item.name}</CardTitle>
-					<CardText>{item.description}</CardText>
+					<h3>{item.name}</h3>
 
-					<Button>Buy</Button>
+					<div className={Styles.ProductThumbnail}>
+						<img
+							src={PRODUCT_IMAGE_URL + item.thumbnail}
+							alt={item.name}
+						/>
+					</div>
+					<div className={Styles.Price}>{this._getPrice()}</div>
+					<CardText>{item.description}</CardText>
 				</CardBody>
 			</Card>
 		);

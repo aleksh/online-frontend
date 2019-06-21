@@ -1,5 +1,6 @@
 import axios from "axios";
 import { CANCEL_REQUEST } from "../config";
+import { DESCRIPTION_LENGTH } from "../../utils/Constants";
 
 
 export const products = {
@@ -9,7 +10,7 @@ export const products = {
 
         CancelProducts.cancelFetch = axios.CancelToken.source();
 
-        return axios.get(`/products?page=${data.page}&limit=${data.limit}`, {
+        return axios.get(`/products?page=${data.page}&limit=${data.limit}&description_length=${DESCRIPTION_LENGTH}`, {
             cancelToken: CancelProducts.cancelFetch.token
         });
     },
@@ -18,7 +19,7 @@ export const products = {
 
         CancelProducts.cancelSearch = axios.CancelToken.source();
 
-        return axios.get(`/products/search?query_string=${data.search}&page=${data.page}&limit=${data.limit}`, {
+        return axios.get(`/products/search?query_string=${data.search}&page=${data.page}&limit=${data.limit}&description_length=${DESCRIPTION_LENGTH}`, {
             cancelToken: CancelProducts.cancelSearch.token
         });
 
@@ -29,7 +30,7 @@ export const products = {
 
         CancelProducts.cancelProductsInCategory = axios.CancelToken.source();
 
-        return axios.get(`/products/inCategory/${data.category_id}/?page=${data.page}&limit=${data.limit}`, {
+        return axios.get(`/products/inCategory/${data.category_id}/?page=${data.page}&limit=${data.limit}&description_length=${DESCRIPTION_LENGTH}`, {
             cancelToken: CancelProducts.cancelProductsInCategory.token
         });
     },
@@ -38,7 +39,7 @@ export const products = {
 
         CancelProducts.cancelProductsInDepartment = axios.CancelToken.source();
 
-        return axios.get(`/products/inDepartment/${data.department_id}/?page=${data.page}&limit=${data.limit}`, {
+        return axios.get(`/products/inDepartment/${data.department_id}/?page=${data.page}&limit=${data.limit}&description_length=${DESCRIPTION_LENGTH}`, {
             cancelToken: CancelProducts.cancelProductsInDepartment.token
         });
     },
