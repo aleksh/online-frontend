@@ -1,12 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { ListGroup } from "reactstrap";
+import { ListGroup, ListGroupItem } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { categoriesActions } from "../../bus/categories/actions";
 import { productsActions } from "../../bus/products/actions";
 import { history } from "../../init/middleware/core";
 import VOCategory from "../../VO/VOCategory";
 import CategoryItem from "./CategoryItem";
+import Styles from "./Styles.module.scss";
 
 interface ICategoriesProps {
 	selectedCategory: VOCategory;
@@ -51,7 +52,14 @@ class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 	};
 
 	public render() {
-		return <ListGroup>{this._getCategoriesList()}</ListGroup>;
+		return (
+			<ListGroup className={Styles.Categories}>
+				<ListGroupItem>
+					<h2>Categories</h2>
+				</ListGroupItem>
+				{this._getCategoriesList()}
+			</ListGroup>
+		);
 	}
 }
 

@@ -26,8 +26,7 @@ class CategoryItem extends React.Component<
 		const { item, active } = this.props;
 
 		return (
-			<ListGroupItem
-				tag="button"
+			<ListGroupItem                                
 				active={active}
 				onClick={this._handleClick}
 			>
