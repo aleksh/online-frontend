@@ -29,7 +29,7 @@ class ProductsList extends React.Component<
 	componentDidMount = () => {
 		const { actions, products, page } = this.props;
 
-		if (products.length === 0) {
+		if (!products || products.length === 0) {
 			actions.productsAsync({ page, limit: ITEMS_PER_PAGE });
 		}
 

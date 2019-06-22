@@ -13,7 +13,8 @@ export function* products({ payload }: any) {
         const state = yield select(getItems);
 
         let response;
-
+        
+        yield put(productsActions.cleanProducts());
 
         if (state.search.length > 0) {
             response = yield call(api.products.search, { ...payload, search: state.search });
@@ -39,7 +40,7 @@ export function* products({ payload }: any) {
         }
 
         yield put(productsActions.setProducts(products));
-
+console.log(products);
         if (state.search.length > 0) {
             // clean selected department and selected category
         }

@@ -36,6 +36,10 @@ export const productsReducer = (state = initialState, action: any) => {
                 product: null,
                 productAttributes: null,
             });
+        case types.CLEAN_PRODUCTS:
+            return state.merge({
+                products: []
+            });
 
         default:
             return state;

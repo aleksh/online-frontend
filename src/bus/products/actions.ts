@@ -45,6 +45,13 @@ export const productsActions = {
         };
     },
 
+    cleanProducts: () => {
+        return {
+            type: types.CLEAN_PRODUCTS,
+        };
+    },
+    
+
     // Async
     productsAsync: (data: any) => {
         return {
