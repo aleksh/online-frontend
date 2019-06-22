@@ -19,9 +19,16 @@ export const categoriesActions = {
         };
     },
 
-    clearSelectedCategory: () => {
+    cleanSelectedCategory: () => {
         return {
-            type: types.CLEAR_SELECTED_CATEGORY
+            type: types.CLEAN_SELECTED_CATEGORY
+        };
+    },
+
+    filterCategoryByDepartment: (departmentId: any) => {
+        return {
+            type: types.FILTER_CATEGORIES_BY_DEPARTMENT,
+            payload: departmentId
         };
     },
 

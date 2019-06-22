@@ -28,13 +28,20 @@ class ProductCard extends React.Component<
 
 		return (
 			<>
-                {item.discounted_price > 0 ? (
-                    <>
-				        <Badge className={Styles.Crossout} color="danger" pill>{item.price}</Badge>
-				        <Badge color="success" pill>{item.discounted_price}</Badge>
-                    </>
-                ) : <Badge color="success" pill>{item.price}</Badge>
-                }
+				{item.discounted_price > 0 ? (
+					<>
+						<Badge className={Styles.Crossout} color="danger" pill>
+							{item.price}
+						</Badge>
+						<Badge color="success" pill>
+							{item.discounted_price}
+						</Badge>
+					</>
+				) : (
+					<Badge color="success" pill>
+						{item.price}
+					</Badge>
+				)}
 			</>
 		);
 	};

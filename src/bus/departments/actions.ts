@@ -26,6 +26,12 @@ export const departmentsActions = {
         };
     },
 
+    cleanSelectedDepartment: () => {
+        return {
+            type: types.CLEAN_SELECTED_DEPARTMENT            
+        };
+    },
+
     // Async
     departmentsAsync: () => {
         return {

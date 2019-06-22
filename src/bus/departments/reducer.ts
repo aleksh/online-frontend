@@ -15,6 +15,9 @@ export const departmentsReducer = (state = initialState, action: any) => {
         case types.SET_SELECTED_DEPARTMENT:
             return state.set("selectedDepartment", action.payload);
 
+        case types.CLEAN_SELECTED_DEPARTMENT:
+            return state.set("selectedDepartment", null);
+
         default:
             return state;
     }

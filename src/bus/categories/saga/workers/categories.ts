@@ -8,7 +8,7 @@ import { categoriesActions } from "../../actions";
 
 export function* categories() {
     try {
-        yield put(categoriesActions.clearSelectedCategory());
+        yield put(categoriesActions.cleanSelectedCategory());
         const state = yield select(getDepartment);
 
         let response;
