@@ -13,7 +13,7 @@ const initialState = Map({
 
 export const productsReducer = (state = initialState, action: any) => {
     switch (action.type) {
-        case types.SET_PRODUCTS:
+        case types.SET_PRODUCTS:            
             return state.merge({
                 products: action.payload.rows,
                 count: action.payload.count,

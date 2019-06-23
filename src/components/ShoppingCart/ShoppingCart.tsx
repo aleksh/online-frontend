@@ -1,10 +1,7 @@
-import { Button, Col, Row } from "antd";
 import * as React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { shoppingCartActions } from "../../bus/shoppingCart/actions";
-import { Path } from "../../navigation/path";
 import VOCartItem from "../../VO/VOCartItem";
 
 interface IShoppingCartProps {
@@ -53,9 +50,12 @@ class ShoppingCart extends React.Component<
 
 	public render() {
 		const { count, totalAmount, items } = this.props;
-		return (
-			<>
-				<div style={{ backgroundColor: "white" }}>
+		return <>asdsd</>;
+	}
+}
+
+/*
+<div style={{ backgroundColor: "white" }}>
 					<Button onClick={this._handleEmptyCart}>Empty Cart</Button>
 					<Link to={Path.shippingAddress}>Place Order</Link>
 				</div>
@@ -124,10 +124,7 @@ class ShoppingCart extends React.Component<
 							</Row>
 						);
 					})}
-			</>
-		);
-	}
-}
+*/
 
 const mapStateToProps = (state: any) => {
 	return {

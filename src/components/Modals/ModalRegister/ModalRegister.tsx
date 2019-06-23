@@ -1,4 +1,3 @@
-import { Modal } from "antd";
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -129,7 +128,7 @@ class ModalRegister extends React.Component<
 		const { formValid, email, name, password } = this.state;
 
 		if (formValid) {
-            const { actions } = this.props;
+			const { actions } = this.props;
 			actions.registerAsync(
 				new VORegisterRequest(name.trim(), email, password)
 			);
@@ -149,8 +148,12 @@ class ModalRegister extends React.Component<
 			confirmPasswordValid,
 			formErrors
 		} = this.state;
-		return (
-			<Modal
+		return <>sdfdsf</>;
+	}
+}
+
+/*
+<Modal
 				title="Register"
 				visible={true}
 				onOk={this._handlerOkPopup}
@@ -207,9 +210,8 @@ class ModalRegister extends React.Component<
 					<input type="submit" value="Submit" />
 				</form>
 			</Modal>
-		);
-	}
-}
+
+*/
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {

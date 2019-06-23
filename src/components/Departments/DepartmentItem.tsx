@@ -28,7 +28,7 @@ class DepartmentItem extends React.Component<
 
 		return (
 			<NavItem key={item.department_id}>
-				<NavLink href="#" active={active} onClick={this._handleClick}>
+				<NavLink href="" active={active} onClick={this._handleClick}>
 					{item.name}
 				</NavLink>
 			</NavItem>

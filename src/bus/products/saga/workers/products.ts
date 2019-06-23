@@ -2,10 +2,10 @@
 import { call, put, select } from "redux-saga/effects";
 import { api } from "../../../../REST";
 import { CANCEL_REQUEST } from "../../../../REST/config";
+import { categoriesActions } from "../../../categories/actions";
+import { departmentsActions } from "../../../departments/actions";
 import { modalActions } from "../../../modal/actions";
 import { productsActions } from "../../actions";
-import { departmentsActions } from "../../../departments/actions";
-import { categoriesActions } from "../../../categories/actions";
 
 
 export function* products({ payload }: any) {
@@ -15,6 +15,7 @@ export function* products({ payload }: any) {
         const state = yield select(getItems);
 
         let response;
+
 
         if (state.search.length > 0) {
             response = yield call(api.products.search, { ...payload, search: state.search });

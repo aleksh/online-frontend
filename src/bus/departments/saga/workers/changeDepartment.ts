@@ -12,7 +12,7 @@ export function* changeDepartment({ payload: item }: any) {
         yield put(productsActions.setSearch());
         yield put(departmentsActions.setSelectedDepartment(item));
 
-        yield put(categoriesActions.filterCategoryByDepartment(item.department_id));
+        yield put(categoriesActions.categoriesAsync());
         yield put(productsActions.productsAsync({ page: 1, limit: ITEMS_PER_PAGE }));
 
     } catch (error) {

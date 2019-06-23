@@ -1,4 +1,3 @@
-import { Modal } from "antd";
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -29,19 +28,21 @@ class ModalInfo extends React.Component<IModalInfoProps, IModalInfoState> {
 
 	public render() {
 		const { message } = this.props.modalProps;
-		return (
-			<Modal
+		return (<>
+        asda
+            </>
+		);
+	}
+}
+/*
+<Modal
 				title="Basic Modal"
 				visible={true}
 				onOk={this._handlerClosedPopup}
 				onCancel={this._handlerClosedPopup}
 			>
 				<p>{message}</p>
-			</Modal>
-		);
-	}
-}
-
+			</Modal>*/
 const mapDispatchToProps = (dispatch: any) => {
 	return {
 		actions: bindActionCreators({ ...modalActions }, dispatch)

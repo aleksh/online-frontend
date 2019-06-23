@@ -25,13 +25,6 @@ export const categoriesActions = {
         };
     },
 
-    filterCategoryByDepartment: (departmentId: any) => {
-        return {
-            type: types.FILTER_CATEGORIES_BY_DEPARTMENT,
-            payload: departmentId
-        };
-    },
-
     changeCategory: (item: VOCategory) => {
         return {
             type: types.CHANGE_CATEGORY,

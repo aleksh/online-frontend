@@ -1,5 +1,76 @@
 .Product {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding-top: 30px;
+    flex-grow: 0;
+       
+}
+
+.Colors, .Sizes {
+    display:flex;
+    align-items: center;
+    padding: 10px 0;
+
+    p {
+        margin:0;
+        padding-right: 5px;
+    }
+}
+
+.Sizes {
+    button {
+        margin-left: 10px;
+    }
+}
+
+.addToCard {
+    margin-top:20px;
+}
+
+
+.Image {
+		
+    margin-right: 30px;    
+    margin-left: 30px;
+
+    img {
+		min-width: 193px;
+		animation: fade 1.2s;
+	}
+}
+
+.Description{
+
+
+    p {
+        max-width: 330px;
+        font-size: 1.6rem;
+    }
+}
+
+.Price {
+    padding: 5px 0 10px 0;
+    span {
+        font-size:1.6rem;
+        margin-right: 10px;
+    }
+}
+
+.Crossout {
+	text-decoration: line-through;
+}
+
+.Hide {
+	visibility: hidden;
+}
+
+
+@keyframes fade {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }

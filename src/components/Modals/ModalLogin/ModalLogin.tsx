@@ -1,10 +1,8 @@
-import { Modal } from "antd";
 import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { modalActions } from "../../../bus/modal/actions";
 import { userActions } from "../../../bus/user/actions";
-import { api } from "../../../REST";
 import VOLoginError from "./VOLoginError";
 import VOLoginRequest from "./VOLoginRequest";
 
@@ -103,7 +101,13 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 			formErrors
 		} = this.state;
 		return (
-			<Modal
+			<>ddddddddddА</>
+		);
+	}
+}
+
+/*
+<Modal
 				title="Login"
 				visible={true}
 				onOk={this._handlerOkPopup}
@@ -138,9 +142,7 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 					<input type="submit" value="Submit" />
 				</form>
 			</Modal>
-		);
-	}
-}
+*/
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {

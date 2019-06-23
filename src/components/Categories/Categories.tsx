@@ -11,7 +11,7 @@ import Styles from "./Styles.module.scss";
 
 interface ICategoriesProps {
 	selectedCategory: VOCategory;
-	filteredCategories: VOCategory[];
+	categories: VOCategory[];
 	actions: any;
 }
 
@@ -19,9 +19,9 @@ export interface ICategoriesState {}
 
 class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 	componentDidMount = () => {
-		const { actions, filteredCategories } = this.props;
+		const { actions, categories } = this.props;
 
-		if (!filteredCategories || filteredCategories.length === 0) {
+		if (!categories || categories.length === 0) {
 			actions.categoriesAsync();
 		}
 	};
@@ -34,9 +34,9 @@ class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 	};
 
 	_getCategoriesList = (): any => {
-		const { filteredCategories, selectedCategory } = this.props;
+		const { categories, selectedCategory } = this.props;
 
-		return filteredCategories.map(item => {
+		return categories.map(item => {
 			const active = selectedCategory
 				? selectedCategory.category_id === item.category_id
 				: false;
@@ -66,7 +66,7 @@ class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 const mapStateToProps = (state: any) => {
 	return {
 		selectedCategory: state.categories.get("selectedCategory"),
-		filteredCategories: state.categories.get("filteredCategories")
+		categories: state.categories.get("categories")
 	};
 };
 
