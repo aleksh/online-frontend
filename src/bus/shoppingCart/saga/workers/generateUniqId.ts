@@ -10,7 +10,6 @@ export function* generateUniqId() {
 
         const { data, status } = yield call(api.shoppingCart.generateUniqueId);
 
-        console.log(data);
         if (status !== 200) {
             throw new Error(data.error.message);
         }

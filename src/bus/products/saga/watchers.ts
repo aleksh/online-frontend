@@ -3,7 +3,7 @@ import { all, call, takeEvery } from "redux-saga/effects";
 // Types
 import { types } from "../types";
 // Workers
-import { product, products, search } from "./workers";
+import { cleanSelectedItems, product, products, search } from "./workers";
 
 
 function* watchProductsAsync() {
@@ -18,6 +18,10 @@ function* watchSearchAsync() {
     yield takeEvery(types.SEARCH_ASYNC, search);
 }
 
+function* watchCleanSelectedItems() {
+    yield takeEvery(types.CLEAN_SELECTED_ITEMS, cleanSelectedItems);
+}
+
 export function* watchProducts(): any {
-    yield all([call(watchProductsAsync), call(watchProductAsync), call(watchSearchAsync)]);
+    yield all([call(watchProductsAsync), call(watchProductAsync), call(watchSearchAsync), call(watchCleanSelectedItems)]);
 }

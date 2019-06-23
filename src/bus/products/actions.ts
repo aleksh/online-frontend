@@ -50,7 +50,14 @@ export const productsActions = {
             type: types.CLEAN_PRODUCTS,
         };
     },
-    
+
+    cleanSelectedItems: () => {
+        return {
+            type: types.CLEAN_SELECTED_ITEMS,
+        };
+    },
+
+
 
     // Async
     productsAsync: (data: any) => {

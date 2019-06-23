@@ -36,6 +36,35 @@ class Product extends React.Component<IProductProps, IProductState> {
 		};
 	}
 
+	static getDerivedStateFromProps(
+		nextProps: IProductProps,
+		prevState: IProductState
+	) {
+		if (
+			nextProps.productAttributes &&
+			(prevState.color.attribute_value_id === -1 ||
+				prevState.size.attribute_value_id === -1)
+		) {
+			let color = null;
+			let size = null;
+
+			if (nextProps.productAttributes.Color) {
+				color = nextProps.productAttributes.Color[0];
+			}
+
+			if (nextProps.productAttributes.Size) {
+				size = nextProps.productAttributes.Size[0];
+			}
+
+			return {
+				color,
+				size
+			};
+		}
+
+		return null;
+	}
+
 	componentDidMount = () => {
 		const {
 			actions,
@@ -44,7 +73,7 @@ class Product extends React.Component<IProductProps, IProductState> {
 		actions.productAsync(params.id);
 	};
 
-	componentWillMount = () => {
+	componentWillUnmount = () => {
 		const { actions } = this.props;
 		actions.cleanProduct();
 	};
@@ -68,7 +97,9 @@ class Product extends React.Component<IProductProps, IProductState> {
 
 		actions.addProductAsync({
 			product_id: product.product_id,
-			attributes: `Color: ${color}   Size: ${size}`
+			attributes: `Color: ${color.attribute_value}   Size: ${
+				size.attribute_value
+			}`
 		});
 	};
 
@@ -129,8 +160,9 @@ class Product extends React.Component<IProductProps, IProductState> {
 					<div className={Styles.Product}>
 						<div>
 							<Button
-								color="info"
 								size="lg"
+								color="primary"
+								outline
 								onClick={this._handleBack}
 							>
 								Back
@@ -161,8 +193,9 @@ class Product extends React.Component<IProductProps, IProductState> {
 							</div>
 							<div className={Styles.addToCard}>
 								<Button
-									color="info"
 									size="lg"
+									color="primary"
+									outline
 									onClick={this._handleAddToCart}
 								>
 									Add To Cart

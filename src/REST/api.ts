@@ -11,9 +11,18 @@ export const api = {
         localStorage.setItem('turFrontentToken', token);
     },
 
-    geToken(): string {
+    getToken(): string {
         return localStorage.getItem('turFrontentToken') || '';
     },
+
+    setCardId(cardId: string) {
+        localStorage.setItem('turFrontentCardId', cardId);
+    },
+
+    getCardId(): string {
+        return localStorage.getItem('turFrontentCardId') || '';
+    },
+
 
     removeToken() {
         localStorage.removeItem('turFrontentToken');
@@ -26,39 +35,4 @@ export const api = {
     products,
     shoppingCart,
 }
-
-    /*
-    
-    let call;
-    const once = (config = {}) => {
-        if (call) {
-          call.cancel("Only one request allowed at a time.");
-        }
-        call = axios.CancelToken.source();
-    
-        config.cancelToken = call.token
-        return axios(config);
-      }
-    use it:
-    
-    var config = {
-            method: "get",
-            url: "/your/url/endpoint",
-            timeout: 60000
-          }
-    
-    once(config)
-            .then(response => {
-              // success callback
-            })
-            .catch(error => {
-              // error callback
-            })
-            .then(() => {
-              // do no matter error or success
-            });
-    
-    
-    */
-
 

@@ -1,0 +1,18 @@
+.ShoppingCard {
+    margin:30px 0 0 0;
+    font-size: 1.7rem;
+
+    div[class*="row"] {
+        padding: 10px 0;        
+    }
+   
+
+    .TopRow {
+        padding:15px 0;
+        border-bottom:2px solid #444444;
+
+        button {
+            margin-right: 10px;
+        }
+    }
+}

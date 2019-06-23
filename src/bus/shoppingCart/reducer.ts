@@ -7,7 +7,6 @@ import { types } from "./types";
 const initialState = Map({
     cart_id: null,
     totalAmount: null,
-    count: null,
     items: [],
 });
 
@@ -16,6 +15,7 @@ export const shoppingCartReducer = (state = initialState, action: any) => {
         case types.SET_CART_ID:
             return state.set("cart_id", action.payload);
         case types.SET_CART_ITEMS:
+
             return state.merge({
                 items: action.payload.items,
                 count: action.payload.count,
@@ -29,6 +29,25 @@ export const shoppingCartReducer = (state = initialState, action: any) => {
             return state.merge({
                 items,
                 count,
+            })
+
+        case types.UPDATE_ITEM:
+            const itemsUpdate = state.get("items") || [];
+
+
+            const upItems: any = itemsUpdate.map((item: VOCartItem) => {
+                if (item.item_id === action.payload.item_id) {
+                    item.quantity = action.payload.quantity;
+                    item.subtotal = Utils.GetSubTotalPrice(item);
+                }
+                return item;
+            }
+            );
+
+            return state.merge({
+                items: upItems,
+                count: Utils.GetProductsCount(upItems),
+                totalAmount: Utils.GetTotalPrice(upItems),
             })
         case types.SET_TOTAL:
             return state.set("totalAmount", action.payload);

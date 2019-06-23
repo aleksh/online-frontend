@@ -1,3 +1,4 @@
+import { Path } from "../navigation/path";
 import VOAttribute from "../VO/VOAttribute";
 import VOCartItem from "../VO/VOCartItem";
 
@@ -21,6 +22,31 @@ export default class Utils {
 
         return result;
     }
+
+    static GetSubTotalPrice = (item: VOCartItem) => {
+        let result = (item.quantity * item.price).toFixed(2);
+        return result;
+    }
+
+    static NeedProductsClean = (history: any) => {
+        if (history.location.pathname.indexOf(Path.product) !== -1 || history.location.pathname.indexOf(Path.shippingAddress) !== -1
+            || history.location.pathname.indexOf(Path.shoppingCart) !== -1) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    static GetTotalPrice = (arr: VOCartItem[]) => {
+        const result = arr.reduce((r, a) => {
+            r = r + (a.price * a.quantity);
+            return r;
+        }, 0);
+
+        return result.toFixed(2);
+    }
+
 
     static GetRandomInt = (max: number): number => {
         return Math.floor(Math.random() * Math.floor(max));

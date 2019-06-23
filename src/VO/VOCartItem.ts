@@ -4,14 +4,14 @@ export default class VOCartItem {
     image: string;
     item_id: number;
     name: string;
-    price: string;
+    price: number;
     product_id: number;
     quantity: number;
     subtotal: string;
 
 
     constructor(attributes: string, image: string, item_id: number, name: string,
-        price: string, product_id: number, quantity: number, subtotal: string) {
+        price: number, product_id: number, quantity: number, subtotal: string) {
         this.attributes = attributes;
         this.image = image;
         this.item_id = item_id;

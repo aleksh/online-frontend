@@ -1,5 +1,6 @@
 .myBag {
-	position: relative;
+    position: relative;
+    cursor:pointer;
 
 	button,
     button:hover,
@@ -16,13 +17,12 @@
 	span {
 		position: absolute;
 		top: 0;
-		left: 10px;
+        left: 10px;
+        font-size: 1rem;
 		background-color: #f62f5e;
 	}
 
-	button:hover {
-		text-decoration: underline;
-	}
+
 }
 
 .icon {

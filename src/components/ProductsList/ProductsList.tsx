@@ -74,8 +74,6 @@ class ProductsList extends React.Component<
 
 	public render() {
 		const { count, page, search } = this.props;
-
-		console.log(count);
 		const pgClass = cx({ [Styles.Hide]: count <= ITEMS_PER_PAGE });
 
 		return (

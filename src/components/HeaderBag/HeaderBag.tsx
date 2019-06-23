@@ -21,12 +21,11 @@ class HeaderBag extends React.Component<IHeaderBagProps, IHeaderBagState> {
 		const { count } = this.props;
 
 		return (
-			<div className={Styles.myBag}>
-				<Badge pill>{count}</Badge>
+			<div className={Styles.myBag} onClick={this._handleClick}>
+				{count > 0 && <Badge pill>{count}</Badge>}
+
 				<Bag className={Styles.icon} />
-				<Button color="link" onClick={this._handleClick}>
-					Your Bag
-				</Button>
+				<Button color="link">Your Bag</Button>
 			</div>
 		);
 	}

@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { categoriesActions } from "../../bus/categories/actions";
 import { productsActions } from "../../bus/products/actions";
 import { history } from "../../init/middleware/core";
+import Utils from "../../utils/Utils";
 import VOCategory from "../../VO/VOCategory";
 import CategoryItem from "./CategoryItem";
 import Styles from "./Styles.module.scss";
@@ -28,6 +29,11 @@ class Categories extends React.Component<ICategoriesProps, ICategoriesState> {
 
 	_handleClick = (item: VOCategory) => {
 		const { actions } = this.props;
+
+		const needClean = Utils.NeedProductsClean(history);
+		if (needClean) {
+			actions.cleanProducts();
+		}
 
 		history.push(`/${item.name}`);
 		actions.changeCategory(item);

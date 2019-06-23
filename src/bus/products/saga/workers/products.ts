@@ -7,7 +7,6 @@ import { departmentsActions } from "../../../departments/actions";
 import { modalActions } from "../../../modal/actions";
 import { productsActions } from "../../actions";
 
-
 export function* products({ payload }: any) {
 
     try {
@@ -45,6 +44,7 @@ export function* products({ payload }: any) {
         if (state.search.length > 0) {
             yield put(departmentsActions.cleanSelectedDepartment());
             yield put(categoriesActions.cleanSelectedCategory());
+            yield put(categoriesActions.categoriesAsync());
             // clean selected department and selected category
         }
 

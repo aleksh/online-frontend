@@ -14,12 +14,14 @@ export function* add({ payload }: any) {
         let cart_id = yield select(getCartId);
 
         //remote it for test        
-        cart_id = "1xh7q2z4qajwzr8gde";
-        yield put(shoppingCartActions.setCartId(cart_id));
+       /* cart_id = "1xh7q2z4qajwzr8gde";
+        yield call(api.setCardId, cart_id);
+        yield put(shoppingCartActions.setCartId(cart_id));*/
         /////////////////////////
 
         if (!cart_id) {
             cart_id = yield call(generateUniqId);
+            yield call(api.setCardId, cart_id);
         }
 
         const { data, status } = yield call(api.shoppingCart.add, { ...payload, cart_id });

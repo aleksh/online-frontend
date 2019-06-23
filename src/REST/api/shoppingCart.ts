@@ -1,4 +1,5 @@
 import axios from "axios";
+import { CANCEL_REQUEST } from "../config";
 
 export const shoppingCart = {
 
@@ -15,7 +16,15 @@ export const shoppingCart = {
     },
 
     update(data:any) {
-        return axios.put(`/shoppingcart/update/${data.item_id}`, {quantity: data.quantity});
+        if (CancelCard.cancelUpdate) {
+            CancelCard.cancelUpdate.cancel(CANCEL_REQUEST);
+        }
+
+        CancelCard.cancelUpdate = axios.CancelToken.source();
+
+        return axios.put(`/shoppingcart/update/${data.item_id}`, {quantity: data.quantity}, {
+            cancelToken: CancelCard.cancelUpdate.token
+        });
     },
 
     empty(cart_id:any) {
@@ -23,11 +32,24 @@ export const shoppingCart = {
     },
 
     totalAmount(cart_id:any) {
-        return axios.get(`/shoppingcart/totalAmount/${cart_id}`);
+        if (CancelCard.cancelTotal) {
+            CancelCard.cancelTotal.cancel(CANCEL_REQUEST);
+        }
+
+        CancelCard.cancelTotal = axios.CancelToken.source();
+
+        return axios.get(`/shoppingcart/totalAmount/${cart_id}`, {
+            cancelToken: CancelCard.cancelTotal.token
+        });
     },
 
     removeProduct(item_id:any) {
         return axios.delete(`/shoppingcart/removeProduct/${item_id}`);
     },
    
+}
+
+class CancelCard {
+    static cancelUpdate: any = null;
+    static cancelTotal: any = null;    
 }

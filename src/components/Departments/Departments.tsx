@@ -6,6 +6,7 @@ import { categoriesActions } from "../../bus/categories/actions";
 import { departmentsActions } from "../../bus/departments/actions";
 import { productsActions } from "../../bus/products/actions";
 import { history } from "../../init/middleware/core";
+import Utils from "../../utils/Utils";
 import VODepartment from "../../VO/VODepartment";
 import DepartmentItem from "./DepartmentItem";
 import Styles from "./Styles.module.scss";
@@ -32,6 +33,12 @@ class Departments extends React.Component<
 
 	_handleClick = (item: VODepartment) => {
 		const { actions } = this.props;
+
+		const needClean = Utils.NeedProductsClean(history);
+		if (needClean) {
+			actions.cleanProducts();
+		}
+
 		history.push(`/${item.name}`);
 		actions.changeDepartment(item);
 	};

@@ -1,12 +1,16 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { Button, Col, Container, Row } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { shoppingCartActions } from "../../bus/shoppingCart/actions";
+import { history } from "../../init/middleware/core";
+import { Path } from "../../navigation/path";
 import VOCartItem from "../../VO/VOCartItem";
+import ProductRow from "./ProductRow/ProductRow";
+import Styles from "./Styles.module.scss";
 
 interface IShoppingCartProps {
-	count: number;
-	cart_id: number;
 	totalAmount: string;
 	items: VOCartItem[];
 	actions: any;
@@ -18,29 +22,30 @@ class ShoppingCart extends React.Component<
 	IShoppingCartProps,
 	IShoppingCartState
 > {
-	_handleRemoveItem = (id: any) => {
-		console.log(id);
+	_handleRemove = (item: VOCartItem) => {
 		const { actions } = this.props;
-		actions.removeItemAsync(id);
+		actions.removeItemAsync(item.item_id);
 	};
 
-	_handleAdd = (item_id: any, quantity: any) => {
-		quantity++;
-		console.log(quantity);
+	_handleAdd = (item: VOCartItem) => {
 		const { actions } = this.props;
-		actions.updateItemAsync({ item_id, quantity });
+		const quantity = item.quantity + 1;
+		actions.updateItemAsync({ item_id: item.item_id, quantity });
 	};
 
-	_handleMinus = (item_id: any, quantity: any) => {
-		quantity--;
-		console.log(quantity);
+	_handleMinus = (item: VOCartItem) => {
 		const { actions } = this.props;
+		const quantity = item.quantity - 1;
 
 		if (quantity === 0) {
-			actions.removeItemAsync(item_id);
+			actions.removeItemAsync(item.item_id);
 		} else {
-			actions.updateItemAsync({ item_id, quantity });
+			actions.updateItemAsync({ item_id: item.item_id, quantity });
 		}
+	};
+
+	_handleBack = () => {
+		history.goBack();
 	};
 
 	_handleEmptyCart = () => {
@@ -48,88 +53,80 @@ class ShoppingCart extends React.Component<
 		actions.emptyCartAsync();
 	};
 
-	public render() {
-		const { count, totalAmount, items } = this.props;
-		return <>asdsd</>;
-	}
-}
+	_getProductRows = () => {
+		const { items } = this.props;
+		return (
+			items &&
+			items.map(item => {
+				return (
+					<ProductRow
+						key={item.item_id}
+						item={item}
+						add={this._handleAdd}
+						remove={this._handleRemove}
+						minus={this._handleMinus}
+					/>
+				);
+			})
+		);
+	};
 
-/*
-<div style={{ backgroundColor: "white" }}>
-					<Button onClick={this._handleEmptyCart}>Empty Cart</Button>
-					<Link to={Path.shippingAddress}>Place Order</Link>
-				</div>
-				<div style={{ backgroundColor: "white" }}>
-					TOTAL AMOUNT {totalAmount}$
-				</div>
-				<Row gutter={16}>
-					<Col span={4}> </Col>
-					<Col span={4}>
+	public render() {
+		const { totalAmount } = this.props;
+		return (
+			<Container className={Styles.ShoppingCard}>
+				<Row className={Styles.TopRow}>
+					<Col>
+						<Button
+							size="lg"
+							color="primary"
+							outline
+							onClick={this._handleBack}
+						>
+							Back
+						</Button>
+						<Button
+							size="lg"
+							color="primary"
+							outline
+							onClick={this._handleEmptyCart}
+						>
+							Empty Cart
+						</Button>
+					</Col>
+					<Col>
+						<strong>TOTAL AMOUNT</strong> {totalAmount}$
+					</Col>
+					<Col>
+						<Link to={Path.shippingAddress}>Place Order</Link>
+					</Col>
+				</Row>
+				<Row>
+					<Col> </Col>
+					<Col>
 						<strong>Name</strong>
 					</Col>
-					<Col span={4}>
+					<Col>
 						<strong>Attributes</strong>
 					</Col>
-					<Col span={4}>
+					<Col>
 						<strong>Price</strong>
 					</Col>
-					<Col span={4}>
+					<Col>
 						<strong>Quantity</strong>
 					</Col>
-					<Col span={4}>
+					<Col>
 						<strong>Subtotal</strong>
 					</Col>
 				</Row>
-				{items &&
-					items.map(item => {
-						return (
-							<Row key={item.item_id}>
-								<Col span={4}>
-									{" "}
-									<Button
-										onClick={() =>
-											this._handleRemoveItem(item.item_id)
-										}
-									>
-										Remove
-									</Button>{" "}
-								</Col>
-								<Col span={4}>{item.name}</Col>
-								<Col span={4}>{item.attributes}</Col>
-								<Col span={4}>{item.price}</Col>
-								<Col span={4}>
-									<Button
-										onClick={() =>
-											this._handleAdd(
-												item.item_id,
-												item.quantity
-											)
-										}
-									>
-										Add
-									</Button>
-									{item.quantity}
-									<Button
-										onClick={() =>
-											this._handleMinus(
-												item.item_id,
-												item.quantity
-											)
-										}
-									>
-										Minus
-									</Button>
-								</Col>
-								<Col span={4}>{item.subtotal}</Col>
-							</Row>
-						);
-					})}
-*/
+				{this._getProductRows()}
+			</Container>
+		);
+	}
+}
 
 const mapStateToProps = (state: any) => {
 	return {
-		count: state.shoppingCart.get("count"),
-		cart_id: state.shoppingCart.get("cart_id"),
 		totalAmount: state.shoppingCart.get("totalAmount"),
 		items: state.shoppingCart.get("items")
 	};
