@@ -40,7 +40,7 @@ class ProductRow extends React.Component<IProductRowProps, IProductRowState> {
 	public render() {
 		const { item } = this.props;
 		return (
-			<Row>
+			<Row className={Styles.CardRow}>
 				<Col>
 					<Button
 						size="lg"

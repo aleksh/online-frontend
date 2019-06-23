@@ -101,7 +101,7 @@ class ShoppingCart extends React.Component<
 						<Link to={Path.shippingAddress}>Place Order</Link>
 					</Col>
 				</Row>
-				<Row>
+				<Row className={Styles.HeadRow}>
 					<Col> </Col>
 					<Col>
 						<strong>Name</strong>
