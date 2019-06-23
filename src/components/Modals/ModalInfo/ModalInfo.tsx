@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { modalActions } from "../../../bus/modal/actions";
 
@@ -28,21 +29,20 @@ class ModalInfo extends React.Component<IModalInfoProps, IModalInfoState> {
 
 	public render() {
 		const { message } = this.props.modalProps;
-		return (<>
-        asda
-            </>
+		return (
+			<Modal isOpen={true} toggle={this._handlerClosedPopup}>
+				<ModalHeader toggle={this._handlerClosedPopup} />
+				<ModalBody>{message}</ModalBody>
+				<ModalFooter>
+					<Button color="primary" onClick={this._handlerOkPopup}>
+						Ok
+					</Button>
+				</ModalFooter>
+			</Modal>
 		);
 	}
 }
-/*
-<Modal
-				title="Basic Modal"
-				visible={true}
-				onOk={this._handlerClosedPopup}
-				onCancel={this._handlerClosedPopup}
-			>
-				<p>{message}</p>
-			</Modal>*/
+
 const mapDispatchToProps = (dispatch: any) => {
 	return {
 		actions: bindActionCreators({ ...modalActions }, dispatch)

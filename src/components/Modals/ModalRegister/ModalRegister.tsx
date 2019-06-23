@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { modalActions } from "../../../bus/modal/actions";
 import { userActions } from "../../../bus/user/actions";
@@ -148,70 +149,67 @@ class ModalRegister extends React.Component<
 			confirmPasswordValid,
 			formErrors
 		} = this.state;
-		return <>sdfdsf</>;
+		return (
+			<Modal isOpen={true} toggle={this._handlerClosedPopup}>
+				<ModalHeader toggle={this._handlerClosedPopup} />
+				<ModalBody>
+					<form onSubmit={this._handlerSubmit}>
+						<div>
+							<label htmlFor="name">Name</label>
+							<input
+								id="name"
+								name="name"
+								autoFocus
+								value={name}
+								onChange={this._handleUserInput}
+							/>
+
+							<p>{formErrors.name}</p>
+						</div>
+						<div>
+							<label htmlFor="email">Email Address</label>
+							<input
+								id="email"
+								name="email"
+								value={email}
+								onChange={this._handleUserInput}
+							/>
+
+							<p>{formErrors.email}</p>
+						</div>
+						<div>
+							<label>Password</label>
+							<input
+								name="password"
+								type="password"
+								id="password"
+								value={password}
+								onChange={this._handleUserInput}
+							/>
+
+							<p>{formErrors.password}</p>
+						</div>
+						<div>
+							<label>Password</label>
+							<input
+								name="confirmPassword"
+								type="password"
+								id="confirmPassword"
+								value={confirmPassword}
+								onChange={this._handleUserInput}
+							/>
+
+							<p>{formErrors.confirmPassword}</p>
+						</div>
+						<Button color="primary" type={"submit"}>
+							Register
+						</Button>
+					</form>
+				</ModalBody>
+			</Modal>
+		);
 	}
 }
-
-/*
-<Modal
-				title="Register"
-				visible={true}
-				onOk={this._handlerOkPopup}
-				onCancel={this._handlerClosedPopup}
-			>
-				<form onSubmit={this._handlerSubmit}>
-					<div>
-						<label htmlFor="name">Name</label>
-						<input
-							id="name"
-							name="name"
-							autoFocus
-							value={name}
-							onChange={this._handleUserInput}
-						/>
-
-						<p>{formErrors.name}</p>
-					</div>
-					<div>
-						<label htmlFor="email">Email Address</label>
-						<input
-							id="email"
-							name="email"
-							value={email}
-							onChange={this._handleUserInput}
-						/>
-
-						<p>{formErrors.email}</p>
-					</div>
-					<div>
-						<label>Password</label>
-						<input
-							name="password"
-							type="password"
-							id="password"
-							value={password}
-							onChange={this._handleUserInput}
-						/>
-
-						<p>{formErrors.password}</p>
-					</div>
-					<div>
-						<label>Password</label>
-						<input
-							name="confirmPassword"
-							type="password"
-							id="confirmPassword"
-							value={confirmPassword}
-							onChange={this._handleUserInput}
-						/>
-
-						<p>{formErrors.confirmPassword}</p>
-					</div>
-					<input type="submit" value="Submit" />
-				</form>
-			</Modal>
-
-*/
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {

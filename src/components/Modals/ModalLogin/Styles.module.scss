@@ -1,0 +1,60 @@
+.Login {
+	> div {
+		border-radius: 10px;
+	}
+
+	div[class*="modal-header"] {
+		border: 0px;
+	}
+
+	h1 {
+		text-align: center;
+		font-size: 3rem;
+	}
+}
+
+.Form {
+	padding: 20px;
+	width: 100%;
+    
+    .Center{
+        text-align: center;
+        padding-bottom:0px;
+    }
+
+	> div {
+        padding-bottom:20px;
+
+        label {
+            width:100%;
+            font-size:1.3rem;
+            text-align: center;
+            
+        }
+		input {
+			width: 100%;
+			background: none;
+            border: 0px;
+            padding: 5px;
+			outline: 0;
+			font-size: 1.4rem;
+			font-family: "Lato", sans-serif;
+			border-bottom: 1px solid #cccccc;
+		}
+
+		input:-webkit-autofill,
+		input:-webkit-autofill:hover,
+		input:-webkit-autofill:active,
+		input:-webkit-autofill:focus {
+			background-color: #ffffff !important;
+			color: #555 !important;
+			-webkit-box-shadow: 0 0 0 1000px white inset !important;
+			-webkit-text-fill-color: #555555 !important;
+		}
+	}
+}
+
+
+.red {
+    color:red;
+}

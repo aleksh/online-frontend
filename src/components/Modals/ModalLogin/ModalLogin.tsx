@@ -1,8 +1,10 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { modalActions } from "../../../bus/modal/actions";
 import { userActions } from "../../../bus/user/actions";
+import Styles from "./Styles.module.scss";
 import VOLoginError from "./VOLoginError";
 import VOLoginRequest from "./VOLoginRequest";
 
@@ -85,10 +87,10 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 		event.preventDefault();
 		const { formValid, email, password } = this.state;
 
-		if (formValid) {		
-            const { actions } = this.props;	
-            actions.loginAsync(new VOLoginRequest(email, password));	
-            actions.hideModal();		
+		if (formValid) {
+			const { actions } = this.props;
+			actions.loginAsync(new VOLoginRequest(email, password));
+			actions.hideModal();
 		}
 	};
 
@@ -99,50 +101,60 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 			emailValid,
 			passwordValid,
 			formErrors
-		} = this.state;
+        } = this.state;
+        
+
+
 		return (
-			<>ddddddddddА</>
+			<Modal
+				size={"sm"}
+				isOpen={true}
+				toggle={this._handlerClosedPopup}
+				className={Styles.Login}
+			>
+				<ModalHeader toggle={this._handlerClosedPopup} />
+				<ModalBody>
+					<h1>Sign In</h1>
+					<form onSubmit={this._handlerSubmit}>
+						<div className={Styles.Form}>
+							<div>
+								<label htmlFor="email" className={!emailValid ? Styles.red : ''}>Email Address *</label>
+								<input
+									id="email"
+									name="email"
+									autoComplete="email"
+									autoFocus
+									value={email}
+									onChange={this._handleUserInput}
+								/>
+
+								<p className={Styles.red}>{formErrors.email}</p>
+							</div>
+							<div>
+								<label htmlFor="password" className={!passwordValid ? Styles.red : ''}>Password *</label>
+								<input
+									name="password"
+									type="password"
+									id="password"
+									value={password}
+									onChange={this._handleUserInput}
+								/>
+
+								<p className={Styles.red}>{formErrors.password}</p>
+							</div>
+                            <div className={Styles.Center}>
+                                <Button size={'lg'} color="primary" type={"submit"}>
+                                    Login
+                                </Button>
+                            </div>
+						</div>
+						
+					</form>
+				</ModalBody>
+			</Modal>
 		);
 	}
 }
-
-/*
-<Modal
-				title="Login"
-				visible={true}
-				onOk={this._handlerOkPopup}
-				onCancel={this._handlerClosedPopup}
-			>
-				<form onSubmit={this._handlerSubmit}>
-					<div>
-						<label htmlFor="email">Email Address</label>
-						<input
-							id="email"
-							name="email"
-							autoComplete="email"
-							autoFocus
-							value={email}
-							onChange={this._handleUserInput}
-						/>
-
-						<p>{formErrors.email}</p>
-					</div>
-					<div>
-						<label>Password</label>
-						<input
-							name="password"
-							type="password"
-							id="password"
-							value={password}
-							onChange={this._handleUserInput}
-						/>
-
-						<p>{formErrors.password}</p>
-					</div>
-					<input type="submit" value="Submit" />
-				</form>
-			</Modal>
-*/
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {

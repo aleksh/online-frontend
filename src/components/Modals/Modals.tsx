@@ -1,6 +1,5 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import ModalConfirm from "./ModalConfirm/ModalConfirm";
 //actions
 import ModalInfo from "./ModalInfo/ModalInfo";
 import ModalLogin from "./ModalLogin/ModalLogin";
@@ -15,8 +14,7 @@ interface IModalsState {}
 export const MODAL_TYPES = {
 	INFO: "INFO",
 	LOGIN: "LOGIN",
-	REGISTER: "REGISTER",
-	CONFIRM_INVITE: "CONFIRM_INVITE"
+	REGISTER: "REGISTER"
 };
 
 class Modals extends React.Component<IModalsProps, IModalsState> {
@@ -28,9 +26,6 @@ class Modals extends React.Component<IModalsProps, IModalsState> {
 				{modalType
 					? (modalType === MODAL_TYPES.INFO && (
 							<ModalInfo modalProps={modalProps} />
-					  )) ||
-					  (modalType === MODAL_TYPES.CONFIRM_INVITE && (
-							<ModalConfirm modalProps={modalProps} />
 					  )) ||
 					  (modalType === MODAL_TYPES.LOGIN && (
 							<ModalLogin modalProps={modalProps} />
