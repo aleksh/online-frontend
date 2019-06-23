@@ -4,6 +4,7 @@ import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { modalActions } from "../../../bus/modal/actions";
 import { userActions } from "../../../bus/user/actions";
+import Styles from "./Styles.module.scss";
 import VORegisterError from "./VOErrorRegister";
 import VORegisterRequest from "./VORegisterRequest";
 
@@ -150,60 +151,99 @@ class ModalRegister extends React.Component<
 			formErrors
 		} = this.state;
 		return (
-			<Modal isOpen={true} toggle={this._handlerClosedPopup}>
+			<Modal
+				className={Styles.Register}
+				isOpen={true}
+				toggle={this._handlerClosedPopup}
+			>
 				<ModalHeader toggle={this._handlerClosedPopup} />
 				<ModalBody>
+					<h1>Register</h1>
 					<form onSubmit={this._handlerSubmit}>
-						<div>
-							<label htmlFor="name">Name</label>
-							<input
-								id="name"
-								name="name"
-								autoFocus
-								value={name}
-								onChange={this._handleUserInput}
-							/>
+						<div className={Styles.Form}>
+							<div>
+								<label
+									htmlFor="name"
+									className={!nameValid ? Styles.red : ""}
+								>
+									Name *
+								</label>
+								<input
+									id="name"
+									name="name"
+									autoFocus
+									value={name}
+									onChange={this._handleUserInput}
+								/>
 
-							<p>{formErrors.name}</p>
-						</div>
-						<div>
-							<label htmlFor="email">Email Address</label>
-							<input
-								id="email"
-								name="email"
-								value={email}
-								onChange={this._handleUserInput}
-							/>
+								<p className={Styles.red}>{formErrors.name}</p>
+							</div>
+							<div>
+								<label
+									htmlFor="email"
+									className={!emailValid ? Styles.red : ""}
+								>
+									Email Address *
+								</label>
+								<input
+									id="email"
+									name="email"
+									value={email}
+									onChange={this._handleUserInput}
+								/>
 
-							<p>{formErrors.email}</p>
-						</div>
-						<div>
-							<label>Password</label>
-							<input
-								name="password"
-								type="password"
-								id="password"
-								value={password}
-								onChange={this._handleUserInput}
-							/>
+								<p className={Styles.red}>{formErrors.email}</p>
+							</div>
+							<div>
+								<label
+									htmlFor="password"
+									className={!passwordValid ? Styles.red : ""}
+								>
+									Password *
+								</label>
+								<input
+									name="password"
+									type="password"
+									id="password"
+									value={password}
+									onChange={this._handleUserInput}
+								/>
 
-							<p>{formErrors.password}</p>
-						</div>
-						<div>
-							<label>Password</label>
-							<input
-								name="confirmPassword"
-								type="password"
-								id="confirmPassword"
-								value={confirmPassword}
-								onChange={this._handleUserInput}
-							/>
+								<p className={Styles.red}>
+									{formErrors.password}
+								</p>
+							</div>
+							<div>
+								<label
+									htmlFor="confirmPassword"
+									className={
+										!confirmPasswordValid ? Styles.red : ""
+									}
+								>
+									Confirm Password *
+								</label>
+								<input
+									name="confirmPassword"
+									type="password"
+									id="confirmPassword"
+									value={confirmPassword}
+									onChange={this._handleUserInput}
+								/>
 
-							<p>{formErrors.confirmPassword}</p>
+								<p className={Styles.red}>
+									{formErrors.confirmPassword}
+								</p>
+							</div>
+							<div className={Styles.Center}>
+								<Button
+									size={"lg"}
+									color="primary"
+									type={"submit"}
+								>
+									Register
+								</Button>
+							</div>
 						</div>
-						<Button color="primary" type={"submit"}>
-							Register
-						</Button>
 					</form>
 				</ModalBody>
 			</Modal>
