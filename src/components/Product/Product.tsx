@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import { Badge, Button } from "reactstrap";
+import { Button } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { productsActions } from "../../bus/products/actions";
 import { shoppingCartActions } from "../../bus/shoppingCart/actions";
@@ -9,6 +9,7 @@ import { PRODUCT_IMAGE_URL } from "../../REST";
 import VOAttribute from "../../VO/VOAttribute";
 import VOProduct from "../../VO/VOProduct";
 import ColorItem from "./ColorItem/ColorItem";
+import PriceItem from "./PriceItem/PriceItem";
 import SizeItem from "./SizeItem/SizeItem";
 import Styles from "./Styles.module.scss";
 
@@ -63,34 +64,12 @@ class Product extends React.Component<IProductProps, IProductState> {
 
 	_handleAddToCart = () => {
 		const { actions, product } = this.props;
+		const { color, size } = this.state;
 
 		actions.addProductAsync({
 			product_id: product.product_id,
-			attributes: "Color red"
+			attributes: `Color: ${color}   Size: ${size}`
 		});
-	};
-
-	_getPrice = () => {
-		const { product } = this.props;
-
-		return (
-			<>
-				{product.discounted_price > 0 ? (
-					<>
-						<Badge className={Styles.Crossout} color="danger" pill>
-							{product.price}
-						</Badge>
-						<Badge color="success" pill>
-							{product.discounted_price}
-						</Badge>
-					</>
-				) : (
-					<Badge color="success" pill>
-						{product.price}
-					</Badge>
-				)}
-			</>
-		);
 	};
 
 	_getColors = () => {
@@ -166,7 +145,7 @@ class Product extends React.Component<IProductProps, IProductState> {
 						<div className={Styles.Description}>
 							<h1>{product.name}</h1>
 							<div className={Styles.Price}>
-								{this._getPrice()}
+								<PriceItem item={product} />
 							</div>
 							<p>{product.description}</p>
 							<div className={Styles.Properties}>

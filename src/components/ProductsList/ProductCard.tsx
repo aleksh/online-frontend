@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Badge, Card, CardBody, CardText } from "reactstrap";
+import { Card, CardBody, CardText } from "reactstrap";
 import { PRODUCT_IMAGE_URL } from "../../REST";
 import VOProduct from "../../VO/VOProduct";
+import PriceItem from "../Product/PriceItem/PriceItem";
 import Styles from "./Styles.module.scss";
 
 interface IProductCardProps {
@@ -23,29 +24,6 @@ class ProductCard extends React.Component<
 		}
 	};
 
-	_getPrice = () => {
-		const { item } = this.props;
-
-		return (
-			<>
-				{item.discounted_price > 0 ? (
-					<>
-						<Badge className={Styles.Crossout} color="danger" pill>
-							{item.price}
-						</Badge>
-						<Badge color="success" pill>
-							{item.discounted_price}
-						</Badge>
-					</>
-				) : (
-					<Badge color="success" pill>
-						{item.price}
-					</Badge>
-				)}
-			</>
-		);
-	};
-
 	public render() {
 		const { item } = this.props;
 		return (
@@ -59,7 +37,9 @@ class ProductCard extends React.Component<
 							alt={item.name}
 						/>
 					</div>
-					<div className={Styles.Price}>{this._getPrice()}</div>
+					<div className={Styles.Price}>
+						<PriceItem item={item} />
+					</div>
 					<CardText>{item.description}</CardText>
 				</CardBody>
 			</Card>
