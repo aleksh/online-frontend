@@ -26,6 +26,13 @@ export const userActions = {
         };
     },
 
+    loginFacebookAsync: (data: any) => {
+        return {
+            type: types.LOGIN_FACEBOOK_ASYNC,
+            payload: data,
+        };
+    },
+
     logoutAsync: () => {
         return {
             type: types.LOGOUT_ASYNC,

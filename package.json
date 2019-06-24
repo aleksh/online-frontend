@@ -31,6 +31,7 @@
 		"rc-pagination": "^1.20.1",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
+		"react-facebook": "^8.0.4",
 		"react-redux": "^7.1.0",
 		"react-router": "^5.0.1",
 		"react-router-dom": "^5.0.1",
@@ -42,7 +43,7 @@
 		"typescript": "3.5.1"
 	},
 	"scripts": {
-		"start": "react-scripts start",
+		"start": "set HTTPS=true&&react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"

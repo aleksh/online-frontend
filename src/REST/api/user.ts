@@ -8,7 +8,9 @@ export const user = {
     },
 
     facebook(access_token: string) {
-        return axios.post(`/customers/facebook`, { access_token });
+        console.log("facebook LLogin")
+        console.log(access_token)
+        return axios.post(`/customers/facebook`, { access_token: access_token});
     },
 
     register(data: VORegisterRequest) {

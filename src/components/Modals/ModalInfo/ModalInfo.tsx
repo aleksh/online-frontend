@@ -32,9 +32,9 @@ class ModalInfo extends React.Component<IModalInfoProps, IModalInfoState> {
 		return (
 			<Modal isOpen={true} toggle={this._handlerClosedPopup}>
 				<ModalHeader toggle={this._handlerClosedPopup} />
-				<ModalBody>{message}</ModalBody>
+				<ModalBody><h2>{message}</h2></ModalBody>
 				<ModalFooter>
-					<Button color="primary" onClick={this._handlerOkPopup}>
+					<Button size={"lg"} color="primary" onClick={this._handlerOkPopup}>
 						Ok
 					</Button>
 				</ModalFooter>

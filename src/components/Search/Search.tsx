@@ -36,7 +36,7 @@ class Search extends React.Component<ISearchProps, ISearchState> {
 		return (
 			<div className={Styles.search}>
 				<form onSubmit={this._handleSubmit}>
-					<input type="search" name="search" ref={this.inputRef} />
+					<input type="text" name="search" ref={this.inputRef} />
 					<button type="submit" value="">
 						<IconSearch width={20} height={20} />
 					</button>

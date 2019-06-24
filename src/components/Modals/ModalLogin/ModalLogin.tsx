@@ -1,4 +1,5 @@
 import * as React from "react";
+import { FacebookProvider, LoginButton } from "react-facebook";
 import { connect } from "react-redux";
 import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
 import { bindActionCreators } from "redux";
@@ -94,6 +95,16 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 		}
 	};
 
+	_handleFacebookResponse = (response: any) => {
+		const { actions } = this.props;
+		actions.loginFacebookAsync(response.tokenDetail.accessToken);
+	};
+
+	_handleFacebookError = (error: any) => {
+		const { actions } = this.props;
+		actions.showError(error.message);
+	};
+
 	public render() {
 		const {
 			email,
@@ -101,9 +112,7 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 			emailValid,
 			passwordValid,
 			formErrors
-        } = this.state;
-        
-
+		} = this.state;
 
 		return (
 			<Modal
@@ -118,7 +127,12 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 					<form onSubmit={this._handlerSubmit}>
 						<div className={Styles.Form}>
 							<div>
-								<label htmlFor="email" className={!emailValid ? Styles.red : ''}>Email Address *</label>
+								<label
+									htmlFor="email"
+									className={!emailValid ? Styles.red : ""}
+								>
+									Email Address *
+								</label>
 								<input
 									id="email"
 									name="email"
@@ -131,7 +145,12 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 								<p className={Styles.red}>{formErrors.email}</p>
 							</div>
 							<div>
-								<label htmlFor="password" className={!passwordValid ? Styles.red : ''}>Password *</label>
+								<label
+									htmlFor="password"
+									className={!passwordValid ? Styles.red : ""}
+								>
+									Password *
+								</label>
 								<input
 									name="password"
 									type="password"
@@ -140,21 +159,41 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 									onChange={this._handleUserInput}
 								/>
 
-								<p className={Styles.red}>{formErrors.password}</p>
+								<p className={Styles.red}>
+									{formErrors.password}
+								</p>
 							</div>
-                            <div className={Styles.Center}>
-                                <Button size={'lg'} color="primary" type={"submit"}>
-                                    Login
-                                </Button>
-                            </div>
+							<div className={Styles.Buttons}>
+								<Button
+									size={"lg"}
+									color="primary"
+									type={"submit"}
+								>
+									Login
+								</Button>
+
+								<FacebookProvider appId="990528587802751">
+									<LoginButton 
+										scope="email"
+										onCompleted={
+											this._handleFacebookResponse
+										}
+										onError={this._handleFacebookError}
+									>
+										<span>Login via Facebook</span>
+									</LoginButton>
+								</FacebookProvider>
+							</div>
 						</div>
-						
 					</form>
 				</ModalBody>
 			</Modal>
 		);
 	}
 }
+
+// 352854622106208  facebook Turing appId
+// 990528587802751  facebook my appId
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
