@@ -11,7 +11,7 @@ export function* categories() {
         yield put(categoriesActions.cleanSelectedCategory());
         const state = yield select(getDepartment);
 
-        let response;
+        let response:any = "";
 
         if (state.selectedDepartment) {
             response = yield call(api.categories.categoriesInDepartment, state.selectedDepartment.department_id);
@@ -19,7 +19,7 @@ export function* categories() {
             response = yield call(api.categories.fetch);
         }
 
-        const { data: categories, message, status } = response;
+        const { data: categories, status } = response;
 
         if (status !== 200) {
             throw new Error(categories.error.message);

@@ -97,11 +97,11 @@ class User extends React.Component<IUserProps, IUserState> {
 				) : (
 					<p>
 						Hi!&nbsp;
-						<a href="#" onClick={this._handlerLogin}>
+						<a href="/" onClick={this._handlerLogin}>
 							Sign in
 						</a>
 						&nbsp;or&nbsp;
-						<a href="#" onClick={this._hendleRegister}>
+						<a href="/"onClick={this._hendleRegister}>
 							Register
 						</a>
 					</p>

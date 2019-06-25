@@ -1,5 +1,5 @@
 
-import { put, call } from "redux-saga/effects";
+import { put } from "redux-saga/effects";
 import { ITEMS_PER_PAGE } from "../../../../utils/Constants";
 import { categoriesActions } from "../../../categories/actions";
 import { modalActions } from "../../../modal/actions";
