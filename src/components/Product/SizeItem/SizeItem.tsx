@@ -3,9 +3,10 @@ import { Button } from "reactstrap";
 import VOAttribute from "../../../VO/VOAttribute";
 
 interface ISizeItemProps {
-	active: boolean;
-	item: VOAttribute;
-	click: any;
+	size?: string;
+	active?: boolean;
+	item?: VOAttribute;
+	click?: any;
 }
 
 export interface ISizeItemState {}
@@ -21,7 +22,10 @@ class SizeItem extends React.Component<ISizeItemProps, ISizeItemState> {
 	};
 
 	public render() {
-		const { item, active } = this.props;
+		const { item, active, size } = this.props;
+
+		const label: any = item ? item.attribute_value : size;
+
 		return (
 			<Button
 				outline
@@ -29,7 +33,7 @@ class SizeItem extends React.Component<ISizeItemProps, ISizeItemState> {
 				active={active}
 				onClick={this._handleClick}
 			>
-				{item.attribute_value}
+				{label}
 			</Button>
 		);
 	}

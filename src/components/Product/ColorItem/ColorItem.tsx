@@ -4,9 +4,10 @@ import Styles from "./Styles.module.scss";
 import VOAttribute from "../../../VO/VOAttribute";
 
 interface IColorItemProps {
-	active: boolean;
-	item: VOAttribute;
-	click: any;
+    color?:string;
+	active?: boolean;
+	item?: VOAttribute;
+	click?: any;
 }
 
 export interface IColorItemState {}
@@ -22,17 +23,19 @@ class ColorItem extends React.Component<IColorItemProps, IColorItemState> {
 	};
 
 	public render() {
-		const { item, active } = this.props;
+		const { item, active, color } = this.props;
 
 		const classes = cx(
 			{ [Styles.Color]: true },
 			{ [Styles.Active]: active }
 		);
+        
+        const bgColor:any = item ? item.attribute_value : color;
 
 		return (
 			<span
 				className={classes}
-				style={{ background: `${item.attribute_value}` }}
+				style={{ background: `${bgColor}` }}
 				onClick={this._handleClick}
 			/>
 		);

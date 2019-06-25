@@ -8,11 +8,11 @@ body {
 	font-family: "Lato", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-    color: #2e2e2e;    
+	color: #2e2e2e;
 }
 
-p{
-    font-size: 1.2rem;
+p {
+	font-size: 1.2rem;
 }
 
 .container-fluid {
@@ -21,12 +21,11 @@ p{
 
 .sidebar {
 	-ms-flex: 0 0 200px;
-    flex: 0 0 200px;
-    border-right:1px solid  rgba(0, 0, 0, 0.125);
+	flex: 0 0 200px;
+	border-right: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .content {
-	background: "green";
 	min-height: calc(100vh - 175px);
 }
 
@@ -37,10 +36,18 @@ p{
 	padding: 0;
 }
 footer {
-	background-color: blue;
+	background-color: #2e2e2e;
+    height: 55px;
+    font-size: 1.6rem;
+    color:#ffffff;
+    display:flex;
+    justify-content: center;
+    align-items: center;    
 }
 
-
+footer p {
+    margin:0;
+}
 
 /**
 Pagination CSS
@@ -52,10 +59,10 @@ Pagination CSS
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	margin-top: 10px;
 }
 .rc-pagination > li {
 	list-style: none;
@@ -87,8 +94,8 @@ Pagination CSS
 	float: left;
 	border: 1px solid #d9d9d9;
 	background-color: #fff;
-    margin-right: 8px;
-    outline: none;
+	margin-right: 8px;
+	outline: none;
 }
 .rc-pagination-item a {
 	text-decoration: none;
@@ -246,20 +253,20 @@ Pagination CSS
 }
 .rc-pagination-options {
 	float: left;
-    margin-left: 15px;
-    outline: none;
+	margin-left: 15px;
+	outline: none;
 }
 .rc-pagination-options-size-changer {
 	float: left;
-    width: 80px;
-    outline: none;
+	width: 80px;
+	outline: none;
 }
 .rc-pagination-options-quick-jumper {
 	float: left;
 	margin-left: 16px;
 	height: 28px;
-    line-height: 28px;
-    outline: none;
+	line-height: 28px;
+	outline: none;
 }
 .rc-pagination-options-quick-jumper input {
 	margin: 0 8px;
@@ -270,8 +277,8 @@ Pagination CSS
 	outline: none;
 	padding: 3px 12px;
 	width: 50px;
-    height: 28px;
-    outline: none;
+	height: 28px;
+	outline: none;
 }
 .rc-pagination-options-quick-jumper input:hover {
 	border-color: #2db7f5;
@@ -299,16 +306,16 @@ Pagination CSS
 	position: relative;
 	color: rgba(0, 0, 0, 0.65);
 	background-color: #fff;
-    border-color: #d9d9d9;
-    outline: none;
+	border-color: #d9d9d9;
+	outline: none;
 }
 .rc-pagination-options-quick-jumper button:hover,
 .rc-pagination-options-quick-jumper button:active,
 .rc-pagination-options-quick-jumper button:focus {
 	color: #2db7f5;
 	background-color: #fff;
-    border-color: #2db7f5;
-    outline: none;
+	border-color: #2db7f5;
+	outline: none;
 }
 .rc-pagination-simple .rc-pagination-prev,
 .rc-pagination-simple .rc-pagination-next {
@@ -316,18 +323,18 @@ Pagination CSS
 	height: 24px;
 	line-height: 24px;
 	margin: 0;
-    font-size: 18px;
-    outline: none;
+	font-size: 18px;
+	outline: none;
 }
 .rc-pagination-simple .rc-pagination-simple-pager {
 	float: left;
 	margin-right: 8px;
-    list-style: none;
-    outline: none;
+	list-style: none;
+	outline: none;
 }
 .rc-pagination-simple .rc-pagination-simple-pager .rc-pagination-slash {
-    margin: 0 10px;
-    outline: none;
+	margin: 0 10px;
+	outline: none;
 }
 .rc-pagination-simple .rc-pagination-simple-pager input {
 	margin: 0 8px;
@@ -337,12 +344,12 @@ Pagination CSS
 	border: 1px solid #d9d9d9;
 	outline: none;
 	padding: 5px 8px;
-    min-height: 20px;
-    outline: none;
+	min-height: 20px;
+	outline: none;
 }
 .rc-pagination-simple .rc-pagination-simple-pager input:hover {
-    border-color: #2db7f5;
-    outline: none;
+	border-color: #2db7f5;
+	outline: none;
 }
 .rc-pagination-simple .rc-pagination-simple-pager button {
 	display: inline-block;
@@ -367,16 +374,16 @@ Pagination CSS
 	position: relative;
 	color: rgba(0, 0, 0, 0.65);
 	background-color: #fff;
-    border-color: #d9d9d9;
-    outline: none;
+	border-color: #d9d9d9;
+	outline: none;
 }
 .rc-pagination-simple .rc-pagination-simple-pager button:hover,
 .rc-pagination-simple .rc-pagination-simple-pager button:active,
 .rc-pagination-simple .rc-pagination-simple-pager button:focus {
 	color: #2db7f5;
 	background-color: #fff;
-    border-color: #2db7f5;
-    outline: none;
+	border-color: #2db7f5;
+	outline: none;
 }
 @media only screen and (max-width: 1024px) {
 	.rc-pagination-item-after-jump-prev,

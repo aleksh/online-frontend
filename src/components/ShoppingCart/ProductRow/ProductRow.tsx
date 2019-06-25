@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Button, Col, Row } from "reactstrap";
 import VOCartItem from "../../../VO/VOCartItem";
+import ColorItem from "../../Product/ColorItem/ColorItem";
+import SizeItem from "../../Product/SizeItem/SizeItem";
 import Styles from "./Styles.module.scss";
 
 interface IProductRowProps {
@@ -37,6 +39,18 @@ class ProductRow extends React.Component<IProductRowProps, IProductRowState> {
 		}
 	};
 
+	_getAttributes = () => {
+		const { item } = this.props;
+		const Attr = item.attributes.split(" ");
+
+		return (
+			<>
+				<ColorItem color={Attr[0]} />
+				<SizeItem size={Attr[1]} />
+			</>
+		);
+	};
+
 	public render() {
 		const { item } = this.props;
 		return (
@@ -52,7 +66,7 @@ class ProductRow extends React.Component<IProductRowProps, IProductRowState> {
 					</Button>
 				</Col>
 				<Col>{item.name}</Col>
-				<Col>{item.attributes}</Col>
+				<Col>{this._getAttributes()}</Col>
 				<Col>{item.price}$</Col>
 				<Col>
 					<Button

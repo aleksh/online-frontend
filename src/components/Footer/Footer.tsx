@@ -6,7 +6,7 @@ export interface IFooterState {}
 class Footer extends React.Component<IFooterProps, IFooterState> {
 	public render() {
 		return (
-			<footer style={{ height: "55px" }}>Footer</footer>
+			<footer><p>&copy; 2019. All rights reserved.</p></footer>
 		);
 	}
 }

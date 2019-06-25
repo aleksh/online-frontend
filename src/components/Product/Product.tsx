@@ -97,9 +97,7 @@ class Product extends React.Component<IProductProps, IProductState> {
 
 		actions.addProductAsync({
 			product_id: product.product_id,
-			attributes: `Color: ${color.attribute_value}   Size: ${
-				size.attribute_value
-			}`
+			attributes: `${color.attribute_value} ${size.attribute_value}`
 		});
 	};
 
