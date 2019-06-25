@@ -62,11 +62,11 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 				emailValid =
 					value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) ||
 					false;
-				formErrors.email = emailValid ? "" : " is invalid";
+				formErrors.email = emailValid ? "" : " invalid";
 				break;
 			case "password":
 				passwordValid = value.length >= 6;
-				formErrors.password = passwordValid ? "" : " is too short";
+				formErrors.password = passwordValid ? "" : " too short";
 				break;
 			default:
 				break;
@@ -172,7 +172,7 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 									Login
 								</Button>
 
-								<FacebookProvider appId="990528587802751">
+								<FacebookProvider appId="352854622106208">
 									<LoginButton 
 										scope="email"
 										onCompleted={

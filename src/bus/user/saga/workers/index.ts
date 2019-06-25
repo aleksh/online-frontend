@@ -3,5 +3,6 @@ export { logout } from "./logout";
 export { register } from "./register";
 export { authenticate } from "./authenticate";
 export { loginFacebook } from "./loginFacebook";
+export { updateProfile } from "./updateProfile";
 
 

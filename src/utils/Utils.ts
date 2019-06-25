@@ -30,7 +30,8 @@ export default class Utils {
 
     static NeedProductsClean = (history: any) => {
         if (history.location.pathname.indexOf(Path.product) !== -1 || history.location.pathname.indexOf(Path.shippingAddress) !== -1
-            || history.location.pathname.indexOf(Path.shoppingCart) !== -1) {
+            || history.location.pathname.indexOf(Path.shoppingCart) !== -1
+            || history.location.pathname.indexOf(Path.profile) !== -1) {
             return true;
         }
 

@@ -26,7 +26,7 @@ class App extends React.Component<IAppProps, IAppState> {
 			return <Loading />;
 		}
 
-		return !isLoggedIn ? <Private /> : <Public />;
+		return isLoggedIn ? <Private /> : <Public />;
 	}
 }
 
@@ -47,3 +47,5 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(App);
+
+//"start": "set HTTPS=true&&react-scripts start",

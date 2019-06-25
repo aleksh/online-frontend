@@ -5,4 +5,5 @@ export const Path = Object.freeze({
     product: '/product',
     shoppingCart: '/cart',
     shippingAddress: '/address',
+    profile: '/profile',
 })

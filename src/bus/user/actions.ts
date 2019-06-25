@@ -45,6 +45,13 @@ export const userActions = {
         };
     },
 
+    updateProfileAsync: (data: any) => {
+        return {
+            type: types.UPDATE_PROFILE_ASYNC,
+            payload: data
+        };
+    },
+
     registerAsync: (data: any) => {
         return {
             type: types.REGISTER_ASYNC,

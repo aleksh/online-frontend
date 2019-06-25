@@ -9,7 +9,7 @@ import { productsActions } from "../../actions";
 
 export function* cleanSelectedItems() {
     try {
-
+        yield put(productsActions.setSearch(""));
         yield put(departmentsActions.cleanSelectedDepartment());
         yield put(categoriesActions.cleanSelectedCategory());
         yield put(categoriesActions.categoriesAsync());

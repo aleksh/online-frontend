@@ -1,60 +1,67 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
+import { Button, Container, Row } from "reactstrap";
 import { bindActionCreators } from "redux";
-import { modalActions } from "../../../bus/modal/actions";
-import { userActions } from "../../../bus/user/actions";
+import { userActions } from "../../bus/user/actions";
+import VOUser from "../../VO/VOUser";
 import Styles from "./Styles.module.scss";
-import VORegisterError from "./VOErrorRegister";
-import VORegisterRequest from "./VORegisterRequest";
+import VOProfileError from "./VOProfileError";
 
-interface IModalRegisterProps {
-	modalProps: any;
+interface IProfileProps {
+	user: VOUser;
 	actions: any;
 }
 
-interface IModalRegisterState {
+export interface IProfileState {
 	name: string;
 	email: string;
 	password: string;
-	confirmPassword: string;
-	formErrors: VORegisterError;
+	day_phone: string;
+	eve_phone: string;
+	mob_phone: string;
+	formErrors: VOProfileError;
 	nameValid: boolean;
-	emailValid: boolean;
 	passwordValid: boolean;
-	confirmPasswordValid: boolean;
+	emailValid: boolean;
 	formValid: boolean;
 	[key: string]: any;
 }
 
-class ModalRegister extends React.Component<
-	IModalRegisterProps,
-	IModalRegisterState
-> {
-	constructor(props: IModalRegisterProps) {
+class Profile extends React.Component<IProfileProps, IProfileState> {
+	constructor(props: IProfileProps) {
 		super(props);
 
 		this.state = {
 			name: "",
 			email: "",
 			password: "",
-			confirmPassword: "",
-			formErrors: new VORegisterError(),
-			emailValid: true,
+			day_phone: "",
+			eve_phone: "",
+			mob_phone: "",
+			formErrors: new VOProfileError(),
 			nameValid: true,
 			passwordValid: true,
-			confirmPasswordValid: true,
+			emailValid: true,
 			formValid: false
 		};
 	}
-	_handlerClosedPopup = () => {
-		const { actions } = this.props;
-		actions.hideModal();
-	};
 
-	_handlerOkPopup = () => {
-		this._handlerClosedPopup();
-	};
+	static getDerivedStateFromProps(
+		nextProps: IProfileProps,
+		prevState: IProfileState
+	) {
+		if (prevState.name.length === 0) {
+			return {
+				name: nextProps.user.name,
+				email: nextProps.user.email,
+				day_phone: nextProps.user.day_phone || "",
+				eve_phone: nextProps.user.eve_phone || "",
+				mob_phone: nextProps.user.mob_phone || ""
+			};
+		}
+
+		return null;
+	}
 
 	_handleUserInput = (event: any) => {
 		const { name, value } = event.target;
@@ -65,100 +72,90 @@ class ModalRegister extends React.Component<
 	};
 
 	_validateField = (fieldName: any, value: any) => {
-		let {
-			formErrors,
-			emailValid,
-			passwordValid,
-			nameValid,
-			confirmPasswordValid,
-			password
-		} = this.state;
+		let { formErrors, emailValid, nameValid, passwordValid } = this.state;
 
 		switch (fieldName) {
-			case "name":
-				nameValid = value.trim().length >= 3;
-				formErrors.name = nameValid ? "" : "too short";
-				break;
 			case "email":
 				emailValid =
 					value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i) ||
 					false;
 				formErrors.email = emailValid ? "" : " invalid";
 				break;
-			case "password":
-				passwordValid = value.length >= 6;
-				formErrors.password = passwordValid ? "" : " too short";
+			case "name":
+				nameValid = value.length >= 6;
+				formErrors.name = nameValid ? "" : " too short";
 				break;
-			case "confirmPassword":
-				confirmPasswordValid = value === password;
-				formErrors.confirmPassword = confirmPasswordValid
-					? ""
-					: " not match ";
+			case "password":
+				passwordValid = value.length === 0 || value.length >= 6;
+				formErrors.password = passwordValid ? "" : " too short";
 				break;
 			default:
 				break;
 		}
 
 		this.setState(
-			{
-				formErrors,
-				emailValid,
-				passwordValid,
-				nameValid,
-				confirmPasswordValid
-			},
+			{ formErrors, emailValid, nameValid, passwordValid },
 			this._validateForm
 		);
 	};
 
 	_validateForm = () => {
-		const {
-			emailValid,
-			passwordValid,
-			nameValid,
-			confirmPasswordValid
-		} = this.state;
 		this.setState({
 			formValid:
-				emailValid && passwordValid && confirmPasswordValid && nameValid
+				this.state.emailValid &&
+				this.state.nameValid &&
+				this.state.passwordValid
 		});
 	};
 
 	_handlerSubmit = (event: any) => {
 		event.preventDefault();
-
-		const { formValid, email, name, password } = this.state;
+		const {
+			formValid,
+			name,
+			email,
+			password,
+			day_phone,
+			eve_phone,
+			mob_phone
+		} = this.state;
 
 		if (formValid) {
 			const { actions } = this.props;
-			actions.registerAsync(
-				new VORegisterRequest(name.trim(), email, password)
-			);
-			actions.hideModal();
+
+			actions.updateProfileAsync({
+				name,
+				email,
+				password,
+				day_phone,
+				eve_phone,
+				mob_phone
+			});
 		}
 	};
 
 	public render() {
 		const {
-			name,
-			email,
-			password,
-			confirmPassword,
+			formErrors,
 			nameValid,
 			emailValid,
+			email,
 			passwordValid,
-			confirmPasswordValid,
-			formErrors
+			password,
+			name,
+			day_phone,
+			eve_phone,
+			mob_phone
 		} = this.state;
+
 		return (
-			<Modal
-				className={Styles.Register}
-				isOpen={true}
-				toggle={this._handlerClosedPopup}
-			>
-				<ModalHeader toggle={this._handlerClosedPopup} />
-				<ModalBody>
-					<h1>Register</h1>
+			<Container className={Styles.Profile}>
+				<Row>
+					<h2>
+						<strong>PROFILE</strong>
+					</h2>
+				</Row>
+				<Row>
 					<form onSubmit={this._handlerSubmit}>
 						<div className={Styles.Form}>
 							<div>
@@ -188,6 +185,8 @@ class ModalRegister extends React.Component<
 								<input
 									id="email"
 									name="email"
+									autoComplete="email"
+									autoFocus
 									value={email}
 									onChange={this._handleUserInput}
 								/>
@@ -199,7 +198,7 @@ class ModalRegister extends React.Component<
 									htmlFor="password"
 									className={!passwordValid ? Styles.red : ""}
 								>
-									Password *
+									Password
 								</label>
 								<input
 									name="password"
@@ -214,53 +213,65 @@ class ModalRegister extends React.Component<
 								</p>
 							</div>
 							<div>
-								<label
-									htmlFor="confirmPassword"
-									className={
-										!confirmPasswordValid ? Styles.red : ""
-									}
-								>
-									Confirm Password *
-								</label>
+								<label htmlFor="day_phone">day phone</label>
 								<input
-									name="confirmPassword"
-									type="password"
-									id="confirmPassword"
-									value={confirmPassword}
+									name="day_phone"
+									type="text"
+									id="day_phone"
+									value={day_phone}
 									onChange={this._handleUserInput}
 								/>
-
-								<p className={Styles.red}>
-									{formErrors.confirmPassword}
-								</p>
 							</div>
-							<div className={Styles.Center}>
+							<div>
+								<label htmlFor="eve_phone">eve phone</label>
+								<input
+									name="eve_phone"
+									type="text"
+									id="eve_phone"
+									value={eve_phone}
+									onChange={this._handleUserInput}
+								/>
+							</div>
+							<div>
+								<label htmlFor="mob_phone">mob phone</label>
+								<input
+									name="mob_phone"
+									type="text"
+									id="mob_phone"
+									value={mob_phone}
+									onChange={this._handleUserInput}
+								/>
+							</div>
+							<div className={Styles.Buttons}>
 								<Button
 									size={"lg"}
 									color="primary"
 									type={"submit"}
 								>
-									Register
+									Update
 								</Button>
 							</div>
 						</div>
 					</form>
-				</ModalBody>
-			</Modal>
+				</Row>
+			</Container>
 		);
 	}
 }
 
+const mapStateToProps = (state: any) => {
+	return {
+		user: state.user.get("user")
+	};
+};
+
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		actions: bindActionCreators(
-			{ ...modalActions, ...userActions },
-			dispatch
-		)
+		actions: bindActionCreators({ ...userActions }, dispatch)
 	};
 };
 
 export default connect(
-	null,
+	mapStateToProps,
 	mapDispatchToProps
-)(ModalRegister);
+)(Profile);
