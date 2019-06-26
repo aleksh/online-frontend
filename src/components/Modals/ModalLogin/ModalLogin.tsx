@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FacebookProvider, LoginButton } from "react-facebook";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { connect } from "react-redux";
 import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
 import { bindActionCreators } from "redux";
@@ -97,7 +97,7 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 
 	_handleFacebookResponse = (response: any) => {
 		const { actions } = this.props;
-		actions.loginFacebookAsync(response.tokenDetail.accessToken);
+		actions.loginFacebookAsync(response.accessToken);
 	};
 
 	_handleFacebookError = (error: any) => {
@@ -172,17 +172,20 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 									Login
 								</Button>
 
-								<FacebookProvider appId="352854622106208">
-									<LoginButton 
-										scope="email"
-										onCompleted={
-											this._handleFacebookResponse
-										}
-										onError={this._handleFacebookError}
-									>
-										<span>Login via Facebook</span>
-									</LoginButton>
-								</FacebookProvider>
+								<FacebookLogin
+									appId="352854622106208"
+									fields="email"
+									onFailure={this._handleFacebookError}
+									callback={this._handleFacebookResponse}
+									render={renderProps => (
+										<button
+											className={Styles.FButton}
+											onClick={renderProps.onClick}
+										>
+											Login via Facebook
+										</button>
+									)}
+								/>
 							</div>
 						</div>
 					</form>
@@ -191,9 +194,6 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 		);
 	}
 }
-
-// 352854622106208  facebook Turing appId
-// 990528587802751  facebook my appId
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
