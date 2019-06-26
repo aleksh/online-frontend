@@ -4,21 +4,18 @@ import { api } from "../../../../REST";
 import { CANCEL_REQUEST } from "../../../../REST/config";
 import { modalActions } from "../../../modal/actions";
 import { productsActions } from "../../actions";
-import { productAttributes, productReviews } from "./index";
 
 
-export function* product({ payload: id }: any) {
+export function* productReviews(id: any) {
     try {
 
-        const { data: product, status } = yield call(api.products.fetchById, id);
+        const { data: reviews, status } = yield call(api.products.productReviews, id);
 
         if (status !== 200) {
-            throw new Error(product.error.message);
+            throw new Error(reviews.error.message);
         }
 
-        yield put(productsActions.setProduct(product));
-        yield call(productAttributes, id);
-        yield call(productReviews, id);
+        yield put(productsActions.setProductReviews(reviews));
 
     } catch (error) {
         if (error.message !== CANCEL_REQUEST) {

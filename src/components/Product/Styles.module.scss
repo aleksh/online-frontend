@@ -4,7 +4,11 @@
 	justify-content: center;
 	padding-top: 30px;
     flex-grow: 0;
-       
+}
+
+.ProductRow{
+    display: flex;
+    flex-direction: column;
 }
 
 .Colors, .Sizes {

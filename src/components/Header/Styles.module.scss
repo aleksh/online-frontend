@@ -1,21 +1,21 @@
 .topHeaderRow {
-    width:100%;
-	display: flex;	
+	width: 100%;
+	display: flex;
 	background: #fff;
-    height: 48px;
-    padding:0 2rem;
-	align-items: center;	
+	height: 48px;
+	padding: 0 2rem;
+	align-items: center;
 	justify-content: space-between;
 }
 
-.headerRow {	
-    width:100%;
+.headerRow {
+	width: 100%;
 	display: flex;
 	background: #2e2e2e;
-    height: 72px;
-    padding:0 2rem;
+	height: 72px;
+	padding: 0 2rem;
 	align-items: center;
-    justify-content: space-between;
+	justify-content: space-between;
 
 	h1 {
 		font-weight: bold;
@@ -25,6 +25,10 @@
 
 		a {
 			color: #f62f5e;
+		}
+
+		a:hover {
+			text-decoration: none;
 		}
 	}
 }

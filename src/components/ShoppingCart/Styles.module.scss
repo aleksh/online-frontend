@@ -11,8 +11,16 @@
         }
     }
     
+    div[class*="col"]  {
+        display: flex;
+        align-items: center;
+        justify-content:center;             
+    }
+
     .HeadRow {
         padding:15px 0 40px 0;        
+
+       
 
         button {
             margin-right: 10px;

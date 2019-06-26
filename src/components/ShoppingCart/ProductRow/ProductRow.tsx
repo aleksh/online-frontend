@@ -46,6 +46,7 @@ class ProductRow extends React.Component<IProductRowProps, IProductRowState> {
 		return (
 			<>
 				<ColorItem color={Attr[0]} />
+                &nbsp;
 				<SizeItem size={Attr[1]} />
 			</>
 		);
@@ -66,7 +67,9 @@ class ProductRow extends React.Component<IProductRowProps, IProductRowState> {
 					</Button>
 				</Col>
 				<Col>{item.name}</Col>
-				<Col>{this._getAttributes()}</Col>
+				<Col>
+					{this._getAttributes()}
+				</Col>
 				<Col>{item.price}$</Col>
 				<Col>
 					<Button

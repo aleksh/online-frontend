@@ -6,5 +6,8 @@
 
 .CardRow{
     padding: 10px 0;        
-    border-bottom:1px solid rgba(0, 0, 0, 0.125)
+    border-bottom:1px solid rgba(0, 0, 0, 0.125);
+    display:flex;
+    align-items: center;
+    font-size: 1.6rem;    
 }

@@ -25,6 +25,13 @@ export const productsActions = {
         };
     },
 
+    setProductReviews: (data: any) => {
+        return {
+            type: types.SET_PRODUCT_REVIEWS,
+            payload: data
+        };
+    },
+
     setSearch: (search: string = "") => {
         return {
             type: types.SET_SEARCH,

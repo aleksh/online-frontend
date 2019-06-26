@@ -17,8 +17,6 @@ export function* cleanSelectedItems() {
 
     } catch (error) {
         yield put(modalActions.showError(error.message));
-    } finally {
-        console.log("SAGA cleanSelectedItems complete");
     }
 }
 

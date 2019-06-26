@@ -1,6 +1,6 @@
 import axios from "axios";
-import { CANCEL_REQUEST } from "../config";
 import { DESCRIPTION_LENGTH } from "../../utils/Constants";
+import { CANCEL_REQUEST } from "../config";
 
 
 export const products = {
@@ -34,6 +34,7 @@ export const products = {
             cancelToken: CancelProducts.cancelProductsInCategory.token
         });
     },
+
     productsInDepartment(data: any) {
         cancelPendingRequests();
 
@@ -47,12 +48,21 @@ export const products = {
     productDetails(product_id: number) {
         return axios.get(`/products/${product_id}/details`);
     },
+
     productLocations(product_id: number) {
         return axios.get(`/products/${product_id}/locations`);
     },
+
     productReviews(product_id: number) {
-        return axios.get(`/products/${product_id}/reviews`);
+        cancelPendingRequests();
+
+        CancelProducts.cancelProductsReviews = axios.CancelToken.source();
+
+        return axios.get(`/products/${product_id}/reviews`, {
+            cancelToken: CancelProducts.cancelProductsReviews.token
+        });
     },
+
     fetchById(product_id: number) {
         return axios.get(`/products/${product_id}`);
     },
@@ -66,6 +76,7 @@ class CancelProducts {
     static cancelFetchById: any = null;
     static cancelProductsInCategory: any = null;
     static cancelProductsInDepartment: any = null;
+    static cancelProductsReviews: any = null;
 }
 
 
@@ -85,5 +96,9 @@ const cancelPendingRequests = () => {
 
     if (CancelProducts.cancelProductsInDepartment) {
         CancelProducts.cancelProductsInDepartment.cancel(CANCEL_REQUEST);
+    }
+
+    if (CancelProducts.cancelProductsReviews) {
+        CancelProducts.cancelProductsReviews.cancel(CANCEL_REQUEST);
     }
 }

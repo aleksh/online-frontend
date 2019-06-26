@@ -1,21 +1,24 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import { Button } from "reactstrap";
+import { Button, Col, Row } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { productsActions } from "../../bus/products/actions";
 import { shoppingCartActions } from "../../bus/shoppingCart/actions";
 import { PRODUCT_IMAGE_URL } from "../../REST";
 import VOAttribute from "../../VO/VOAttribute";
 import VOProduct from "../../VO/VOProduct";
+import VOReview from "../../VO/VOReview";
 import ColorItem from "./ColorItem/ColorItem";
 import PriceItem from "./PriceItem/PriceItem";
+import ProductReviews from "./ProductReviews/ProductReviews";
 import SizeItem from "./SizeItem/SizeItem";
 import Styles from "./Styles.module.scss";
 
 interface IProductProps {
 	product: VOProduct;
 	productAttributes: any;
+	productReviews: VOReview[];
 	match: any;
 	history: any;
 	actions: any;
@@ -150,57 +153,69 @@ class Product extends React.Component<IProductProps, IProductState> {
 	};
 
 	public render() {
-		const { product } = this.props;
+		const { product, productReviews } = this.props;
 
 		return (
 			<>
 				{product ? (
-					<div className={Styles.Product}>
-						<div>
-							<Button
-								size="lg"
-								color="primary"
-								outline
-								onClick={this._handleBack}
-							>
-								Back
-							</Button>
-						</div>
-						<div className={Styles.Image}>
-							<img
-								src={PRODUCT_IMAGE_URL + product.image}
-								alt={product.name}
-							/>
-						</div>
-						<div className={Styles.Description}>
-							<h1>{product.name}</h1>
-							<div className={Styles.Price}>
-								<PriceItem item={product} />
-							</div>
-							<p>{product.description}</p>
-							<div className={Styles.Properties}>
-								<div className={Styles.Colors}>
-									<p>Color:</p>
-									{this._getColors()}
-								</div>
+					<>
+						<Row className={Styles.ProductRow}>
+							<Col>
+								<div className={Styles.Product}>
+									<div>
+										<Button
+											size="lg"
+											color="primary"
+											outline
+											onClick={this._handleBack}
+										>
+											Back
+										</Button>
+									</div>
+									<div className={Styles.Image}>
+										<img
+											src={
+												PRODUCT_IMAGE_URL +
+												product.image
+											}
+											alt={product.name}
+										/>
+									</div>
+									<div className={Styles.Description}>
+										<h1>{product.name}</h1>
+										<div className={Styles.Price}>
+											<PriceItem item={product} />
+										</div>
+										<p>{product.description}</p>
+										<div className={Styles.Properties}>
+											<div className={Styles.Colors}>
+												<p>Color:</p>
+												{this._getColors()}
+											</div>
 
-								<div className={Styles.Sizes}>
-									<p>Size:</p>
-									{this._getSizes()}
+											<div className={Styles.Sizes}>
+												<p>Size:</p>
+												{this._getSizes()}
+											</div>
+										</div>
+										<div className={Styles.addToCard}>
+											<Button
+												size="lg"
+												color="primary"
+												outline
+												onClick={this._handleAddToCart}
+											>
+												Add To Cart
+											</Button>
+										</div>
+									</div>
 								</div>
-							</div>
-							<div className={Styles.addToCard}>
-								<Button
-									size="lg"
-									color="primary"
-									outline
-									onClick={this._handleAddToCart}
-								>
-									Add To Cart
-								</Button>
-							</div>
-						</div>
-					</div>
+							</Col>
+							<Col>
+								<ProductReviews reviews={productReviews} />
+							</Col>
+						</Row>
+					</>
 				) : null}
 			</>
 		);
@@ -210,7 +225,8 @@ class Product extends React.Component<IProductProps, IProductState> {
 const mapStateToProps = (state: any) => {
 	return {
 		product: state.products.get("product"),
-		productAttributes: state.products.get("productAttributes")
+		productAttributes: state.products.get("productAttributes"),
+		productReviews: state.products.get("productReviews")
 	};
 };
 

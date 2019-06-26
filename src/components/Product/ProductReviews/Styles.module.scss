@@ -1,0 +1,35 @@
+.ReviewRow {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-content: center;
+	padding-top: 30px;
+	flex-grow: 0;
+    flex-direction: column;
+    padding-bottom:40px;
+}
+
+.Review {
+	margin-top: 20px;
+	width: 500px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    
+    > div {
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 5px;
+
+        h2 {
+            margin-bottom: 0;
+        }
+
+        p {
+            font-size:2rem;
+        }
+    }
+}
+
+.Hide {
+	visibility: hidden;
+}
