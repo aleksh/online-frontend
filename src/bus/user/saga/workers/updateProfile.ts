@@ -11,13 +11,12 @@ export function* updateProfile({ payload }: any) {
 
         const { data, status } = yield call(api.user.updateProfile, payload, api.getToken());
 
-        console.log(data);
         if (status !== 200) {
             throw new Error(data.error.message);
         }
 
         yield call(api.setToken, data.accessToken);
-        yield put(userActions.setUser(data.customer));
+        yield put(userActions.setUser(data));
 
     } catch (error) {
         yield put(modalActions.showError(error.message));

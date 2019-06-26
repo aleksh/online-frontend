@@ -16,7 +16,7 @@ export const user = {
     },
 
     updateProfile(data: any, token: string) {
-        return axios.put(`/customers`, data, {
+        return axios.put(`/customer`, data, {
             headers: { 'user-key': token }
         });
     },
