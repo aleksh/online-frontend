@@ -2,6 +2,7 @@ import cx from "classnames";
 import moment from "moment";
 import Pagination from "rc-pagination";
 import * as React from "react";
+import StarRatings from "react-star-ratings";
 import { REVIEWS_PER_PAGE } from "../../../utils/Constants";
 import locale from "../../../utils/en_US";
 import VOReview from "../../../VO/VOReview";
@@ -60,6 +61,15 @@ class ProductReviews extends React.Component<
 							<h2>{item.name}</h2>
 							<span>{moment(item.created_on).format("LL")}</span>
 						</div>
+
+						<StarRatings
+							rating={item.rating}
+							starRatedColor="#f62f5e"
+							numberOfStars={5}
+                            name="rating"
+                            starDimension="20px"
+                            starSpacing="3px"
+						/>
 						<p>{item.review}</p>
 					</div>
 				);

@@ -2,20 +2,37 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router";
 import MainPage from "../pages/MainPage";
 import ProductPage from "../pages/ProductPage";
+import ProfilePage from "../pages/ProfilePage";
+import ShippingAddressPage from "../pages/ShippingAddressPage";
 import ShoppingCartPage from "../pages/ShoppingCartPage";
 import { Path } from "./path";
+import ProtectedRoute from "./ProtectedRoute";
 
-interface IPublicProps {}
+interface IRoutersProps {
+	isLoggedIn: boolean;
+}
 
-interface IPublicState {}
+interface IRoutersState {}
 
-export default class Public extends React.Component<
-	IPublicProps,
-	IPublicState
+export default class Routers extends React.Component<
+	IRoutersProps,
+	IRoutersState
 > {
 	public render() {
+		const { isLoggedIn } = this.props;
 		return (
 			<Switch>
+				<ProtectedRoute
+					isLoggedIn={isLoggedIn}
+					path={Path.shippingAddress}
+					component={ShippingAddressPage}
+				/>
+				<ProtectedRoute
+					isLoggedIn={isLoggedIn}
+					path={Path.profile}
+					component={ProfilePage}
+				/>
+
 				<Route
 					exact
 					path={`${Path.product}/:id`}

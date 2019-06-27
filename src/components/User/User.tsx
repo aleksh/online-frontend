@@ -55,6 +55,7 @@ class User extends React.Component<IUserProps, IUserState> {
 	_handlerLogout = (event: any) => {
 		const { actions } = this.props;
 		actions.logoutAsync();
+		history.push(Path.home);
 	};
 
 	_handleToMyBag = () => {
@@ -101,7 +102,7 @@ class User extends React.Component<IUserProps, IUserState> {
 							Sign in
 						</a>
 						&nbsp;or&nbsp;
-						<a href="/"onClick={this._hendleRegister}>
+						<a href="/" onClick={this._hendleRegister}>
 							Register
 						</a>
 					</p>

@@ -2,8 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { userActions } from "./bus/user/actions";
-import Private from "./navigation/Private";
-import Public from "./navigation/Public";
+import Routers from "./navigation/Routers";
 
 interface IAppProps {
 	isLoggedIn: boolean;
@@ -20,7 +19,7 @@ class App extends React.Component<IAppProps, IAppState> {
 	public render() {
 		const { isLoggedIn } = this.props;
 
-		return isLoggedIn ? <Private /> : <Public />;
+		return <Routers isLoggedIn={isLoggedIn} />;
 	}
 }
 
@@ -40,5 +39,3 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(App);
-
-//"start": "set HTTPS=true&&react-scripts start",
