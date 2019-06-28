@@ -57,14 +57,15 @@ class ShippingAddress extends React.Component<
 		};
 	}
 
-	static getDerivedStateFromProps(
+	static getDerivedStateFromProps = (
 		nextProps: IShippingAddressProps,
 		prevState: IShippingAddressState
-	) {
+	) => {
+        
 		if (prevState.address_1.length === 0) {
 			return {
-				address_1: nextProps.user.address_1,
-				address_2: nextProps.user.address_2,
+				address_1: nextProps.user.address_1 || "",
+				address_2: nextProps.user.address_2 || "",
 				city: nextProps.user.city || "",
 				region: nextProps.user.region || "",
 				postal_code: nextProps.user.postal_code || "",
@@ -80,7 +81,7 @@ class ShippingAddress extends React.Component<
 		const { name, value } = event.target;
 
 		this.setState({ [name]: value }, () => {
-			this._validateField(name, value);
+			this._validateField(name, value || '');
 		});
 	};
 
