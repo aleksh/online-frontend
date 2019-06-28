@@ -1,11 +1,9 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { Button, Col, Container, Row } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { shoppingCartActions } from "../../bus/shoppingCart/actions";
 import { history } from "../../init/middleware/core";
-import { Path } from "../../navigation/path";
 import VOCartItem from "../../VO/VOCartItem";
 import ProductRow from "./ProductRow/ProductRow";
 import Styles from "./Styles.module.scss";
@@ -97,9 +95,7 @@ class ShoppingCart extends React.Component<
 					<Col>
 						<strong>TOTAL AMOUNT</strong> {totalAmount}$
 					</Col>
-					<Col>
-						<Link to={Path.shippingAddress}>Place Order</Link>
-					</Col>
+					<Col />
 				</Row>
 				<Row className={Styles.HeadRow}>
 					<Col> </Col>

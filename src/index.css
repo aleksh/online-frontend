@@ -8,7 +8,8 @@ body {
 	font-family: "Lato", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	color: #2e2e2e;
+    color: #2e2e2e;
+    min-width: 700px;
 }
 
 p {
@@ -20,8 +21,8 @@ p {
 }
 
 .sidebar {
-	-ms-flex: 0 0 200px;
-	flex: 0 0 200px;
+	-ms-flex: 0 0 230px;
+	flex: 0 0 230px;
 	border-right: 1px solid rgba(0, 0, 0, 0.125);
 }
 
