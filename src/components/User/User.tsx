@@ -60,7 +60,12 @@ class User extends React.Component<IUserProps, IUserState> {
 
 	_handleToMyBag = () => {
 		history.push(Path.shoppingCart);
-	};
+    };
+    
+    _handleToAddress = () => {
+		history.push(Path.shippingAddress);
+    };
+
 
 	_handleToProfile = () => {
 		history.push(Path.profile);
@@ -88,6 +93,10 @@ class User extends React.Component<IUserProps, IUserState> {
 								<DropdownItem onClick={this._handleToProfile}>
 									Profile
 								</DropdownItem>
+                                <DropdownItem divider />
+                                <DropdownItem onClick={this._handleToAddress}>
+                                    Address
+								</DropdownItem>                                
 								<DropdownItem divider />
 								<DropdownItem onClick={this._handlerLogout}>
 									Logout

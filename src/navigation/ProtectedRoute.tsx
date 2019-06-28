@@ -1,10 +1,10 @@
 import React from "react";
-import { Redirect, Route } from "react-router";
+import { Route } from "react-router";
 import MainPage from "../pages/MainPage";
 
 interface IProtectedRouteProps {
-    isLoggedIn: boolean;    
-    path:string;
+	isLoggedIn: boolean;
+	path: string;
 	component: any;
 }
 
@@ -17,9 +17,10 @@ export default class ProtectedRoute extends React.Component<
 	public render() {
 		const { component: Component, isLoggedIn, path } = this.props;
 		return (
-			<Route exact
+			<Route
+				exact
 				path={path}
-				render={isLoggedIn ? Component :  MainPage }
+				render={isLoggedIn ? Component : MainPage}
 			/>
 		);
 	}
