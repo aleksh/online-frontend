@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router";
-import MainPage from "../pages/MainPage";
+import RedirectComp from "./RedirectComp";
 
 interface IProtectedRouteProps {
 	isLoggedIn: boolean;
@@ -20,7 +20,7 @@ export default class ProtectedRoute extends React.Component<
 			<Route
 				exact
 				path={path}
-				render={isLoggedIn ? Component : MainPage}
+				render={isLoggedIn ? Component : RedirectComp}
 			/>
 		);
 	}
