@@ -1,8 +1,7 @@
+export { authenticate } from "./authenticate";
 export { login } from "./login";
+export { loginFacebook } from "./loginFacebook";
 export { logout } from "./logout";
 export { register } from "./register";
-export { authenticate } from "./authenticate";
-export { loginFacebook } from "./loginFacebook";
+export { updateAddress } from "./updateAddress";
 export { updateProfile } from "./updateProfile";
-
-

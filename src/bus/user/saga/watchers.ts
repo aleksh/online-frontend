@@ -3,7 +3,7 @@ import { all, call, takeEvery } from "redux-saga/effects";
 // Types
 import { types } from "../types";
 // Workers
-import { authenticate, login, loginFacebook, logout, register, updateProfile } from "./workers";
+import { authenticate, login, loginFacebook, logout, register, updateAddress, updateProfile } from "./workers";
 
 
 function* watchLogin() {
@@ -30,6 +30,10 @@ function* watchUpdateProfile() {
     yield takeEvery(types.UPDATE_PROFILE_ASYNC, updateProfile);
 }
 
+function* watchUpdateAddress() {
+    yield takeEvery(types.UPDATE_SHIPPING_ADDRESS_ASYNC, updateAddress);
+}
+
 export function* watchUser() {
-    yield all([call(watchLogin), call(watchLogout), call(watchRegister), call(watchAuth), call(watchLoginFacebook), call(watchUpdateProfile)]);
+    yield all([call(watchLogin), call(watchLogout), call(watchRegister), call(watchAuth), call(watchLoginFacebook), call(watchUpdateProfile), call(watchUpdateAddress)]);
 }

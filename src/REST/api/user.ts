@@ -21,6 +21,12 @@ export const user = {
         });
     },
 
+    updateAddress(data: any, token: string) {
+        return axios.put(`/customers/address`, data, {
+            headers: { 'user-key': token }
+        });
+    },
+
     authenticate(token: string) {
         return axios.get('/customer', {
             headers: { 'user-key': token }

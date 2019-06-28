@@ -52,6 +52,14 @@ export const userActions = {
         };
     },
 
+    updateShippingAddressAsync: (data: any) => {
+        return {
+            type: types.UPDATE_SHIPPING_ADDRESS_ASYNC,
+            payload: data
+        };
+    },
+    
+
     registerAsync: (data: any) => {
         return {
             type: types.REGISTER_ASYNC,

@@ -9,7 +9,7 @@ export default class VOUser {
     region: string = "";
     postal_code: string = "";
     country: string = "";
-    shipping_region_id: number = -1;
+    shipping_region_id: number = 1;
     day_phone: string = "";
     eve_phone: string = "";
     mob_phone: string = "";

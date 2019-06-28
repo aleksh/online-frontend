@@ -8,7 +8,12 @@ const initialState = Map({
 export const shippingReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.SET_REGIONS:
-            return state.set("regions", action.payload);
+
+            const regions = action.payload.map(item => {
+                return { ...item, label: item.shipping_region, value: item.shipping_region_id }
+            })
+
+            return state.set("regions", regions);
 
         default:
             return state;
