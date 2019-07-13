@@ -1,0 +1,8 @@
+{
+	"error": {
+		"status": 400,
+		"code": "USR_01",
+		"message": "Email or Password is invalid.",
+		"field": "password"
+	}
+}

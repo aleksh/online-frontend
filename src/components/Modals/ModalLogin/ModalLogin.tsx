@@ -118,7 +118,7 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 				className={Styles.Login}
 			>
 				<ModalHeader toggle={this._handlerClosedPopup} />
-				<ModalBody>
+				<ModalBody data-test="login-modal">
 					<h1>Sign In</h1>
 					<form onSubmit={this._handlerSubmit}>
 						<div className={Styles.Form}>
@@ -130,10 +130,8 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 									Email Address *
 								</label>
 								<input
-									id="email"
+									type="text"
 									name="email"
-									autoComplete="email"
-									autoFocus
 									value={email}
 									onChange={this._handleUserInput}
 								/>
@@ -150,7 +148,6 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 								<input
 									name="password"
 									type="password"
-									id="password"
 									value={password}
 									onChange={this._handleUserInput}
 								/>
@@ -161,6 +158,7 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 							</div>
 							<div className={Styles.Buttons}>
 								<Button
+									data-test="login-button"
 									size={"lg"}
 									color="primary"
 									type={"submit"}

@@ -1,0 +1,19 @@
+{
+	"customer": {
+		"customer_id": 15230,
+		"name": "Oleksiiiiii",
+		"email": "sh.oleksii@gmail.com",
+		"address_1": "Klochkovskaya",
+		"address_2": "fghdgf",
+		"city": "Kharkiv",
+		"region": "Kharkiv state",
+		"postal_code": "640977",
+		"shipping_region_id": 2,
+		"credit_card": null,
+		"day_phone": "",
+		"eve_phone": "",
+		"mob_phone": ""
+	},
+	"accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjdXN0b21lcl9pZCI6MTUyMzAsIm5hbWUiOiJPbGVrc2lpaWlpaSIsInJvbGUiOiJjdXN0b21lciIsImlhdCI6MTU2MzAyNzg0NSwiZXhwIjoxNTYzMTE0MjQ1fQ.YhmQr5wJXeT99OP3yZGn9HqG3ryZGww7MbLlfBTTcNM",
+    "expires_in": "24h"
+}

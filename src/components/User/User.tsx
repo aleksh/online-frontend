@@ -98,7 +98,7 @@ class User extends React.Component<IUserProps, IUserState> {
                                     Address
 								</DropdownItem>                                
 								<DropdownItem divider />
-								<DropdownItem onClick={this._handlerLogout}>
+								<DropdownItem data-test="logout-button" onClick={this._handlerLogout}>
 									Logout
 								</DropdownItem>
 							</DropdownMenu>
@@ -107,7 +107,7 @@ class User extends React.Component<IUserProps, IUserState> {
 				) : (
 					<p>
 						Hi!&nbsp;
-						<a href="/" onClick={this._handlerLogin}>
+						<a data-test="signin-button" href="/" onClick={this._handlerLogin}>
 							Sign in
 						</a>
 						&nbsp;or&nbsp;

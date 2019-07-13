@@ -1,13 +1,14 @@
-import { ConnectedRouter as Router } from "connected-react-router";
+import "react-app-polyfill/ie11";
+import "react-app-polyfill/stable";
 import React from "react";
 import ReactDOM from "react-dom";
+import { ConnectedRouter as Router } from "connected-react-router";
 import { Provider } from "react-redux";
-import App from "./App";
-import 'bootstrap/dist/css/bootstrap.css';
-import "./index.css";
 import { history } from "./init/middleware/core";
 import { store } from "./init/store";
-import * as serviceWorker from "./serviceWorker";
+import App from "./App";
+import "bootstrap/dist/css/bootstrap.css";
+import "./index.css";
 
 ReactDOM.render(
 	<Provider store={store}>
@@ -17,5 +18,3 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById("root")
 );
-
-serviceWorker.unregister();
