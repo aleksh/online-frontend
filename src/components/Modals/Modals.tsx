@@ -1,11 +1,14 @@
 import * as React from "react";
 import { connect } from "react-redux";
-//actions
+import { bindActionCreators } from "redux";
+import { modalActions } from "./../../bus/modal/actions";
+import { userActions } from "./../../bus/user/actions";
 import ModalInfo from "./ModalInfo/ModalInfo";
 import ModalLogin from "./ModalLogin/ModalLogin";
 import ModalRegister from "./ModalRegister/ModalRegister";
 
 interface IModalsProps {
+	actions: any;
 	modalType: string;
 	modalProps: any;
 }
@@ -19,19 +22,28 @@ export const MODAL_TYPES = {
 
 class Modals extends React.Component<IModalsProps, IModalsState> {
 	public render() {
-		const { modalType, modalProps } = this.props;
+		const { modalType, modalProps, actions } = this.props;
 
 		return (
 			<>
 				{modalType
 					? (modalType === MODAL_TYPES.INFO && (
-							<ModalInfo modalProps={modalProps} />
+							<ModalInfo
+								modalProps={modalProps}
+								close={actions.hideModal}
+							/>
 					  )) ||
 					  (modalType === MODAL_TYPES.LOGIN && (
-							<ModalLogin modalProps={modalProps} />
+							<ModalLogin
+								modalProps={modalProps}
+								actions={actions}
+							/>
 					  )) ||
 					  (modalType === MODAL_TYPES.REGISTER && (
-							<ModalRegister modalProps={modalProps} />
+							<ModalRegister
+								modalProps={modalProps}
+								actions={actions}
+							/>
 					  ))
 					: null}
 			</>
@@ -46,7 +58,16 @@ const mapStateToProps = (state: any) => {
 	};
 };
 
+const mapDispatchToProps = (dispatch: any) => {
+	return {
+		actions: bindActionCreators(
+			{ ...modalActions, ...userActions },
+			dispatch
+		)
+	};
+};
+
 export default connect(
 	mapStateToProps,
-	null
+	mapDispatchToProps
 )(Modals);

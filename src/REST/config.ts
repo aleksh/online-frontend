@@ -16,14 +16,11 @@ axios.interceptors.response.use(function (response) {
     let { response } = error;
     if (response && response.status === 401) {
         // Do logout;
-        // Redirect to login;
-
-        console.log("aaaaaaaaaaaaaaaaaaaaaaa")
+        // Redirect to login;        
         return Promise.resolve(error.response);
     }
     else if (error.response) {
-        // Do something.
-        console.log('some API_CLIENT error');
+        // Do something.        
         return Promise.resolve(error.response);
     }
 

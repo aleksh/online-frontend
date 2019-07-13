@@ -29,9 +29,10 @@ export default class Utils {
     }
 
     static NeedProductsClean = (history: any) => {
-        if (history.location.pathname.indexOf(Path.product) !== -1 || history.location.pathname.indexOf(Path.shippingAddress) !== -1
-            || history.location.pathname.indexOf(Path.shoppingCart) !== -1
-            || history.location.pathname.indexOf(Path.profile) !== -1) {
+        const pathName = history.location.pathname;
+        if (pathName.indexOf(Path.product) !== -1 || pathName.indexOf(Path.shippingAddress) !== -1
+            || pathName.indexOf(Path.shoppingCart) !== -1
+            || pathName.indexOf(Path.profile) !== -1) {
             return true;
         }
 
@@ -77,66 +78,6 @@ export default class Utils {
         return newStr;
     }
 
-    static IsImageFile = (fileName: string) => {
-        var extension = fileName.substr((fileName.lastIndexOf('.') + 1))
-        if (extension === 'jpg' || extension === 'jpeg' || extension === 'png') {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    static GetImageExtensions = (fileName: string) => {
-        return fileName.substr((fileName.lastIndexOf('.') + 1))
-    }
-
-    static GetResizedImage = (file: any, maxWidth: number, maxHeight: number) => {
-
-        return new Promise(resolve => {
-            const reader = new FileReader();
-
-            reader.onload = () => {
-                var image = new Image();
-                image.onload = () => {
-                    resolve(Utils.ResizeImage(
-                        image,
-                        maxWidth,
-                        maxHeight
-                    ));
-
-                };
-                image.src = String(reader.result);
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-
-    static ResizeImage(image: any, maxWidth: number, maxHeight: number, quality: number = 1) {
-        const canvas = document.createElement('canvas');
-        let width = image.width;
-        let height = image.height;
-
-        if (width > height) {
-            if (width > maxWidth) {
-                height = Math.round(height * maxWidth / width);
-                width = maxWidth;
-            }
-        } else {
-            if (height > maxHeight) {
-                width = Math.round(width * maxHeight / height);
-                height = maxHeight;
-            }
-        }
-
-        canvas.width = width;
-        canvas.height = height;
-
-        const ctx: CanvasRenderingContext2D = canvas.getContext("2d") as CanvasRenderingContext2D;
-        ctx.drawImage(image, 0, 0, width, height);
-
-
-        return canvas.toDataURL("image/jpeg", quality);
-    }
 }
 
 

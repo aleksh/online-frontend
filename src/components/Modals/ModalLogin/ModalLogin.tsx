@@ -1,10 +1,6 @@
 import * as React from "react";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
-import { connect } from "react-redux";
 import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
-import { bindActionCreators } from "redux";
-import { modalActions } from "../../../bus/modal/actions";
-import { userActions } from "../../../bus/user/actions";
 import Styles from "./Styles.module.scss";
 import VOLoginError from "./VOLoginError";
 import VOLoginRequest from "./VOLoginRequest";
@@ -195,16 +191,4 @@ class ModalLogin extends React.Component<IModalLoginProps, IModalLoginState> {
 	}
 }
 
-const mapDispatchToProps = (dispatch: any) => {
-	return {
-		actions: bindActionCreators(
-			{ ...modalActions, ...userActions },
-			dispatch
-		)
-	};
-};
-
-export default connect(
-	null,
-	mapDispatchToProps
-)(ModalLogin);
+export default ModalLogin;
