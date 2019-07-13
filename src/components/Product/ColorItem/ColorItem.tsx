@@ -1,10 +1,10 @@
 import cx from "classnames";
 import * as React from "react";
-import Styles from "./Styles.module.scss";
 import VOAttribute from "../../../VO/VOAttribute";
+import Styles from "./Styles.module.scss";
 
 interface IColorItemProps {
-    color?:string;
+	color?: string;
 	active?: boolean;
 	item?: VOAttribute;
 	click?: any;
@@ -30,7 +30,7 @@ class ColorItem extends React.Component<IColorItemProps, IColorItemState> {
 			{ [Styles.Active]: active }
 		);
         
-        const bgColor:any = item ? item.attribute_value : color;
+		const bgColor: any = item ? item.attribute_value : color;
 
 		return (
 			<span
