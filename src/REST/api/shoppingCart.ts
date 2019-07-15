@@ -31,6 +31,12 @@ export const shoppingCart = {
         return axios.delete(`/shoppingcart/empty/${cart_id}`);
     },
 
+    cancelTotalAmount() {
+        if (CancelCard.cancelTotal) {
+            CancelCard.cancelTotal.cancel(CANCEL_REQUEST);
+        }
+    }, 
+
     totalAmount(cart_id:any) {
         if (CancelCard.cancelTotal) {
             CancelCard.cancelTotal.cancel(CANCEL_REQUEST);

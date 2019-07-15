@@ -23,12 +23,12 @@ export const shoppingCartReducer = (state = initialState, action: any) => {
 
         case types.REMOVE_ITEM:
             let items = state.get("items") || [];
-            items = items.filter((item: VOCartItem) => item.item_id !== action.payload);
-            const count = Utils.GetProductsCount(items);
+            items = items.filter((item: VOCartItem) => item.item_id !== action.payload);            
 
             return state.merge({
                 items,
-                count,
+                count:Utils.GetProductsCount(items),
+                totalAmount: Utils.GetTotalPrice(items),
             })
 
         case types.UPDATE_ITEM:

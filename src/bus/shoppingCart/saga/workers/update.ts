@@ -11,12 +11,14 @@ import { shoppingCartActions } from "../../../shoppingCart/actions";
 export function* update({ payload }: any) {
     try {
 
-        yield put(shoppingCartActions.updateItem(payload))
+        yield put(shoppingCartActions.updateItem(payload));
+        yield call(api.shoppingCart.cancelTotalAmount);
+        
         const { data, status } = yield call(api.shoppingCart.update, payload);
 
         if (status !== 200) {
             throw new Error(data.error.message);
-        }
+        }        
 
         const count = yield call(Utils.GetProductsCount, data);
         yield put(shoppingCartActions.setItems({ items: data, count }));
