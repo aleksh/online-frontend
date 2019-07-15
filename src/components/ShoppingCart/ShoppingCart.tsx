@@ -83,6 +83,11 @@ class ShoppingCart extends React.Component<
 						>
 							Back
 						</Button>
+					</Col>
+					<Col>
+						<strong>TOTAL AMOUNT&nbsp;&nbsp;</strong> {totalAmount}$
+					</Col>
+					<Col>
 						<Button
 							size="lg"
 							color="primary"
@@ -92,10 +97,6 @@ class ShoppingCart extends React.Component<
 							Empty Cart
 						</Button>
 					</Col>
-					<Col>
-						<strong>TOTAL AMOUNT</strong> {totalAmount}$
-					</Col>
-					<Col />
 				</Row>
 				<Row className={Styles.HeadRow}>
 					<Col> </Col>

@@ -1,3 +1,5 @@
+@import "../../breakpoints";
+
 .Categories {
     color: #2e2e2e;    
     margin-left:20px;
@@ -32,6 +34,22 @@
         color: #f62f5e;
         transition: all .2s;
     }
+
+    @include rwd(770) {        
+        text-align: center;  
+        
+        li h2 {
+            font-size: 3rem;
+        }
+
+        :not(:first-child) {            
+            font-size: 2rem;              
+        }
+
+        li[class*="active"] {
+            font-size:2.5rem;
+        }
+	}
     
 
 }

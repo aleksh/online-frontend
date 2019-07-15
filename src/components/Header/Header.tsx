@@ -9,7 +9,6 @@ import { history } from "../../init/middleware/core";
 import Utils from "../../utils/Utils";
 import Departments from "../Departments/Departments";
 import HeaderBag from "../HeaderBag/HeaderBag";
-import HeaderNav from "../HeaderNav/HeaderNav";
 import Search from "../Search/Search";
 import User from "../User/User";
 import Styles from "./Styles.module.scss";
@@ -35,7 +34,6 @@ class Header extends React.Component<IHeaderProps, IHeaderState> {
 			<header>
 				<div className={Styles.topHeaderRow}>
 					<User />
-					<HeaderNav />
 					<HeaderBag />
 				</div>
 				<div className={Styles.headerRow}>

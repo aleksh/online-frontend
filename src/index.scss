@@ -1,5 +1,8 @@
+@import "./breakpoints";
+
 html {
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	font-size: 62.5%; /* 10px/16px = 62.5% -> 1rem = 10px*/
 }
 
@@ -8,8 +11,7 @@ body {
 	font-family: "Lato", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-    color: #2e2e2e;
-    min-width: 700px;
+    color: #2e2e2e;    
 }
 
 p {
@@ -22,8 +24,21 @@ p {
 
 .sidebar {
 	-ms-flex: 0 0 230px;
-	flex: 0 0 230px;
-	border-right: 1px solid rgba(0, 0, 0, 0.125);
+	-webkit-box-flex: 0;
+	        flex: 0 0 230px;
+    border-right: 1px solid rgba(0, 0, 0, 0.125);
+    
+    @include rwd(770) {
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 100%;
+                flex: 0 0 100%;              
+        -webkit-box-pack: center;              
+            -ms-flex-pack: center;              
+                justify-content: center;
+        border-right: 0px;        
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+	}
+
 }
 
 .content {
@@ -41,9 +56,15 @@ footer {
     height: 55px;
     font-size: 1.6rem;
     color:#ffffff;
+    display:-webkit-box;
+    display:-ms-flexbox;
     display:flex;
-    justify-content: center;
-    align-items: center;    
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;    
 }
 
 footer p {
@@ -61,8 +82,12 @@ Pagination CSS
 	-ms-user-select: none;
 	user-select: none;
 	padding: 0;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
 	margin-top: 10px;
 }
 .rc-pagination > li {
@@ -158,6 +183,7 @@ Pagination CSS
 	bottom: 0;
 	left: 0;
 	margin: auto;
+	-webkit-transition: all 0.2s;
 	transition: all 0.2s;
 	content: "•••";
 	opacity: 1;
@@ -172,6 +198,7 @@ Pagination CSS
 .rc-pagination-jump-prev-custom-icon .custom-icon-jump-next,
 .rc-pagination-jump-next-custom-icon .custom-icon-jump-next {
 	opacity: 0;
+	-webkit-transition: all 0.2s;
 	transition: all 0.2s;
 }
 .rc-pagination-jump-prev-custom-icon:hover:after,
@@ -271,7 +298,8 @@ Pagination CSS
 }
 .rc-pagination-options-quick-jumper input {
 	margin: 0 8px;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	background-color: #fff;
 	border-radius: 6px;
 	border: 1px solid #d9d9d9;
@@ -303,6 +331,7 @@ Pagination CSS
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	-webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 	transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 	position: relative;
 	color: rgba(0, 0, 0, 0.65);
@@ -339,7 +368,8 @@ Pagination CSS
 }
 .rc-pagination-simple .rc-pagination-simple-pager input {
 	margin: 0 8px;
-	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
 	background-color: #fff;
 	border-radius: 6px;
 	border: 1px solid #d9d9d9;
@@ -371,6 +401,7 @@ Pagination CSS
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	-webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 	transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 	position: relative;
 	color: rgba(0, 0, 0, 0.65);

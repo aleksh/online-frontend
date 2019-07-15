@@ -13,7 +13,9 @@
     }
     
     div[class*="row"]{
-        justify-content: center;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
     }
 }
 

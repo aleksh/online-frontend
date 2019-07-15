@@ -1,7 +1,12 @@
 .ProductList {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
+	-ms-flex-wrap: wrap;
+	    flex-wrap: wrap;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
 
 	> div {
 		margin: 20px;
@@ -11,19 +16,25 @@
 
 .ProductThumbnail {
 	width: 100%;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	justify-content: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
 	padding-bottom: 10px;
 	padding-top: 10px;
 	min-height: 131px;
 	img {
 		width: 120px;
-		animation: fade 1s;
+		-webkit-animation: fade 1s;
+		        animation: fade 1s;
 	}
 }
 
 .ProductCard {
 	cursor: pointer;
+	-webkit-transition: all 0.5s;
 	transition: all 0.5s;
 
 	h3 {
@@ -31,16 +42,19 @@
 	}
 
 	.Price {
+		display: -webkit-box;
+		display: -ms-flexbox;
 		display: flex;
 		padding: 10px 0 10px 0;
 		font-size: 2rem;
-		justify-content: space-between;
+		-webkit-box-pack: justify;
+		    -ms-flex-pack: justify;
+		        justify-content: space-between;
 	}
 }
 
 .ProductCard:hover {
 	-webkit-box-shadow: -2px 6px 15px 1px rgba(0, 0, 0, 0.75);
-	-moz-box-shadow: -2px 6px 15px 1px rgba(0, 0, 0, 0.75);
 	box-shadow: -2px 6px 15px 1px rgba(0, 0, 0, 0.75);
 }
 
@@ -55,6 +69,15 @@
 	span {
 		font-weight: bold;
 		color: #f62f5e;
+	}
+}
+
+@-webkit-keyframes fade {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }
 
