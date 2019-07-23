@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { Elements, StripeProvider } from "react-stripe-elements";
 import { Container, Row } from "reactstrap";
 import { bindActionCreators } from "redux";
-import { userActions } from "../../bus/user/actions";
 import { modalActions } from "../../bus/modal/actions";
+import { userActions } from "../../bus/user/actions";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
 import Styles from "./Styles.module.scss";
 
@@ -15,19 +15,15 @@ interface IProfileProps {
 interface IProfileState {}
 
 class Pay extends React.Component<IProfileProps, IProfileState> {
+	_handleError = (error: string) => {
+		const { actions } = this.props;
+		actions.showError(error);
+	};
 
-
-    _handleError = (error:string) => {
-        const { actions } = this.props;
-        actions.showError(error);
-        console.log(error)
-    }
-
-    _handleResult = (token:any) => {
-        console.log(token);
-        const { actions } = this.props;
-        actions.showError(token.id);
-    }
+	_handleResult = (token: any) => {
+		const { actions } = this.props;
+		actions.showError(token.id);
+	};
 
 	public render() {
 		return (
@@ -42,7 +38,10 @@ class Pay extends React.Component<IProfileProps, IProfileState> {
 						<div className="example">
 							<h1>React Stripe Elements Example</h1>
 							<Elements>
-								<CheckoutForm error={this._handleError} tokenResult={this._handleResult} />
+								<CheckoutForm
+									error={this._handleError}
+									tokenResult={this._handleResult}
+								/>
 							</Elements>
 						</div>
 					</StripeProvider>
@@ -54,13 +53,16 @@ class Pay extends React.Component<IProfileProps, IProfileState> {
 
 const mapStateToProps = (state: any) => {
 	return {
-	//	user: state.user.get("user")
+		//	user: state.user.get("user")
 	};
 };
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		actions: bindActionCreators({ ...userActions, ...modalActions }, dispatch)
+		actions: bindActionCreators(
+			{ ...userActions, ...modalActions },
+			dispatch
+		)
 	};
 };
 

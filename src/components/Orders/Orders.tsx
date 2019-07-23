@@ -3,12 +3,11 @@ import { connect } from "react-redux";
 import { Button, Col, Container, Row } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { orderActions } from "../../bus/order/actions";
-import { shoppingCartActions } from "../../bus/shoppingCart/actions";
 import { history } from "../../init/middleware/core";
+import { Path } from "../../navigation/path";
 import VOOrder from "../../VO/VOOrder";
 import OrderRow from "./OrderRow/OrderRow";
 import Styles from "./Styles.module.scss";
-import { Path } from "../../navigation/path";
 
 interface IOrdersProps {
 	orders: [VOOrder];
@@ -26,19 +25,27 @@ class Orders extends React.Component<IOrdersProps, IOrdersState> {
 
 	_handleBack = () => {
 		history.goBack();
-    };
-    
-    _handlePay = (item:VOOrder) => {
-        console.log("PAYYYY ");
-        history.push(Path.pay);
-    }
+	};
+
+	_handlePay = (item: VOOrder) => {
+        const { actions } = this.props;
+        actions.setOrderForPay(item);
+		console.log("PAYYYY ");
+		history.push(Path.pay);
+	};
 
 	_getProductRows = () => {
 		const { orders } = this.props;
 		return (
 			orders &&
 			orders.map(item => {
-				return <OrderRow pay={this._handlePay} item={item} key={item.order_id} />;
+				return (
+					<OrderRow
+						pay={this._handlePay}
+						item={item}
+						key={item.order_id}
+					/>
+				);
 			})
 		);
 	};
@@ -62,7 +69,7 @@ class Orders extends React.Component<IOrdersProps, IOrdersState> {
 				</Row>
 				<Row className={Styles.HeadRow}>
 					<Col>
-						<strong>ID</strong>{" "}
+						<strong>ID</strong>
 					</Col>
 					<Col>
 						<strong>Created On</strong>
@@ -92,10 +99,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		actions: bindActionCreators(
-			{ ...shoppingCartActions, ...orderActions },
-			dispatch
-		)
+		actions: bindActionCreators({ ...orderActions }, dispatch)
 	};
 };
 

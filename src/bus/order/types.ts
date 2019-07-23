@@ -1,5 +1,6 @@
 export const types = {
     SET_ORDERS: "SET_ORDERS",
+    SET_ORDER_FOR_PAY: "SET_ORDER_FOR_PAY",
 
 
     FETCH_ORDERS_ASYNC: "FETCH_ORDERS_ASYNC",

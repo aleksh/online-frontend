@@ -10,6 +10,13 @@ export const orderActions = {
         }
     },
 
+    setOrderForPay: (order: any) => {
+        return {
+            type: types.SET_ORDER_FOR_PAY,
+            payload: order,
+        }
+    },
+
 
     // Async 
     createOrderAsync: (item: Object) => {
