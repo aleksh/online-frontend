@@ -1,6 +1,7 @@
 import { attributes } from "./api/attributes";
 import { categories } from "./api/categories";
 import { departments } from "./api/departments";
+import { order } from "./api/order";
 import { products } from "./api/products";
 import { shipping } from "./api/shipping";
 import { shoppingCart } from "./api/shoppingCart";
@@ -29,6 +30,7 @@ export const api = {
     },
 
     user,
+    order,
     shipping,
     departments,
     categories,

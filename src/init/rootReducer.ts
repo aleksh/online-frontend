@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import { categoriesReducer as categories } from "../bus/categories/reducer";
 import { departmentsReducer as departments } from "../bus/departments/reducer";
 import { modalReducer as modal } from "../bus/modal/reducer";
+import { orderReducer as order } from "../bus/order/reducer";
 import { productsReducer as products } from "../bus/products/reducer";
 import { shippingReducer as shipping } from "../bus/shipping/reducer";
 import { shoppingCartReducer as shoppingCart } from "../bus/shoppingCart/reducer";
@@ -17,4 +18,5 @@ export const rootReducer = (history: any) => combineReducers({
     products,
     shoppingCart,
     shipping,
+    order
 })

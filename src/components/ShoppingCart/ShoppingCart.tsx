@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Button, Col, Container, Row } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { shoppingCartActions } from "../../bus/shoppingCart/actions";
+import { orderActions } from "../../bus/order/actions";
 import { history } from "../../init/middleware/core";
 import VOCartItem from "../../VO/VOCartItem";
 import ProductRow from "./ProductRow/ProductRow";
@@ -49,7 +50,13 @@ class ShoppingCart extends React.Component<
 	_handleEmptyCart = () => {
 		const { actions } = this.props;
 		actions.emptyCartAsync();
-	};
+    };
+    
+    _handleCreateOrder = () => {
+        const { actions } = this.props;
+        actions.createOrderAsync();
+        //actions.fetchOrdersAsync();
+    }
 
 	_getProductRows = () => {
 		const { items } = this.props;
@@ -96,6 +103,14 @@ class ShoppingCart extends React.Component<
 						>
 							Empty Cart
 						</Button>
+                        <Button
+							size="lg"
+							color="primary"
+							outline
+							onClick={this._handleCreateOrder}
+						>
+							Order
+						</Button>
 					</Col>
 				</Row>
 				<Row className={Styles.HeadRow}>
@@ -131,7 +146,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		actions: bindActionCreators({ ...shoppingCartActions }, dispatch)
+		actions: bindActionCreators({ ...shoppingCartActions, ...orderActions }, dispatch)
 	};
 };
 

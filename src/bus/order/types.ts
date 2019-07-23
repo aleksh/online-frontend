@@ -1,0 +1,7 @@
+export const types = {
+    SET_ORDERS: "SET_ORDERS",
+
+
+    FETCH_ORDERS_ASYNC: "FETCH_ORDERS_ASYNC",
+    CREATE_ORDER_ASYNC: "CREATE_ORDER_ASYNC",
+};

@@ -60,12 +60,15 @@ class User extends React.Component<IUserProps, IUserState> {
 
 	_handleToMyBag = () => {
 		history.push(Path.shoppingCart);
-    };
-    
-    _handleToAddress = () => {
-		history.push(Path.shippingAddress);
-    };
+	};
 
+	_handleToMyOrders = () => {
+		history.push(Path.orders);
+	};
+
+	_handleToAddress = () => {
+		history.push(Path.shippingAddress);
+	};
 
 	_handleToProfile = () => {
 		history.push(Path.profile);
@@ -89,16 +92,23 @@ class User extends React.Component<IUserProps, IUserState> {
 								<DropdownItem onClick={this._handleToMyBag}>
 									My Bag
 								</DropdownItem>
+                                <DropdownItem divider />
+								<DropdownItem onClick={this._handleToMyOrders}>
+									Orders
+								</DropdownItem>
 								<DropdownItem divider />
 								<DropdownItem onClick={this._handleToProfile}>
 									Profile
 								</DropdownItem>
-                                <DropdownItem divider />
-                                <DropdownItem onClick={this._handleToAddress}>
-                                    Address
-								</DropdownItem>                                
 								<DropdownItem divider />
-								<DropdownItem data-test="logout-button" onClick={this._handlerLogout}>
+								<DropdownItem onClick={this._handleToAddress}>
+									Address
+								</DropdownItem>
+								<DropdownItem divider />
+								<DropdownItem
+									data-test="logout-button"
+									onClick={this._handlerLogout}
+								>
 									Logout
 								</DropdownItem>
 							</DropdownMenu>
@@ -107,7 +117,11 @@ class User extends React.Component<IUserProps, IUserState> {
 				) : (
 					<p>
 						Hi!&nbsp;
-						<a data-test="signin-button" href="/" onClick={this._handlerLogin}>
+						<a
+							data-test="signin-button"
+							href="/"
+							onClick={this._handlerLogin}
+						>
 							Sign in
 						</a>
 						&nbsp;or&nbsp;

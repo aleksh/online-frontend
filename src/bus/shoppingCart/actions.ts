@@ -79,6 +79,12 @@ export const shoppingCartActions = {
         return {
             type: types.EMPTY_CART_ASYNC,
         }
+    },
+
+    createOrderAsync: () => {
+        return {
+            type: types.CREATE_ORDER_ASYNC,
+        }
     }
 
 
