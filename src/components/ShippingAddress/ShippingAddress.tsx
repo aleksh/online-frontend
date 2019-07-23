@@ -102,7 +102,6 @@ class ShippingAddress extends React.Component<
 	_handleSelectInput = (event: any) => {
 		const { value } = event;
 
-		console.log(value);
 		this.setState({ shipping_region_id: value, formTouched: true }, () => {
 			this._validateField("shipping_region_id", value || "");
 		});
@@ -226,8 +225,6 @@ class ShippingAddress extends React.Component<
 					item => item.shipping_region_id === shipping_region_id
 			  )
 			: "";
-
-		console.log(selectedRegion);
 
 		return (
 			<Container className={Styles.Profile}>

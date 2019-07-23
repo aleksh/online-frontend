@@ -32,18 +32,6 @@ class ProductsList extends React.Component<
 		if (!products || products.length === 0) {
 			actions.productsAsync({ page, limit: ITEMS_PER_PAGE });
 		}
-
-		console.log("ProductsList conponentDidMount");
-	};
-
-	componentDidUpdate = () => {
-		console.log(
-			"ProductsList ---------------------------componentDidUpdate"
-		);
-	};
-
-	componentWillMount = () => {
-		console.log("ProductsList componentWillMount");
 	};
 
 	_handleClick = (item: VOProduct) => {

@@ -12,5 +12,11 @@ export const order = {
         return axios.get(`/orders/inCustomer`, {
             headers: { 'user-key': token }
         });
-    },  
+    },
+
+    charge(data: any, token: string) {
+        return axios.post(`/stripe/charge`, data, {
+            headers: { 'user-key': token }
+        });
+    },
 }

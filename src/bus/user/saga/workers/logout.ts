@@ -8,9 +8,7 @@ import { userActions } from "../../actions";
 export function* logout() {
     try {
 
-        console.log("logout saga")
         yield call(api.removeToken);
-        console.log("logout saga 11")
         yield put(userActions.logout());
 
     } catch (error) {

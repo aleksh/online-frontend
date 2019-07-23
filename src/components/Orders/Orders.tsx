@@ -28,9 +28,8 @@ class Orders extends React.Component<IOrdersProps, IOrdersState> {
 	};
 
 	_handlePay = (item: VOOrder) => {
-        const { actions } = this.props;
-        actions.setOrderForPay(item);
-		console.log("PAYYYY ");
+		const { actions } = this.props;
+		actions.setOrderForPay(item);
 		history.push(Path.pay);
 	};
 
@@ -83,7 +82,6 @@ class Orders extends React.Component<IOrdersProps, IOrdersState> {
 					<Col>
 						<strong>Shipped On</strong>
 					</Col>
-					<Col />
 				</Row>
 				{this._getProductRows()}
 			</Container>

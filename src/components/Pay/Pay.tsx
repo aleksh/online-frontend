@@ -4,11 +4,13 @@ import { Elements, StripeProvider } from "react-stripe-elements";
 import { Container, Row } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { modalActions } from "../../bus/modal/actions";
-import { userActions } from "../../bus/user/actions";
+import { orderActions } from "../../bus/order/actions";
+import VOOrder from "../../VO/VOOrder";
 import CheckoutForm from "../CheckoutForm/CheckoutForm";
 import Styles from "./Styles.module.scss";
 
 interface IProfileProps {
+	order: VOOrder;
 	actions: any;
 }
 
@@ -21,22 +23,22 @@ class Pay extends React.Component<IProfileProps, IProfileState> {
 	};
 
 	_handleResult = (token: any) => {
-		const { actions } = this.props;
-		actions.showError(token.id);
+		const { actions, order } = this.props;
+
+		actions.chargeOrderAsync({
+			stripeToken: token.id,
+			order_id: order.order_id,
+			description: "test Order",
+			amount: Math.ceil(Number(order.total_amount)) * 100
+		});
 	};
 
 	public render() {
 		return (
 			<Container className={Styles.Pay}>
-				<Row>
-					<h2>
-						<strong>Pay</strong>
-					</h2>
-				</Row>
 				<Row className={Styles.Pay}>
 					<StripeProvider apiKey="pk_test_NcwpaplBCuTL6I0THD44heRe">
 						<div className="example">
-							<h1>React Stripe Elements Example</h1>
 							<Elements>
 								<CheckoutForm
 									error={this._handleError}
@@ -53,14 +55,14 @@ class Pay extends React.Component<IProfileProps, IProfileState> {
 
 const mapStateToProps = (state: any) => {
 	return {
-		//	user: state.user.get("user")
+		order: state.order.get("orderForPay")
 	};
 };
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
 		actions: bindActionCreators(
-			{ ...userActions, ...modalActions },
+			{ ...modalActions, ...orderActions },
 			dispatch
 		)
 	};

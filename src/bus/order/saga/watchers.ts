@@ -1,6 +1,6 @@
 import { all, call, takeEvery } from 'redux-saga/effects';
 import { types } from "../types";
-import { createOrder, orders } from './workers';
+import { chargeOrder, createOrder, orders } from './workers';
 
 
 function* watchCreateOrder() {
@@ -11,6 +11,11 @@ function* watchFetchOrders() {
     yield takeEvery(types.FETCH_ORDERS_ASYNC, orders);
 }
 
+function* watchChargeOrder() {
+    yield takeEvery(types.CHARGE_ORDER_ASYNC, chargeOrder);
+}
+
+
 export function* watchOrders() {
-    yield all([call(watchCreateOrder), call(watchFetchOrders)]);
+    yield all([call(watchCreateOrder), call(watchFetchOrders), call(watchChargeOrder)]);
 }

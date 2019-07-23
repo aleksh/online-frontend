@@ -31,4 +31,11 @@ export const orderActions = {
             type: types.FETCH_ORDERS_ASYNC
         }
     },
+
+    chargeOrderAsync: (token) => {
+        return {
+            type: types.CHARGE_ORDER_ASYNC,
+            payload: token
+        }
+    },
 }

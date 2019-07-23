@@ -26,18 +26,21 @@ class OrderRow extends React.Component<IOrderRowProps, IOrderRowState> {
 				<Col>{item.order_id}</Col>
 				<Col>{item.created_on}</Col>
 				<Col>{item.total_amount}$</Col>
-				<Col>{item.status}</Col>
-				<Col>{item.shipped_on ? "Yes" : "No"}</Col>
 				<Col>
-					<Button
-						size="lg"
-						color="primary"
-						outline
-						onClick={this._handlePay}
-					>
-						Pay
-					</Button>
+					{item.status === 0 ? (
+						<Button
+							size="lg"
+							color="primary"
+							outline
+							onClick={this._handlePay}
+						>
+							Pay
+						</Button>
+					) : (
+						"Paid"
+					)}
 				</Col>
+				<Col>{item.shipped_on ? "Yes" : "No"}</Col>
 			</Row>
 		);
 	}

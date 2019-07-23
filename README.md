@@ -74,4 +74,5 @@ cypres command line version
 6. Users can add items to their shopping carts
 7. Users can register/login using website custom forms, or social login libraries
 8. Users can update personal profiles with shipping addresses and other info
-9. Responsive layout
+9. Create Order, Pay Order
+10. Responsive layout

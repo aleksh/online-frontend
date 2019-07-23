@@ -2,14 +2,17 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { Button, Col, Container, Row } from "reactstrap";
 import { bindActionCreators } from "redux";
-import { shoppingCartActions } from "../../bus/shoppingCart/actions";
+import { modalActions } from "../../bus/modal/actions";
 import { orderActions } from "../../bus/order/actions";
+import { shoppingCartActions } from "../../bus/shoppingCart/actions";
 import { history } from "../../init/middleware/core";
 import VOCartItem from "../../VO/VOCartItem";
+import { MODAL_TYPES } from "../Modals/Modals";
 import ProductRow from "./ProductRow/ProductRow";
 import Styles from "./Styles.module.scss";
 
 interface IShoppingCartProps {
+	isLoggedIn: boolean;
 	totalAmount: string;
 	items: VOCartItem[];
 	actions: any;
@@ -50,13 +53,17 @@ class ShoppingCart extends React.Component<
 	_handleEmptyCart = () => {
 		const { actions } = this.props;
 		actions.emptyCartAsync();
-    };
-    
-    _handleCreateOrder = () => {
-        const { actions } = this.props;
-        actions.createOrderAsync();
-        //actions.fetchOrdersAsync();
-    }
+	};
+
+	_handleCreateOrder = () => {
+		const { actions, isLoggedIn } = this.props;
+
+		if (isLoggedIn) {
+			actions.createOrderAsync();
+		} else {
+			actions.showModal({ modalType: MODAL_TYPES.LOGIN });
+		}
+	};
 
 	_getProductRows = () => {
 		const { items } = this.props;
@@ -103,7 +110,7 @@ class ShoppingCart extends React.Component<
 						>
 							Empty Cart
 						</Button>
-                        <Button
+						<Button
 							size="lg"
 							color="primary"
 							outline
@@ -140,13 +147,17 @@ class ShoppingCart extends React.Component<
 const mapStateToProps = (state: any) => {
 	return {
 		totalAmount: state.shoppingCart.get("totalAmount"),
-		items: state.shoppingCart.get("items")
+		items: state.shoppingCart.get("items"),
+		isLoggedIn: state.user.get("isLoggedIn")
 	};
 };
 
 const mapDispatchToProps = (dispatch: any) => {
 	return {
-		actions: bindActionCreators({ ...shoppingCartActions, ...orderActions }, dispatch)
+		actions: bindActionCreators(
+			{ ...shoppingCartActions, ...orderActions, ...modalActions },
+			dispatch
+		)
 	};
 };
 
