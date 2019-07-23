@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router";
 import MainPage from "../pages/MainPage";
 import OrdersPage from "../pages/OrdersPage";
+import PayPage from "../pages/PayPage";
 import ProductPage from "../pages/ProductPage";
 import ProfilePage from "../pages/ProfilePage";
 import ShippingAddressPage from "../pages/ShippingAddressPage";
@@ -39,6 +40,12 @@ export default class Routers extends React.Component<
 					isLoggedIn={isLoggedIn}
 					path={Path.orders}
 					component={OrdersPage}
+				/>
+
+				<ProtectedRoute
+					isLoggedIn={isLoggedIn}
+					path={Path.pay}
+					component={PayPage}
 				/>
 
 				<Route

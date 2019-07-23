@@ -27,7 +27,7 @@ class OrderRow extends React.Component<IOrderRowProps, IOrderRowState> {
 				<Col>{item.created_on}</Col>
 				<Col>{item.total_amount}$</Col>
 				<Col>{item.status}</Col>
-				<Col>{item.shipped_on}$</Col>
+				<Col>{item.shipped_on ? "Yes" : "No"}</Col>
 				<Col>
 					<Button
 						size="lg"

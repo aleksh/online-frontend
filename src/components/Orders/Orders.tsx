@@ -8,6 +8,7 @@ import { history } from "../../init/middleware/core";
 import VOOrder from "../../VO/VOOrder";
 import OrderRow from "./OrderRow/OrderRow";
 import Styles from "./Styles.module.scss";
+import { Path } from "../../navigation/path";
 
 interface IOrdersProps {
 	orders: [VOOrder];
@@ -29,6 +30,7 @@ class Orders extends React.Component<IOrdersProps, IOrdersState> {
     
     _handlePay = (item:VOOrder) => {
         console.log("PAYYYY ");
+        history.push(Path.pay);
     }
 
 	_getProductRows = () => {
